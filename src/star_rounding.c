@@ -36,9 +36,9 @@ stretched.
 
 #include "plugin-intl.h"
 
-#define PLUG_IN_NAME "astro-star-rounding"
-#define PLUG_IN_VERSION "astro-star-rounding 0.6"
-#define PLUG_IN_DATE "07.2008"
+#define PLUG_IN_NAME "gimp-plugin-rounds-stars"
+#define PLUG_IN_VERSION "0.7"
+#define PLUG_IN_DATE "09.2012"
 
 enum REPLACE_METHOD
 {
@@ -169,13 +169,13 @@ static void query( void )
 	static int nparams = sizeof( params )/sizeof( params[0] );
 	static int nreturn_vals = 0;
 
-	gimp_install_procedure( "plug_in_"PLUG_IN_NAME,
-		"star rounding",
-		_("This plug-in applies different calculations to each pixel, resulting in rounded stars. "),
+	gimp_install_procedure( PLUG_IN_NAME,
+		_("Rounds longish stars"),
+		_("This plug-in applies different calculations to each pixel, resulting in rounded stars."),
 		"Georg Hennig <georg.hennig@web.de>",
 		"Georg Hennig <georg.hennig@web.de>",
 		PLUG_IN_DATE,
-		_("Star rounding"),
+		_("Round Stars"),
 		"RGB*,GRAY*",
 		GIMP_PLUGIN,
 		nparams,
@@ -183,7 +183,7 @@ static void query( void )
 		params,
 		return_vals );
 
-	gimp_plugin_menu_register( "plug_in_"PLUG_IN_NAME, _("<Image>/Filters/Astronomy") );
+	gimp_plugin_menu_register( PLUG_IN_NAME, _("<Image>/Filters/Astronomy") );
 }
 
 static void run( const gchar *name, gint nparams, const GimpParam  *param,
@@ -718,10 +718,10 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
   gimp_ui_init( PLUG_IN_NAME, TRUE );
 
-	dlg = gimp_dialog_new( PLUG_IN_VERSION, PLUG_IN_NAME, NULL, 0,
-		gimp_standard_help_func, "plug-in-"PLUG_IN_NAME,
+	dlg = gimp_dialog_new( _("Rounds Stars"), "round_stars", NULL, 0,
+		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		_("Round stars"), GTK_RESPONSE_OK,
+		GTK_STOCK_OK, GTK_RESPONSE_OK,
 		NULL );
 
 	main_vbox = gtk_vbox_new( FALSE, 8 );
