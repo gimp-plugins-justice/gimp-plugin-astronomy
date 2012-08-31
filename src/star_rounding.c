@@ -36,7 +36,7 @@ stretched.
 
 #include "plugin-intl.h"
 
-#define PLUG_IN_NAME "gimp-plugin-rounds-stars"
+#define PLUG_IN_NAME "gimp-plugin-round-stars"
 #define PLUG_IN_VERSION "0.7"
 #define PLUG_IN_DATE "09.2012"
 
