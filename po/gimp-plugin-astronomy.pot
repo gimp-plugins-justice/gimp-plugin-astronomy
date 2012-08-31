@@ -1,0 +1,1194 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-07-31 15:31+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/alignment.c:225
+msgid "This plug-in translates and rotates layers so they fit best."
+msgstr ""
+
+#: ../src/alignment.c:229
+msgid "Align Layers"
+msgstr ""
+
+#: ../src/alignment.c:237 ../src/merge.c:177 ../src/background_gradient.c:170
+#: ../src/artificial_stars.c:357 ../src/artificial_galaxy.c:491
+#: ../src/star_rounding.c:186
+msgid "<Image>/Filters/Astronomy"
+msgstr ""
+
+#: ../src/alignment.c:873 ../src/alignment.c:1064
+msgid "Invalid color type!"
+msgstr ""
+
+#: ../src/alignment.c:1138 ../src/alignment.c:1283
+msgid "Align Layers..."
+msgstr ""
+
+#: ../src/alignment.c:1219 ../src/alignment.c:1482
+msgid "Moving layers by estimated values..."
+msgstr ""
+
+#. Calculate the "quality" always in the same way. Contrast?
+#: ../src/alignment.c:1222 ../src/alignment.c:1240 ../src/alignment.c:1483
+#: ../src/alignment.c:1501
+#, c-format
+msgid "Quality: %.5f"
+msgstr ""
+
+#: ../src/alignment.c:1245 ../src/alignment.c:1506
+msgid "Requested invalid move values. Not moving layer!"
+msgstr ""
+
+#: ../src/alignment.c:1290
+msgid "Please select another area for de-rotating layers."
+msgstr ""
+
+#: ../src/alignment.c:1367
+msgid "Rotating layers by estimated values..."
+msgstr ""
+
+#: ../src/alignment.c:1593
+msgid "Align"
+msgstr ""
+
+#. Generic settings
+#: ../src/alignment.c:1601 ../src/merge.c:985
+msgid "Generic Settings"
+msgstr ""
+
+#: ../src/alignment.c:1613
+msgid "Scale before processing [%]:"
+msgstr ""
+
+#: ../src/alignment.c:1615
+msgid "Scale layers before processing"
+msgstr ""
+
+#. visible layers ?
+#: ../src/alignment.c:1620 ../src/merge.c:996
+msgid "Use visible layers only"
+msgstr ""
+
+#. remove invisible layers ?
+#: ../src/alignment.c:1627
+msgid "Remove invisible layers"
+msgstr ""
+
+#. trim image ?
+#: ../src/alignment.c:1634
+msgid "Trim image to overlap area"
+msgstr ""
+
+#. two star alignment ?
+#: ../src/alignment.c:1641
+msgid "Two star alignment"
+msgstr ""
+
+#. alignment methods + settings
+#: ../src/alignment.c:1648
+msgid "Alignment Method"
+msgstr ""
+
+#: ../src/alignment.c:1660
+msgid "Gauss fit"
+msgstr ""
+
+#: ../src/alignment.c:1661
+msgid "Center of brightness"
+msgstr ""
+
+#: ../src/alignment.c:1662
+msgid "Cross correlation"
+msgstr ""
+
+#: ../src/alignment.c:1663
+msgid "Cross correlation (FFT)"
+msgstr ""
+
+#: ../src/alignment.c:1667
+msgid "Center of brightness mean value's radius [Pixel]:"
+msgstr ""
+
+#: ../src/alignment.c:1669
+msgid "Search radius, of course limited by layer border"
+msgstr ""
+
+#: ../src/alignment.c:1674
+#, c-format
+msgid "Cross correlation search area [% of selected area width/height]:"
+msgstr ""
+
+#: ../src/alignment.c:1676
+msgid "Cross correlation search area, of course limited by layer border"
+msgstr ""
+
+#: ../src/alignment.c:1683
+msgid "Subpixel resolution when using cross correlation"
+msgstr ""
+
+#: ../src/merge.c:165
+msgid "This plug-in merges layers using different mean value algorithms. "
+msgstr ""
+
+#: ../src/merge.c:169
+msgid "Merge Layers"
+msgstr ""
+
+#: ../src/merge.c:721
+msgid "Merge Layers..."
+msgstr ""
+
+#: ../src/merge.c:800 ../src/merge.c:1015
+msgid "Arithmetic mean"
+msgstr ""
+
+#: ../src/merge.c:803 ../src/merge.c:1016
+msgid "Geometric mean"
+msgstr ""
+
+#: ../src/merge.c:806 ../src/merge.c:1017
+msgid "Median"
+msgstr ""
+
+#: ../src/merge.c:809
+msgid "Sigma median / arithmetic"
+msgstr ""
+
+#: ../src/merge.c:812
+msgid "Sigma median (1 pass)"
+msgstr ""
+
+#: ../src/merge.c:815
+msgid "Sigma median (2 passes)"
+msgstr ""
+
+#: ../src/merge.c:963
+msgid "Merge"
+msgstr ""
+
+#. Merge methods + settings
+#: ../src/merge.c:1004
+msgid "Merge method (mean value)"
+msgstr ""
+
+#: ../src/merge.c:1018
+msgid "Arithmetic mean of x sigma around median"
+msgstr ""
+
+#: ../src/merge.c:1019
+msgid "Median of x sigma around median (1 pass)"
+msgstr ""
+
+#: ../src/merge.c:1020
+msgid "Median of x sigma around median (2 passes)"
+msgstr ""
+
+#: ../src/merge.c:1032 ../src/artificial_stars.c:1702
+#: ../src/artificial_galaxy.c:1661 ../src/artificial_galaxy.c:1687
+#: ../src/artificial_galaxy.c:1713 ../src/artificial_galaxy.c:1739
+#: ../src/artificial_galaxy.c:1867 ../src/artificial_galaxy.c:1893
+#: ../src/artificial_galaxy.c:1919 ../src/artificial_galaxy.c:1945
+msgid "Sigma:"
+msgstr ""
+
+#: ../src/merge.c:1034
+msgid ""
+"Clip x sigma around median (unused for arithmetic/geometric mean or median)"
+msgstr ""
+
+#. Preprocess values
+#: ../src/merge.c:1040
+msgid "Preprocess pixel values before merging"
+msgstr ""
+
+#: ../src/merge.c:1052
+msgid "Multiply before processing:"
+msgstr ""
+
+#: ../src/merge.c:1054
+msgid "Multiply each pixel value with this constant before processing"
+msgstr ""
+
+#: ../src/merge.c:1061
+msgid "Add constant before processing:"
+msgstr ""
+
+#: ../src/merge.c:1063
+msgid "Add this constant to each pixel value before processing"
+msgstr ""
+
+#: ../src/background_gradient.c:158
+msgid ""
+"This plug-in tries to fit a polynomial of order 4 through the background "
+"pixel values. "
+msgstr ""
+
+#: ../src/background_gradient.c:162 ../src/background_gradient.c:434
+msgid "Background gradient"
+msgstr ""
+
+#: ../src/background_gradient.c:464
+msgid "Calculating mean values for pivotal points..."
+msgstr ""
+
+#: ../src/background_gradient.c:573
+msgid "Too few pivotal points found!"
+msgstr ""
+
+#: ../src/background_gradient.c:585
+msgid "Fitting polynomial and calculating maximum pixel values..."
+msgstr ""
+
+#: ../src/background_gradient.c:672
+msgid "Writing normalized pixel values..."
+msgstr ""
+
+#: ../src/background_gradient.c:790
+msgid "Create gradient"
+msgstr ""
+
+#. Box width
+#: ../src/background_gradient.c:805
+msgid "Box width:"
+msgstr ""
+
+#. Box height
+#: ../src/background_gradient.c:818
+msgid "Box height:"
+msgstr ""
+
+#: ../src/background_gradient.c:839
+msgid "Iterations of sigma clipping:"
+msgstr ""
+
+#: ../src/background_gradient.c:859
+msgid "Sigma clipping:"
+msgstr ""
+
+#: ../src/background_gradient.c:861
+msgid "Clip values inside the box by ... sigma"
+msgstr ""
+
+#: ../src/background_gradient.c:867
+msgid "Minimum number of not clipping values:"
+msgstr ""
+
+#: ../src/background_gradient.c:869
+msgid "Minimum number of values that do not clip inside the box"
+msgstr ""
+
+#: ../src/background_gradient.c:882
+msgid "All values"
+msgstr ""
+
+#: ../src/background_gradient.c:883
+msgid "Darkest values"
+msgstr ""
+
+#: ../src/background_gradient.c:884
+msgid "Brightest values"
+msgstr ""
+
+#: ../src/background_gradient.c:894
+msgid "Use percentage:"
+msgstr ""
+
+#: ../src/artificial_stars.c:345
+msgid "This plug-in creates an artificial star distribution. "
+msgstr ""
+
+#: ../src/artificial_stars.c:349
+msgid "Create artificial stars"
+msgstr ""
+
+#: ../src/artificial_stars.c:459
+msgid ""
+"Do you want to recalculate the star distribution before actually drawing the "
+"stars?"
+msgstr ""
+
+#: ../src/artificial_stars.c:528
+msgid "Creating background star distribution"
+msgstr ""
+
+#: ../src/artificial_stars.c:534
+msgid "Creating object star distribution"
+msgstr ""
+
+#: ../src/artificial_stars.c:540
+msgid "Creating foreground star distribution"
+msgstr ""
+
+#: ../src/artificial_stars.c:552 ../src/artificial_stars.c:1380
+#: ../src/artificial_stars.c:1801 ../src/artificial_galaxy.c:1141
+#: ../src/artificial_galaxy.c:2187
+msgid "Recalculate distribution"
+msgstr ""
+
+#: ../src/artificial_stars.c:571
+msgid "Sorting stars by brightness"
+msgstr ""
+
+#: ../src/artificial_stars.c:1060 ../src/artificial_galaxy.c:1378
+msgid "Creating background..."
+msgstr ""
+
+#: ../src/artificial_stars.c:1087
+msgid "Creating background stars..."
+msgstr ""
+
+#: ../src/artificial_stars.c:1097
+msgid "Creating object stars..."
+msgstr ""
+
+#: ../src/artificial_stars.c:1107
+msgid "Creating foreground stars..."
+msgstr ""
+
+#: ../src/artificial_stars.c:1117 ../src/artificial_galaxy.c:1440
+msgid "Creating noise..."
+msgstr ""
+
+#: ../src/artificial_stars.c:1123 ../src/artificial_galaxy.c:1446
+msgid "Writing normalized values to buffer..."
+msgstr ""
+
+#: ../src/artificial_stars.c:1165
+msgid "Artificial background stars"
+msgstr ""
+
+#: ../src/artificial_stars.c:1180
+msgid "Artificial object stars"
+msgstr ""
+
+#: ../src/artificial_stars.c:1195
+msgid "Artificial foreground stars"
+msgstr ""
+
+#: ../src/artificial_stars.c:1212
+msgid "Artificial stars"
+msgstr ""
+
+#: ../src/artificial_stars.c:1371 ../src/artificial_galaxy.c:2178
+msgid "Cancel recalculation"
+msgstr ""
+
+#: ../src/artificial_stars.c:1643 ../src/artificial_galaxy.c:2291
+msgid "Create"
+msgstr ""
+
+#: ../src/artificial_stars.c:1671 ../src/artificial_galaxy.c:2319
+msgid "Draw options:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1681
+msgid "PSF:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1687
+msgid "Delta peak"
+msgstr ""
+
+#: ../src/artificial_stars.c:1688 ../src/artificial_stars.c:2041
+msgid "Gauss"
+msgstr ""
+
+#: ../src/artificial_stars.c:1689
+msgid "Gauss with 4 diffraction lines"
+msgstr ""
+
+#: ../src/artificial_stars.c:1690
+msgid "Gauss with 6 diffraction lines"
+msgstr ""
+
+#: ../src/artificial_stars.c:1691
+msgid "Gauss with 12 diffraction lines"
+msgstr ""
+
+#: ../src/artificial_stars.c:1704
+msgid "Sigma of gauss function in px"
+msgstr ""
+
+#: ../src/artificial_stars.c:1710
+msgid "Stars with diffraction lines:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1712
+msgid "Percentage of stars that have diffraction lines"
+msgstr ""
+
+#: ../src/artificial_stars.c:1719
+msgid "Diffraction angle:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1721
+msgid "Angle of diffraction lines in degrees"
+msgstr ""
+
+#: ../src/artificial_stars.c:1727
+msgid "Diffraction length:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1729
+msgid "Length of diffraction lines"
+msgstr ""
+
+#: ../src/artificial_stars.c:1735
+msgid "Diffraction color:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1737
+msgid "Diffraction lines usually show a color variation"
+msgstr ""
+
+#: ../src/artificial_stars.c:1743 ../src/artificial_galaxy.c:2387
+msgid "Noise:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1745 ../src/artificial_galaxy.c:2389
+#, c-format
+msgid "Noise in % of sqrt(N) = photon noise"
+msgstr ""
+
+#: ../src/artificial_stars.c:1751
+msgid "Background:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1753
+msgid "Background pixel value offset"
+msgstr ""
+
+#: ../src/artificial_stars.c:1759
+msgid "Burn out:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1761
+#, c-format
+msgid ""
+"% of stars that burn out (0=normalize to brightest star, 100=to darkest one)"
+msgstr ""
+
+#: ../src/artificial_stars.c:1768
+msgid "Shininess:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1770
+msgid "Burnt out stars have larger sigma"
+msgstr ""
+
+#: ../src/artificial_stars.c:1775
+msgid "Split foreground, object and background to layers"
+msgstr ""
+
+#: ../src/artificial_stars.c:1782
+msgid "Create an illumination mask"
+msgstr ""
+
+#. gtk_widget_show( check_box );
+#. Distribution options (right side)
+#: ../src/artificial_stars.c:1791
+msgid "Star distribution:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1821
+msgid "Sample distributions:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1831
+msgid "Standard (HD)"
+msgstr ""
+
+#: ../src/artificial_stars.c:1837
+msgid "Standard (LD)"
+msgstr ""
+
+#: ../src/artificial_stars.c:1843
+msgid "Globular cluster (HD)"
+msgstr ""
+
+#: ../src/artificial_stars.c:1849
+msgid "Globular cluster (LD)"
+msgstr ""
+
+#: ../src/artificial_stars.c:1855
+msgid "Open cluster (HD)"
+msgstr ""
+
+#: ../src/artificial_stars.c:1861
+msgid "Open cluster (LD)"
+msgstr ""
+
+#: ../src/artificial_stars.c:1868
+msgid "Background stars:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1878 ../src/artificial_stars.c:1948
+#: ../src/artificial_stars.c:2073
+msgid "Number:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1889 ../src/artificial_stars.c:1959
+#: ../src/artificial_stars.c:2084
+msgid "Brightness mean:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1900 ../src/artificial_stars.c:1970
+#: ../src/artificial_stars.c:2095
+msgid "Brightness sigma:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1911 ../src/artificial_stars.c:1981
+#: ../src/artificial_stars.c:2106
+msgid "Color mean:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1922 ../src/artificial_stars.c:1992
+#: ../src/artificial_stars.c:2117
+msgid "Color sigma:"
+msgstr ""
+
+#: ../src/artificial_stars.c:1934
+msgid "Object stars:"
+msgstr ""
+
+#: ../src/artificial_stars.c:2004
+msgid "Object center: X:"
+msgstr ""
+
+#: ../src/artificial_stars.c:2016
+msgid "Y:"
+msgstr ""
+
+#: ../src/artificial_stars.c:2033
+msgid "Density profile:"
+msgstr ""
+
+#: ../src/artificial_stars.c:2040
+msgid "Random"
+msgstr ""
+
+#: ../src/artificial_stars.c:2042
+msgid "Plummer"
+msgstr ""
+
+#: ../src/artificial_stars.c:2053
+msgid "Radius parameter:"
+msgstr ""
+
+#: ../src/artificial_stars.c:2055
+#, c-format
+msgid "Radius of object in % of the image (unused for random distribution)"
+msgstr ""
+
+#: ../src/artificial_stars.c:2063
+msgid "Foreground stars:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:479
+msgid "This plug-in creates an artificial galaxy. "
+msgstr ""
+
+#: ../src/artificial_galaxy.c:483
+msgid "Create artificial galaxy"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1395
+msgid "Creating bulge / ellipse..."
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1407
+msgid "Creating bright objects (1)..."
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1412
+msgid "Creating bright objects (2)..."
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1417
+msgid "Creating bright objects (3)..."
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1422
+msgid "Creating dark objects..."
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1432
+msgid "Normalizing image..."
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1484
+msgid "Artificial galaxy"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1645 ../src/artificial_galaxy.c:1851
+msgid "Bright objects (1):"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1655 ../src/artificial_galaxy.c:1861
+msgid "Bright objects (1) color"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1671 ../src/artificial_galaxy.c:1877
+msgid "Bright objects (2):"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1681 ../src/artificial_galaxy.c:1887
+msgid "Bright objects (2) color"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1697 ../src/artificial_galaxy.c:1903
+msgid "Bright objects (3):"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1707 ../src/artificial_galaxy.c:1913
+msgid "Bright objects (3) color"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1723 ../src/artificial_galaxy.c:1929
+msgid "Dark objects:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1733 ../src/artificial_galaxy.c:1939
+msgid "Dark objects color"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1750 ../src/artificial_galaxy.c:1956
+msgid "Logarithmic spiral"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1751 ../src/artificial_galaxy.c:1957
+msgid "Archimedic spiral"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1752 ../src/artificial_galaxy.c:1958
+msgid "Circles"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1761 ../src/artificial_galaxy.c:1967
+msgid "Bulge radius:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1763 ../src/artificial_galaxy.c:1969
+#, c-format
+msgid "Radius [% of image size] of the bulge"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1767 ../src/artificial_galaxy.c:1973
+msgid "Bulge color:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1776 ../src/artificial_galaxy.c:1982
+#: ../src/artificial_galaxy.c:2089
+msgid "K"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1782 ../src/artificial_galaxy.c:1988
+msgid "Spiral radius:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1784 ../src/artificial_galaxy.c:1990
+#, c-format
+msgid "Radius [% of image size] of the spiral"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1789 ../src/artificial_galaxy.c:1995
+msgid "Spiral thickness:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1791 ../src/artificial_galaxy.c:1997
+#, c-format
+msgid "Thickness sigma [% of image size] of the spiral"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1796 ../src/artificial_galaxy.c:2002
+msgid "Spiral turns:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1798 ../src/artificial_galaxy.c:2004
+msgid "How often the spirals turn around"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1803 ../src/artificial_galaxy.c:2009
+msgid "Spiral randomness:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1805 ../src/artificial_galaxy.c:2011
+msgid "Randomness of the spiral"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1810 ../src/artificial_galaxy.c:2016
+msgid "Angle randomness:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1812 ../src/artificial_galaxy.c:2018
+msgid "Randomness of the angle"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1817 ../src/artificial_galaxy.c:2023
+msgid "Radius randomness:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1819 ../src/artificial_galaxy.c:2025
+msgid "Randomness of the radius"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1824 ../src/artificial_galaxy.c:2030
+msgid "Spiral lumpiness:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1826 ../src/artificial_galaxy.c:2032
+msgid "Lumpiness of the spiral"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1831 ../src/artificial_galaxy.c:2037
+msgid "Disc lumpiness:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:1833 ../src/artificial_galaxy.c:2039
+msgid "Lumpiness of the disc"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2056
+msgid "Radius:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2058
+#, c-format
+msgid "Radius [% of image size] of the elliptical galaxy"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2064
+msgid "Excentricity:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2066
+msgid "Numerical excentricity of the elliptical galaxy"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2072
+msgid "Boxy - Disky:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2074
+msgid "a4 parameter, dr=a4*cos(4*t). a4<0 is boxy, a4>0 is disky"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2079
+msgid "Color:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2331
+msgid "Object center (X, Y):"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2347
+msgid "Phi:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2349
+msgid "Rotation inside galaxy plane"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2395
+msgid "Multiplier:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2397
+msgid "Multiply with value"
+msgstr ""
+
+#. check_box = gtk_check_button_new_with_label( _("Split bulge, spirals and dark clouds to layers") );
+#. gtk_table_attach_defaults( GTK_TABLE( table ), check_box, 0, 2, 9, 10 );
+#. gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( check_box ), parameters.split_layers );
+#. g_signal_connect( check_box, "toggled", G_CALLBACK( split_layers_toggled ), NULL );
+#. g_signal_connect_swapped( check_box, "toggled", G_CALLBACK( gimp_preview_invalidate ), preview );
+#. gtk_widget_show( check_box );
+#. star_frame = gtk_frame_new( _("Sample distributions:") );
+#. gtk_box_pack_start( GTK_BOX( left_vbox ), star_frame, FALSE, FALSE, 0 );
+#. gtk_widget_show( star_frame );
+#.
+#. table = gtk_table_new( 2, 3, FALSE );
+#. gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
+#. gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
+#. gtk_container_add( GTK_CONTAINER( star_frame ), table );
+#. gtk_widget_show( table );
+#.
+#. button = gtk_button_new_with_label( _("Sample A") );
+#. gtk_table_attach( GTK_TABLE( table ), button, 0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
+#. gtk_widget_show( button );
+#. g_signal_connect( button, "clicked", G_CALLBACK( a_clicked ), NULL );
+#.
+#. button = gtk_button_new_with_label( _("Sample B") );
+#. gtk_table_attach( GTK_TABLE( table ), button, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
+#. gtk_widget_show( button );
+#. g_signal_connect( button, "clicked", G_CALLBACK( b_clicked ), NULL );
+#.
+#. button = gtk_button_new_with_label( _("Sample C") );
+#. gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
+#. gtk_widget_show( button );
+#. g_signal_connect( button, "clicked", G_CALLBACK( c_clicked ), NULL );
+#.
+#. button = gtk_button_new_with_label( _("Sample D") );
+#. gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 1, 2, GTK_FILL, 0, 0, 0 );
+#. gtk_widget_show( button );
+#. g_signal_connect( button, "clicked", G_CALLBACK( d_clicked ), NULL );
+#.
+#. button = gtk_button_new_with_label( _("Sample E") );
+#. gtk_table_attach( GTK_TABLE( table ), button, 2, 3, 0, 1, GTK_FILL, 0, 0, 0 );
+#. gtk_widget_show( button );
+#. g_signal_connect( button, "clicked", G_CALLBACK( e_clicked ), NULL );
+#.
+#. button = gtk_button_new_with_label( _("Sample F") );
+#. gtk_table_attach( GTK_TABLE( table ), button, 2, 3, 1, 2, GTK_FILL, 0, 0, 0 );
+#. gtk_widget_show( button );
+#. g_signal_connect( button, "clicked", G_CALLBACK( f_clicked ), NULL );
+#. Distribution options (right side)
+#: ../src/artificial_galaxy.c:2451
+msgid "Object distribution:"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2488
+msgid "Galaxy type:"
+msgstr ""
+
+#. _("Spiral galaxy"), GALAXY_SPIRAL,
+#. _("Spiral barred galaxy"), GALAXY_SPIRALBARRED,
+#: ../src/artificial_galaxy.c:2496
+msgid "Elliptical galaxy"
+msgstr ""
+
+#: ../src/artificial_galaxy.c:2507
+msgid "Galaxy settings:"
+msgstr ""
+
+#: ../src/star_rounding.c:174
+msgid ""
+"This plug-in applies different calculations to each pixel, resulting in "
+"rounded stars. "
+msgstr ""
+
+#: ../src/star_rounding.c:178
+msgid "Star rounding"
+msgstr ""
+
+#: ../src/star_rounding.c:592
+msgid "Round stars..."
+msgstr ""
+
+#: ../src/star_rounding.c:724
+msgid "Round stars"
+msgstr ""
+
+#. Radial correction
+#: ../src/star_rounding.c:747
+msgid "Radial correction"
+msgstr ""
+
+#: ../src/star_rounding.c:759
+msgid "Maximum length:"
+msgstr ""
+
+#: ../src/star_rounding.c:761 ../src/star_rounding.c:829
+msgid "Length of the blurred stars"
+msgstr ""
+
+#: ../src/star_rounding.c:768 ../src/star_rounding.c:845
+msgid "Percentage:"
+msgstr ""
+
+#: ../src/star_rounding.c:770 ../src/star_rounding.c:847
+msgid "Replace pixel value by <percentage> of new pixel value"
+msgstr ""
+
+#: ../src/star_rounding.c:791
+msgid "* x^3 + "
+msgstr ""
+
+#: ../src/star_rounding.c:800
+msgid "* x^2 + "
+msgstr ""
+
+#: ../src/star_rounding.c:809
+msgid "* x"
+msgstr ""
+
+#. Linear correction
+#: ../src/star_rounding.c:815
+msgid "Linear correction"
+msgstr ""
+
+#: ../src/star_rounding.c:827
+msgid "Length:"
+msgstr ""
+
+#: ../src/star_rounding.c:836
+msgid "Angle:"
+msgstr ""
+
+#: ../src/star_rounding.c:838
+msgid "Angle of the blurred stars"
+msgstr ""
+
+#. Replace method
+#: ../src/star_rounding.c:854
+msgid "Replace method"
+msgstr ""
+
+#: ../src/star_rounding.c:865
+msgid "Minimum of pixels 0 and 1"
+msgstr ""
+
+#: ../src/star_rounding.c:866
+msgid "Minimum of pixels 0-4"
+msgstr ""
+
+#: ../src/star_rounding.c:867
+msgid "Minimum of pixel 0 and mean value of pixels 1-4"
+msgstr ""
+
+#: ../src/star_rounding.c:868
+msgid "Maximum of pixels 0 and 1"
+msgstr ""
+
+#: ../src/star_rounding.c:869
+msgid "Maximum of pixels 0-4"
+msgstr ""
+
+#: ../src/star_rounding.c:870
+msgid "Maximum of pixel 0 and mean value of pixels 1-4"
+msgstr ""
+
+#. RGB or brightness ?
+#: ../src/star_rounding.c:881
+msgid "Treat colors seperately (instead of brightness)"
+msgstr ""
+
+#: ../src/star_rounding.c:889
+msgid "Threshold:"
+msgstr ""
+
+#: ../src/star_rounding.c:891
+msgid ""
+"Replace pixel value only if above threshold (for minimum) or below "
+"threshowld (for maximum)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:1
+msgid "Bottom information height"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:2
+msgid "Draw border with image information"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:3
+msgid "Font"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:4
+msgid "Font Color"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:5
+msgid "Font size (left, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:6
+msgid "Font size (left, second line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:7
+msgid "Font size (middle, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:8
+msgid "Font size (middle, second line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:9
+msgid "Font size (right, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:10
+msgid "Font size (right, second line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:11
+msgid "Gauss Radius"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:12
+msgid "Inner border color"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:13
+msgid "Inner border size"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:14
+msgid "Outer border color"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:15
+msgid "Outer border size"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:16
+msgid "Text (left, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:17
+msgid "Text (left, second line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:18
+msgid "Text (middle, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:19
+msgid "Text (middle, second line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:20
+msgid "Text (right, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:21
+msgid "Text (right, second line)"
+msgstr ""
+
+#: ../scripts/brightness_contrast_batch.scm.h:1
+msgid "Brightness"
+msgstr ""
+
+#: ../scripts/brightness_contrast_batch.scm.h:2
+msgid "Contrast"
+msgstr ""
+
+#: ../scripts/brightness_contrast_batch.scm.h:3
+msgid "Set brightness and contrast for all layers"
+msgstr ""
+
+#: ../scripts/brightness_contrast_batch.scm.h:4
+#: ../scripts/dark_subtraction.scm.h:2 ../scripts/flat_division.scm.h:2
+#: ../scripts/mode_batch.scm.h:24 ../scripts/normalize_batch.scm.h:2
+msgid "Visible layers only"
+msgstr ""
+
+#: ../scripts/dark_subtraction.scm.h:1
+msgid "Subtract a dark frame from all layers"
+msgstr ""
+
+#: ../scripts/flat_division.scm.h:1
+msgid "Divide all layers by a flat field"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:1
+msgid "Addition"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:2
+msgid "Burn"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:3
+msgid "Color"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:4
+msgid "Darken Only"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:5
+msgid "Difference"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:6
+msgid "Divide"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:7
+msgid "Dodge"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:8
+msgid "Grain extract"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:9
+msgid "Grain merge"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:10
+msgid "Hard Light"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:11
+msgid "Hue"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:12
+msgid "Lighten Only"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:13
+msgid "Mode"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:14
+msgid "Multiply"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:15
+msgid "Normal"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:16
+msgid "Opacity"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:17
+msgid "Overlay"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:18
+msgid "Saturation"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:19
+msgid "Screen"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:20
+msgid "Set mode for all layers"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:21
+msgid "Soft Light"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:22
+msgid "Subtract"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:23
+msgid "Value"
+msgstr ""
+
+#: ../scripts/normalize_batch.scm.h:1
+msgid "Normalize all layers"
+msgstr ""
