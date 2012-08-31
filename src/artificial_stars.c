@@ -46,7 +46,7 @@ cluster, and foreground stars.
 #include "plugin-intl.h"
 
 #define PLUG_IN_NAME "gimp-plugin-artificial-stars"
-#define PLUG_IN_VERSION "0.6"
+#define PLUG_IN_VERSION "0.7"
 #define PLUG_IN_DATE "09.2012"
 
 enum PSF
