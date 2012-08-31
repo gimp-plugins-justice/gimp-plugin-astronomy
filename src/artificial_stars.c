@@ -45,9 +45,9 @@ cluster, and foreground stars.
 
 #include "plugin-intl.h"
 
-#define PLUG_IN_NAME "astro-artificial-stars"
-#define PLUG_IN_VERSION "astro-artificial-stars 0.6"
-#define PLUG_IN_DATE "07.2008"
+#define PLUG_IN_NAME "gimp-plugin-artificial-stars"
+#define PLUG_IN_VERSION "0.6"
+#define PLUG_IN_DATE "09.2012"
 
 enum PSF
 {
@@ -340,13 +340,13 @@ static void query( void )
 	static int nparams = sizeof( params )/sizeof( params[0] );
 	static int nreturn_vals = 0;
 
-	gimp_install_procedure( "plug_in_"PLUG_IN_NAME,
-		"artificial stars",
+	gimp_install_procedure(PLUG_IN_NAME,
+		_("Create an artificial star distribution"),
 		_("This plug-in creates an artificial star distribution. "),
 		"Georg Hennig <georg.hennig@web.de>",
 		"Georg Hennig <georg.hennig@web.de>",
-		PLUG_IN_DATE,
-		_("Create artificial stars"),
+		"2008, 2012",
+		_("Create Artificial Stars"),
 		"RGB*",
 		GIMP_PLUGIN,
 		nparams,
@@ -354,7 +354,7 @@ static void query( void )
 		params,
 		return_vals );
 
-	gimp_plugin_menu_register( "plug_in_"PLUG_IN_NAME, _("<Image>/Filters/Astronomy") );
+	gimp_plugin_menu_register(PLUG_IN_NAME, _("<Image>/Filters/Astronomy") );
 }
 
 static void run( const gchar *name, gint nparams, const GimpParam  *param,
@@ -1637,10 +1637,10 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
   gimp_ui_init( PLUG_IN_NAME, TRUE );
 
-	dlg = gimp_dialog_new( PLUG_IN_VERSION, PLUG_IN_NAME, NULL, 0,
-		gimp_standard_help_func, "plug-in-"PLUG_IN_NAME,
+	dlg = gimp_dialog_new( _("Create Artificial Stars"), "artificial_stars", NULL, 0,
+		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		_("Create"), GTK_RESPONSE_OK,
+		_("Cre_ate"), GTK_RESPONSE_OK,
 		NULL );
 
 /* General layout */
