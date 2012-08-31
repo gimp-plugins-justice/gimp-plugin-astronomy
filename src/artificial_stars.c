@@ -346,7 +346,7 @@ static void query( void )
 		"Georg Hennig <georg.hennig@web.de>",
 		"Georg Hennig <georg.hennig@web.de>",
 		"2008, 2012",
-		_("Create Artificial Stars"),
+		_("Artificial Stars"),
 		"RGB*",
 		GIMP_PLUGIN,
 		nparams,
