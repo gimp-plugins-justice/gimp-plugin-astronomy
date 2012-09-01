@@ -1640,7 +1640,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	dlg = gimp_dialog_new( _("Create Artificial Stars"), "astro_artificial_stars", NULL, 0,
 		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		_("Cre_ate"), GTK_RESPONSE_OK,
+		GTK_STOCK_OK, GTK_RESPONSE_OK,
 		NULL );
 
 /* General layout */

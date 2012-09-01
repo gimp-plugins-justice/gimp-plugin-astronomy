@@ -1590,7 +1590,7 @@ static gint dialog()
 	dlg = gimp_dialog_new( _("Align Layers"), "astro_align_layers", NULL, 0,
 		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		_("_Align"), GTK_RESPONSE_OK,
+		GTK_STOCK_OK, GTK_RESPONSE_OK,
 		NULL);
 
 	main_vbox = gtk_vbox_new( FALSE, 12 );
