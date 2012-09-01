@@ -40,9 +40,9 @@ Might also useful for real flat fields.
 
 #include "plugin-intl.h"
 
-#define PLUG_IN_NAME "astro-background-gradient"
-#define PLUG_IN_VERSION "astro-background-gradient 0.6"
-#define PLUG_IN_DATE "07.2008"
+#define PLUG_IN_NAME "gimp-plugin-astro-background-gradient"
+#define PLUG_IN_VERSION "0.7"
+#define PLUG_IN_DATE "09.2012"
 
 enum BACKGROUND_VALUE_METHOD
 {
@@ -153,13 +153,13 @@ static void query( void )
 	static int nparams = sizeof( params )/sizeof( params[0] );
 	static int nreturn_vals = 0;
 
-	gimp_install_procedure( "plug_in_"PLUG_IN_NAME,
-		"background gradient",
-		_("This plug-in tries to fit a polynomial of order 4 through the background pixel values. "),
+	gimp_install_procedure( PLUG_IN_NAME,
+		_("Create a layer containing the background for an artificial flat field"),
+		_("This plug-in tries to fit a polynomial of order 4 through the background pixel values."),
 		"Georg Hennig <georg.hennig@web.de>",
 		"Georg Hennig <georg.hennig@web.de>",
 		PLUG_IN_DATE,
-		_("Background gradient"),
+		_("Background Gradient"),
 		"RGB*,GRAY*",
 		GIMP_PLUGIN,
 		nparams,
@@ -167,7 +167,7 @@ static void query( void )
 		params,
 		return_vals );
 
-	gimp_plugin_menu_register( "plug_in_"PLUG_IN_NAME, _("<Image>/Filters/Astronomy") );
+	gimp_plugin_menu_register( PLUG_IN_NAME, _("<Image>/Filters/Astronomy") );
 }
 
 static void run( const gchar *name, gint nparams, const GimpParam  *param,
@@ -784,10 +784,10 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
   gimp_ui_init( PLUG_IN_NAME, TRUE );
 
-	dlg = gimp_dialog_new( PLUG_IN_VERSION, PLUG_IN_NAME, NULL, 0,
-		gimp_standard_help_func, "plug-in-"PLUG_IN_NAME,
+	dlg = gimp_dialog_new( "Create A Background Gradient", "astro_background_gradient", NULL, 0,
+		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		_("Create gradient"), GTK_RESPONSE_OK,
+		GTK_STOCK_OK, GTK_RESPONSE_OK,
 		NULL );
 
 	main_vbox = gtk_vbox_new( FALSE, 8 );
@@ -864,7 +864,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 	/* Minimum number */
 	minimum_adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 1,
-		_("Minimum number of not clipping values:"), 185, 75,
+		_("Min number of non-clipping values:"), 185, 75,
 		parameters.minimum_number_box, 10, 2000, 1, 5, 0,
 		TRUE, 0, 0, _("Minimum number of values that do not clip inside the box"), NULL );
 	g_signal_connect( minimum_adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
@@ -891,7 +891,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	gtk_table_attach( GTK_TABLE( table ), background_value, 0, 1, 0, 1, GTK_EXPAND | GTK_FILL, 0, 0, 0);
 	gtk_widget_show( background_value );
 
-	use_percentage_label = gtk_label_new( _("Use percentage:") );
+	use_percentage_label = gtk_label_new( _("Percentage:") );
 	use_percentage = gtk_spin_button_new_with_range( 1, 100, 1 );
 	gtk_spin_button_set_value( GTK_SPIN_BUTTON( use_percentage ), parameters.use_percentage );
 
