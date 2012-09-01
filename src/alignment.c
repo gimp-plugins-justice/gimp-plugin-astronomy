@@ -1598,7 +1598,7 @@ static gint dialog()
 	gtk_container_add( GTK_CONTAINER( GTK_DIALOG( dlg )->vbox ), main_vbox );
 
 	/* Generic settings */
-	frame = gimp_frame_new( _("Generic Settings") );
+	frame = gimp_frame_new( _("General Settings") );
 	gtk_box_pack_start( GTK_BOX( main_vbox ), frame, FALSE, FALSE, 0 );
 	gtk_widget_show( frame );
 

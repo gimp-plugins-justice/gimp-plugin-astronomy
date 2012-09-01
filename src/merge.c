@@ -38,9 +38,9 @@ char *strndup(const char *s, size_t n);
 
 #include "plugin-intl.h"
 
-#define PLUG_IN_NAME "astro-merge"
-#define PLUG_IN_VERSION "astro-merge 0.6"
-#define PLUG_IN_DATE "07.2008"
+#define PLUG_IN_NAME "gimp-plugin-astro-merge-layers"
+#define PLUG_IN_VERSION "0.7"
+#define PLUG_IN_DATE "09.2012"
 
 enum MERGE_METHOD
 {
@@ -160,8 +160,8 @@ static void query( void )
 	static int nparams = sizeof( params )/sizeof( params[0] );
 	static int nreturn_vals = 0;
 
-	gimp_install_procedure( "plug_in_"PLUG_IN_NAME,
-		"layer merge",
+	gimp_install_procedure( PLUG_IN_NAME,
+		_("Merge layers using different mean value algorithms"),
 		_("This plug-in merges layers using different mean value algorithms. "),
 		"Georg Hennig <georg.hennig@web.de>",
 		"Georg Hennig <georg.hennig@web.de>",
@@ -174,7 +174,7 @@ static void query( void )
 		params,
 		return_vals );
 
-	gimp_plugin_menu_register( "plug_in_"PLUG_IN_NAME, _("<Image>/Filters/Astronomy") );
+	gimp_plugin_menu_register( PLUG_IN_NAME, _("<Image>/Filters/Astronomy") );
 }
 
 static void run( const gchar *name, gint nparams, const GimpParam  *param,
@@ -957,10 +957,10 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
   gimp_ui_init( PLUG_IN_NAME, TRUE );
 
-	dlg = gimp_dialog_new( PLUG_IN_VERSION, PLUG_IN_NAME, NULL, 0,
-		gimp_standard_help_func, "plug-in-"PLUG_IN_NAME,
+	dlg = gimp_dialog_new( _("Merge Layers"), "astro_merge_layers", NULL, 0,
+		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		_("Merge"), GTK_RESPONSE_OK,
+		GTK_STOCK_OK, GTK_RESPONSE_OK,
 		NULL );
 
 	main_vbox = gtk_vbox_new( FALSE, 8 );
@@ -982,7 +982,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	gtk_box_pack_start( GTK_BOX( main_hbox ), sub_vbox, FALSE, FALSE, 0 );
 
 	/* Generic settings */
-	frame = gimp_frame_new( _("Generic Settings") );
+	frame = gimp_frame_new( _("General Settings") );
 	gtk_box_pack_start( GTK_BOX( sub_vbox ), frame, FALSE, FALSE, 1 );
 	gtk_widget_show( frame );
 
@@ -1015,9 +1015,9 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 		_("Arithmetic mean"), ARITHMETIC,
 		_("Geometric mean"), GEOMETRIC,
 		_("Median"), MEDIAN,
-		_("Arithmetic mean of x sigma around median"), SIGMA_MEDIAN_ARITHMETIC,
-		_("Median of x sigma around median (1 pass)"), SIGMA_MEDIAN_1,
-		_("Median of x sigma around median (2 passes)"), SIGMA_MEDIAN_2,
+		_("Arithmetic mean of X sigma around median"), SIGMA_MEDIAN_ARITHMETIC,
+		_("Median of X sigma around median (1 pass)"), SIGMA_MEDIAN_1,
+		_("Median of X sigma around median (2 passes)"), SIGMA_MEDIAN_2,
 		NULL );
 	gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( merge_method ), parameters.merge_method );
 	gimp_int_combo_box_connect( GIMP_INT_COMBO_BOX( merge_method ), parameters.merge_method,
@@ -1031,7 +1031,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 1,
 		_("Sigma:"), 185, 75,
 		parameters.sigma_merge_method, 0.5, 3., 0.1, 5, 3,
-		TRUE, 0, 0, _("Clip x sigma around median (unused for arithmetic/geometric mean or median)"), NULL );
+		TRUE, 0, 0, _("Clip X sigma around median (unused for arithmetic/geometric mean or median)"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_double_adjustment_update ),
 		&parameters.sigma_merge_method );
 	g_signal_connect_swapped( adj, "value_changed", G_CALLBACK( gimp_preview_invalidate ), preview );
