@@ -952,6 +952,8 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	GtkWidget *sub_vbox;
 	GtkWidget *frame;
 	GtkWidget *table;
+	GtkWidget *label;
+	GtkWidget *spin;
 	GtkObject *adj;
 	GtkWidget *preview;
 
@@ -1001,7 +1003,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	gtk_widget_show( visible_layers );
 
 	/* Merge methods + settings */
-	frame = gimp_frame_new( _("Merge method (mean value)") );
+	frame = gimp_frame_new( _("Merge Method (Mean Value)") );
 	gtk_box_pack_start( GTK_BOX( sub_vbox ), frame, FALSE, FALSE, 2 );
 	gtk_widget_show( frame );
 
@@ -1037,8 +1039,8 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	g_signal_connect_swapped( adj, "value_changed", G_CALLBACK( gimp_preview_invalidate ), preview );
 
 	/* Preprocess values */
-	frame = gimp_frame_new( _("Preprocess pixel values before merging") );
-	gtk_box_pack_start( GTK_BOX( main_vbox ), frame, FALSE, FALSE, 3 );
+	frame = gimp_frame_new( _("Preprocess Pixel Values Before Merging") );
+	gtk_box_pack_start( GTK_BOX( sub_vbox ), frame, FALSE, FALSE, 2 );
 	gtk_widget_show( frame );
 
 	table = gtk_table_new( 2, 3, FALSE );
@@ -1049,7 +1051,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 		/* Multiply with constant */
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 0,
-		_("Multiply before processing:"), 185, 75,
+		_("Multiply:"), 185, 75,
 		parameters.multiply_constant, -10, 10, 0.1, 5, 3,
 		TRUE, 0, 0, _("Multiply each pixel value with this constant before processing"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_double_adjustment_update ),
@@ -1058,7 +1060,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 		/* Add a constant */
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 1,
-		_("Add constant before processing:"), 185, 75,
+		_("Add a constant:"), 185, 75,
 		parameters.add_constant, -255, 255, 1, 10, 0,
 		TRUE, 0, 0, _("Add this constant to each pixel value before processing"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
