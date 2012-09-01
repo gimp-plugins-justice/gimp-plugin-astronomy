@@ -744,7 +744,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 
 	/* Radial correction */
-	frame = gimp_frame_new( _("Radial correction") );
+	frame = gimp_frame_new( _("Radial Correction") );
 	gtk_box_pack_start( GTK_BOX( sub_vbox ), frame, FALSE, FALSE, 1 );
 	gtk_widget_show( frame );
 
@@ -812,7 +812,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 
 	/* Linear correction */
-	frame = gimp_frame_new( _("Linear correction") );
+	frame = gimp_frame_new( _("Linear Correction") );
 	gtk_box_pack_start( GTK_BOX( sub_vbox ), frame, FALSE, FALSE, 1 );
 	gtk_widget_show( frame );
 
@@ -851,7 +851,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 
 	/* Replace method */
-	frame = gimp_frame_new( _("Replace method") );
+	frame = gimp_frame_new( _("Replacement Method") );
 	gtk_box_pack_start( GTK_BOX( sub_vbox ), frame, FALSE, FALSE, 2 );
 	gtk_widget_show( frame );
 
