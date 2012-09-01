@@ -1622,12 +1622,12 @@ main dialog
 static gint dialog( gint32 image_id, GimpDrawable *drawable )
 {
 	GtkWidget *dlg;
+	GtkWidget *notebook;
 	GtkWidget *main_hbox;
 	GtkWidget *left_vbox;
 	GtkWidget *right_vbox;
 	GtkWidget *label;
 	GtkWidget *button;
-	GtkWidget *star_frame;
 	GtkWidget *object_box;
 	GtkWidget *check_box;
 	GtkWidget *random_seed;
@@ -1652,24 +1652,386 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	gtk_container_set_border_width( GTK_CONTAINER( left_vbox ), 8 );
 	gtk_box_pack_start( GTK_BOX( main_hbox ), left_vbox, FALSE, FALSE, 0 );
 
-	GtkWidget *vertical_line = gtk_vseparator_new();
+/*	GtkWidget *vertical_line = gtk_vseparator_new();
 	gtk_box_pack_start( GTK_BOX( main_hbox ), vertical_line, FALSE, FALSE, 0 );
-	gtk_widget_show( vertical_line );
+	gtk_widget_show( vertical_line ); */
 
 	right_vbox = gtk_vbox_new( FALSE, 8 );
 	gtk_container_set_border_width( GTK_CONTAINER( right_vbox ), 8 );
 	gtk_box_pack_start( GTK_BOX( main_hbox ), right_vbox, FALSE, FALSE, 0 );
 
+/* Preview (left side) */
 
-/* Draw options (left side) */
 	preview = gimp_drawable_preview_new( drawable, &parameters.show_preview );
 	gtk_box_pack_start( GTK_BOX( left_vbox ), preview, FALSE, FALSE, 0 );
 	gtk_widget_show( preview );
 
 	g_signal_connect( preview, "invalidated", G_CALLBACK( preview_callback ), NULL );
 
-	frame = gimp_frame_new( _("Draw options:") );
+/* Star distribution (left side) */
+
+	frame = gimp_frame_new( _("Star Distribution") );
 	gtk_box_pack_start( GTK_BOX( left_vbox ), frame, FALSE, FALSE, 0 );
+	gtk_widget_show( frame );
+
+	table = gtk_table_new( 3, 1, FALSE );
+	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
+	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
+	gtk_container_add( GTK_CONTAINER( frame ), table );
+	gtk_widget_show( table );
+
+	recalculate_button = gtk_button_new_with_label( _("Recalculate distribution") );
+	gtk_table_attach( GTK_TABLE( table ), recalculate_button, 0, 1, 0, 1, GTK_FILL | GTK_EXPAND, 0, 0, 0 );
+
+	recalculation_necessary();
+
+	gtk_widget_show( recalculate_button );
+	g_signal_connect( recalculate_button, "clicked", G_CALLBACK( recalculate_distribution_clicked ), NULL );
+
+	progress_bar = gtk_progress_bar_new();
+	gtk_widget_set_size_request( progress_bar, -1, 24 );
+	gtk_table_attach( GTK_TABLE( table ), progress_bar, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( progress_bar );
+	gtk_progress_bar_set_orientation( GTK_PROGRESS_BAR( progress_bar ), GTK_PROGRESS_LEFT_TO_RIGHT );
+
+	random_seed = gimp_random_seed_new( &parameters.random_seed, &parameters.random_seed_bool );
+	gtk_table_attach( GTK_TABLE( table ), random_seed, 0, 1, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( random_seed );
+	g_signal_connect( GIMP_RANDOM_SEED_SPINBUTTON( random_seed ), "value_changed", G_CALLBACK( spin_random_seed ), NULL );
+	g_signal_connect_swapped( GIMP_RANDOM_SEED_SPINBUTTON( random_seed ), "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+
+/* Sample Distributions */
+
+	frame = gimp_frame_new( _("Sample Distributions") );
+	gtk_box_pack_start( GTK_BOX( left_vbox ), frame, FALSE, FALSE, 0 );
+	gtk_widget_show( frame );
+
+	table = gtk_table_new( 2, 3, FALSE );
+	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
+	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
+	gtk_container_add( GTK_CONTAINER( frame ), table );
+	gtk_widget_show( table );
+
+	button = gtk_button_new_with_label( _("Standard (HD)") );
+	gtk_table_attach( GTK_TABLE( table ), button, 0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( button );
+	g_signal_connect( button, "clicked", G_CALLBACK( standard_hd_clicked ), NULL );
+	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
+
+	button = gtk_button_new_with_label( _("Standard (LD)") );
+	gtk_table_attach( GTK_TABLE( table ), button, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( button );
+	g_signal_connect( button, "clicked", G_CALLBACK( standard_ld_clicked ), NULL );
+	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
+
+	button = gtk_button_new_with_label( _("Globular cluster (HD)") );
+	gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( button );
+	g_signal_connect( button, "clicked", G_CALLBACK( globular_hd_clicked ), NULL );
+	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
+
+	button = gtk_button_new_with_label( _("Globular cluster (LD)") );
+	gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( button );
+	g_signal_connect( button, "clicked", G_CALLBACK( globular_ld_clicked ), NULL );
+	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
+
+	button = gtk_button_new_with_label( _("Open cluster (HD)") );
+	gtk_table_attach( GTK_TABLE( table ), button, 2, 3, 0, 1, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( button );
+	g_signal_connect( button, "clicked", G_CALLBACK( open_hd_clicked ), NULL );
+	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
+
+	button = gtk_button_new_with_label( _("Open cluster (LD)") );
+	gtk_table_attach( GTK_TABLE( table ), button, 2, 3, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( button );
+	g_signal_connect( button, "clicked", G_CALLBACK( open_ld_clicked ), NULL );
+	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
+
+
+
+/*  Create notebook  */
+	notebook = gtk_notebook_new ();
+	gtk_box_pack_start (GTK_BOX (main_hbox), notebook, FALSE, FALSE, 0);
+	gtk_widget_show (notebook);
+
+/*  Distribution options page  */
+	right_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+	gtk_container_set_border_width (GTK_CONTAINER (right_vbox), 12);
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), right_vbox,
+                            gtk_label_new_with_mnemonic (_("_Distribution Options")));
+	gtk_widget_show (right_vbox);
+
+	frame = gimp_frame_new( _("Background Stars") );
+	gtk_box_pack_start( GTK_BOX( right_vbox ), frame, FALSE, FALSE, 0 );
+	gtk_widget_show( frame );
+
+	table = gtk_table_new( 3, 4, FALSE );
+	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
+	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
+	gtk_container_add( GTK_CONTAINER( frame ), table );
+	gtk_widget_show( table );
+
+	label = gtk_label_new( _("Amount:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	background_number_spin = gtk_spin_button_new_with_range( 0, 40000, 1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), parameters.background_stars );
+	g_signal_connect( background_number_spin, "value_changed", G_CALLBACK( spin_background_stars ), NULL );
+	g_signal_connect_swapped( background_number_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), background_number_spin, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( background_number_spin );
+
+	label = gtk_label_new( _("Brightness mean:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	background_brightness_spin = gtk_spin_button_new_with_range( 0, 1000, 0.1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), parameters.background_brightness_mean );
+	g_signal_connect( background_brightness_spin, "value_changed", G_CALLBACK( spin_background_brightness_mean ), NULL );
+	g_signal_connect_swapped( background_brightness_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), background_brightness_spin, 1, 2, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( background_brightness_spin );
+
+	label = gtk_label_new( _("Brightness sigma:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	background_brightness_sigma_spin = gtk_spin_button_new_with_range( 0, 500, 0.1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), parameters.background_brightness_sigma );
+	g_signal_connect( background_brightness_sigma_spin, "value_changed", G_CALLBACK( spin_background_brightness_sigma ), NULL );
+	g_signal_connect_swapped( background_brightness_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), background_brightness_sigma_spin, 3, 4, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( background_brightness_sigma_spin );
+
+	label = gtk_label_new( _("Color mean:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	background_color_spin = gtk_spin_button_new_with_range( 1000, 100000, 1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), parameters.background_color_mean );
+	g_signal_connect( background_color_spin, "value_changed", G_CALLBACK( spin_background_color_mean ), NULL );
+	g_signal_connect_swapped( background_color_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), background_color_spin, 1, 2, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( background_color_spin );
+
+	label = gtk_label_new( _("Color sigma:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	background_color_sigma_spin = gtk_spin_button_new_with_range( 1, 10000, 1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), parameters.background_color_sigma );
+	g_signal_connect( background_color_sigma_spin, "value_changed", G_CALLBACK( spin_background_color_sigma ), NULL );
+	g_signal_connect_swapped( background_color_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), background_color_sigma_spin, 3, 4, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( background_color_sigma_spin );
+
+
+	frame = gimp_frame_new( _("Object Stars") );
+	gtk_box_pack_start( GTK_BOX( right_vbox ), frame, FALSE, FALSE, 0 );
+	gtk_widget_show( frame );
+
+	object_box = gtk_vbox_new( FALSE, 8 );
+	gtk_container_set_border_width( GTK_CONTAINER( object_box ), 0 );
+	gtk_container_add( GTK_CONTAINER( frame ), object_box );
+
+	table = gtk_table_new( 3, 4, FALSE );
+	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
+	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
+	gtk_box_pack_start( GTK_BOX( object_box ), table, FALSE, FALSE, 0 );
+	gtk_widget_show( table );
+
+	label = gtk_label_new( _("Amount:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	object_number_spin = gtk_spin_button_new_with_range( 0, 100000, 1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), parameters.object_stars );
+	g_signal_connect( object_number_spin, "value_changed", G_CALLBACK( spin_object_stars ), NULL );
+	g_signal_connect_swapped( object_number_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), object_number_spin, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( object_number_spin );
+
+	label = gtk_label_new( _("Brightness mean:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	object_brightness_spin = gtk_spin_button_new_with_range( 0, 1000, 0.1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), parameters.object_brightness_mean );
+	g_signal_connect( object_brightness_spin, "value_changed", G_CALLBACK( spin_object_brightness_mean ), NULL );
+	g_signal_connect_swapped( object_brightness_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), object_brightness_spin, 1, 2, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( object_brightness_spin );
+
+	label = gtk_label_new( _("Brightness sigma:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	object_brightness_sigma_spin = gtk_spin_button_new_with_range( 0, 500, 0.1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), parameters.object_brightness_sigma );
+	g_signal_connect( object_brightness_sigma_spin, "value_changed", G_CALLBACK( spin_object_brightness_sigma ), NULL );
+	g_signal_connect_swapped( object_brightness_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), object_brightness_sigma_spin, 3, 4, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( object_brightness_sigma_spin );
+
+	label = gtk_label_new( _("Color mean:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	object_color_spin = gtk_spin_button_new_with_range( 1000, 40000, 1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), parameters.object_color_mean );
+	g_signal_connect( object_color_spin, "value_changed", G_CALLBACK( spin_object_color_mean ), NULL );
+	g_signal_connect_swapped( object_color_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), object_color_spin, 1, 2, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( object_color_spin );
+
+	label = gtk_label_new( _("Color sigma:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	object_color_sigma_spin = gtk_spin_button_new_with_range( 1, 10000, 1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), parameters.object_color_sigma );
+	g_signal_connect( object_color_sigma_spin, "value_changed", G_CALLBACK( spin_object_color_sigma ), NULL );
+	g_signal_connect_swapped( object_color_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), object_color_sigma_spin, 3, 4, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( object_color_sigma_spin );
+
+	if ( parameters.object_x == 0 ) parameters.object_x = gimp_image_width( image_id )/2;
+	label = gtk_label_new( _("Object center: X:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	object_center_x_spin = gtk_spin_button_new_with_range( 0, gimp_image_width( image_id ), 1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), parameters.object_x );
+	g_signal_connect( object_center_x_spin, "value_changed", G_CALLBACK( spin_object_x ), NULL );
+	g_signal_connect_swapped( object_center_x_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 3, 4, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), object_center_x_spin, 1, 2, 3, 4, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( object_center_x_spin );
+
+	if ( parameters.object_y == 0 ) parameters.object_y = gimp_image_height( image_id )/2;
+	label = gtk_label_new( _("Y:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	object_center_y_spin = gtk_spin_button_new_with_range( 0, gimp_image_height( image_id ), 1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), parameters.object_y );
+	g_signal_connect( object_center_y_spin, "value_changed", G_CALLBACK( spin_object_y ), NULL );
+	g_signal_connect_swapped( object_center_y_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 3, 4, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), object_center_y_spin, 3, 4, 3, 4, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( object_center_y_spin );
+
+	table = gtk_table_new( 2, 3, FALSE );
+	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
+	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
+	gtk_box_pack_start( GTK_BOX( object_box ), table, FALSE, FALSE, 0 );
+	gtk_widget_show( table );
+
+	label = gtk_label_new( _("Density profile:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 0, 1, GTK_EXPAND | GTK_FILL, 0, 0, 0);
+	gtk_label_set_justify( GTK_LABEL( label ), GTK_JUSTIFY_LEFT );
+	gtk_widget_show( label );
+
+	object_density_combo = gimp_int_combo_box_new(
+		_("Random"), DENSITY_RANDOM,
+		_("Gauss"), DENSITY_GAUSS,
+		_("Plummer"), DENSITY_PLUMMER,
+		NULL );
+	gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), parameters.object_density );
+	gimp_int_combo_box_connect( GIMP_INT_COMBO_BOX( object_density_combo ), parameters.object_density,
+		G_CALLBACK( gimp_int_combo_box_get_active ), &parameters.object_density );
+	gimp_int_combo_box_connect( GIMP_INT_COMBO_BOX( object_density_combo ), parameters.object_density,
+		G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), object_density_combo, 1, 2, 0, 1, GTK_EXPAND | GTK_FILL, 0, 0, 0);
+	gtk_widget_show( object_density_combo );
+
+	object_radius_adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 2,
+		_("Radius parameter:"), 125, 75,
+		parameters.object_radius, 0, 200, 1, 5, 0,
+		TRUE, 0, 0, _("Radius of object in % of the image (unused for random distribution)"), NULL );
+	g_signal_connect( object_radius_adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
+		&parameters.object_radius );
+	g_signal_connect_swapped( object_radius_adj, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+
+	gtk_widget_show( object_box );
+
+
+	frame = gimp_frame_new( _("Foreground Stars") );
+	gtk_box_pack_start( GTK_BOX( right_vbox ), frame, FALSE, FALSE, 0 );
+	gtk_widget_show( frame );
+
+	table = gtk_table_new( 2, 6, FALSE );
+	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
+	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
+	gtk_container_add( GTK_CONTAINER( frame ), table );
+	gtk_widget_show( table );
+
+	label = gtk_label_new( _("Amount:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	foreground_number_spin = gtk_spin_button_new_with_range( 0, 10000, 1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), parameters.foreground_stars );
+	g_signal_connect( foreground_number_spin, "value_changed", G_CALLBACK( spin_foreground_stars ), NULL );
+	g_signal_connect_swapped( foreground_number_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), foreground_number_spin, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( foreground_number_spin );
+
+	label = gtk_label_new( _("Brightness mean:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	foreground_brightness_spin = gtk_spin_button_new_with_range( 0, 1000, 0.1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), parameters.foreground_brightness_mean );
+	g_signal_connect( foreground_brightness_spin, "value_changed", G_CALLBACK( spin_foreground_brightness_mean ), NULL );
+	g_signal_connect_swapped( foreground_brightness_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), foreground_brightness_spin, 1, 2, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( foreground_brightness_spin );
+
+	label = gtk_label_new( _("Brightness sigma:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	foreground_brightness_sigma_spin = gtk_spin_button_new_with_range( 0, 500, 0.1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), parameters.foreground_brightness_sigma );
+	g_signal_connect( foreground_brightness_sigma_spin, "value_changed", G_CALLBACK( spin_foreground_brightness_sigma ), NULL );
+	g_signal_connect_swapped( foreground_brightness_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), foreground_brightness_sigma_spin, 3, 4, 1, 2, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( foreground_brightness_sigma_spin );
+
+	label = gtk_label_new( _("Color mean:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	foreground_color_spin = gtk_spin_button_new_with_range( 1000, 40000, 1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), parameters.foreground_color_mean );
+	g_signal_connect( foreground_color_spin, "value_changed", G_CALLBACK( spin_foreground_color_mean ), NULL );
+	g_signal_connect_swapped( foreground_color_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), foreground_color_spin, 1, 2, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( foreground_color_spin );
+
+	label = gtk_label_new( _("Color sigma:") );
+	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
+	foreground_color_sigma_spin = gtk_spin_button_new_with_range( 1, 10000, 1 );
+	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), parameters.foreground_color_sigma );
+	g_signal_connect( foreground_color_sigma_spin, "value_changed", G_CALLBACK( spin_foreground_color_sigma ), NULL );
+	g_signal_connect_swapped( foreground_color_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
+	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( label );
+	gtk_table_attach( GTK_TABLE( table ), foreground_color_sigma_spin, 3, 4, 2, 3, GTK_FILL, 0, 0, 0 );
+	gtk_widget_show( foreground_color_sigma_spin );
+
+/* Rendering options */
+
+	right_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+	gtk_container_set_border_width (GTK_CONTAINER (right_vbox), 12);
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), right_vbox,
+                            gtk_label_new_with_mnemonic (_("R_endering")));
+	gtk_widget_show (right_vbox);
+
+	frame = gimp_frame_new( _("Options") );
+	gtk_box_pack_start( GTK_BOX( right_vbox ), frame, FALSE, FALSE, 0 );
 	gtk_widget_show( frame );
 
 	table = gtk_table_new( 12, 3, FALSE );
@@ -1786,344 +2148,6 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	g_signal_connect_swapped( check_box, "toggled", G_CALLBACK( gimp_preview_invalidate ), preview );
 /*	gtk_widget_show( check_box ); */
 
-
-/* Distribution options (right side) */
-	frame = gimp_frame_new( _("Star distribution:") );
-	gtk_box_pack_start( GTK_BOX( right_vbox ), frame, FALSE, FALSE, 0 );
-	gtk_widget_show( frame );
-
-	table = gtk_table_new( 3, 1, FALSE );
-	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
-	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
-	gtk_container_add( GTK_CONTAINER( frame ), table );
-	gtk_widget_show( table );
-
-	recalculate_button = gtk_button_new_with_label( _("Recalculate distribution") );
-	gtk_table_attach( GTK_TABLE( table ), recalculate_button, 0, 1, 0, 1, GTK_FILL | GTK_EXPAND, 0, 0, 0 );
-
-	recalculation_necessary();
-
-	gtk_widget_show( recalculate_button );
-	g_signal_connect( recalculate_button, "clicked", G_CALLBACK( recalculate_distribution_clicked ), NULL );
-
-	progress_bar = gtk_progress_bar_new();
-	gtk_widget_set_size_request( progress_bar, -1, 24 );
-	gtk_table_attach( GTK_TABLE( table ), progress_bar, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( progress_bar );
-	gtk_progress_bar_set_orientation( GTK_PROGRESS_BAR( progress_bar ), GTK_PROGRESS_LEFT_TO_RIGHT );
-
-	random_seed = gimp_random_seed_new( &parameters.random_seed, &parameters.random_seed_bool );
-	gtk_table_attach( GTK_TABLE( table ), random_seed, 0, 1, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( random_seed );
-	g_signal_connect( GIMP_RANDOM_SEED_SPINBUTTON( random_seed ), "value_changed", G_CALLBACK( spin_random_seed ), NULL );
-	g_signal_connect_swapped( GIMP_RANDOM_SEED_SPINBUTTON( random_seed ), "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-
-	star_frame = gtk_frame_new( _("Sample distributions:") );
-	gtk_box_pack_start( GTK_BOX( right_vbox ), star_frame, FALSE, FALSE, 0 );
-	gtk_widget_show( star_frame );
-
-	table = gtk_table_new( 2, 3, FALSE );
-	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
-	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
-	gtk_container_add( GTK_CONTAINER( star_frame ), table );
-	gtk_widget_show( table );
-
-	button = gtk_button_new_with_label( _("Standard (HD)") );
-	gtk_table_attach( GTK_TABLE( table ), button, 0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( standard_hd_clicked ), NULL );
-	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
-
-	button = gtk_button_new_with_label( _("Standard (LD)") );
-	gtk_table_attach( GTK_TABLE( table ), button, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( standard_ld_clicked ), NULL );
-	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
-
-	button = gtk_button_new_with_label( _("Globular cluster (HD)") );
-	gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( globular_hd_clicked ), NULL );
-	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
-
-	button = gtk_button_new_with_label( _("Globular cluster (LD)") );
-	gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( globular_ld_clicked ), NULL );
-	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
-
-	button = gtk_button_new_with_label( _("Open cluster (HD)") );
-	gtk_table_attach( GTK_TABLE( table ), button, 2, 3, 0, 1, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( open_hd_clicked ), NULL );
-	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
-
-	button = gtk_button_new_with_label( _("Open cluster (LD)") );
-	gtk_table_attach( GTK_TABLE( table ), button, 2, 3, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( open_ld_clicked ), NULL );
-	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
-
-
-	star_frame = gtk_frame_new( _("Background stars:") );
-	gtk_box_pack_start( GTK_BOX( right_vbox ), star_frame, FALSE, FALSE, 0 );
-	gtk_widget_show( star_frame );
-
-	table = gtk_table_new( 3, 4, FALSE );
-	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
-	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
-	gtk_container_add( GTK_CONTAINER( star_frame ), table );
-	gtk_widget_show( table );
-
-	label = gtk_label_new( _("Number:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	background_number_spin = gtk_spin_button_new_with_range( 0, 40000, 1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), parameters.background_stars );
-	g_signal_connect( background_number_spin, "value_changed", G_CALLBACK( spin_background_stars ), NULL );
-	g_signal_connect_swapped( background_number_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), background_number_spin, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( background_number_spin );
-
-	label = gtk_label_new( _("Brightness mean:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	background_brightness_spin = gtk_spin_button_new_with_range( 0, 1000, 0.1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), parameters.background_brightness_mean );
-	g_signal_connect( background_brightness_spin, "value_changed", G_CALLBACK( spin_background_brightness_mean ), NULL );
-	g_signal_connect_swapped( background_brightness_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), background_brightness_spin, 1, 2, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( background_brightness_spin );
-
-	label = gtk_label_new( _("Brightness sigma:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	background_brightness_sigma_spin = gtk_spin_button_new_with_range( 0, 500, 0.1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), parameters.background_brightness_sigma );
-	g_signal_connect( background_brightness_sigma_spin, "value_changed", G_CALLBACK( spin_background_brightness_sigma ), NULL );
-	g_signal_connect_swapped( background_brightness_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), background_brightness_sigma_spin, 3, 4, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( background_brightness_sigma_spin );
-
-	label = gtk_label_new( _("Color mean:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	background_color_spin = gtk_spin_button_new_with_range( 1000, 100000, 1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), parameters.background_color_mean );
-	g_signal_connect( background_color_spin, "value_changed", G_CALLBACK( spin_background_color_mean ), NULL );
-	g_signal_connect_swapped( background_color_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), background_color_spin, 1, 2, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( background_color_spin );
-
-	label = gtk_label_new( _("Color sigma:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	background_color_sigma_spin = gtk_spin_button_new_with_range( 1, 10000, 1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), parameters.background_color_sigma );
-	g_signal_connect( background_color_sigma_spin, "value_changed", G_CALLBACK( spin_background_color_sigma ), NULL );
-	g_signal_connect_swapped( background_color_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), background_color_sigma_spin, 3, 4, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( background_color_sigma_spin );
-
-
-	star_frame = gtk_frame_new( _("Object stars:") );
-	gtk_box_pack_start( GTK_BOX( right_vbox ), star_frame, FALSE, FALSE, 0 );
-	gtk_widget_show( star_frame );
-
-	object_box = gtk_vbox_new( FALSE, 8 );
-	gtk_container_set_border_width( GTK_CONTAINER( object_box ), 0 );
-	gtk_container_add( GTK_CONTAINER( star_frame ), object_box );
-
-	table = gtk_table_new( 3, 4, FALSE );
-	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
-	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
-	gtk_box_pack_start( GTK_BOX( object_box ), table, FALSE, FALSE, 0 );
-	gtk_widget_show( table );
-
-	label = gtk_label_new( _("Number:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	object_number_spin = gtk_spin_button_new_with_range( 0, 100000, 1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), parameters.object_stars );
-	g_signal_connect( object_number_spin, "value_changed", G_CALLBACK( spin_object_stars ), NULL );
-	g_signal_connect_swapped( object_number_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), object_number_spin, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( object_number_spin );
-
-	label = gtk_label_new( _("Brightness mean:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	object_brightness_spin = gtk_spin_button_new_with_range( 0, 1000, 0.1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), parameters.object_brightness_mean );
-	g_signal_connect( object_brightness_spin, "value_changed", G_CALLBACK( spin_object_brightness_mean ), NULL );
-	g_signal_connect_swapped( object_brightness_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), object_brightness_spin, 1, 2, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( object_brightness_spin );
-
-	label = gtk_label_new( _("Brightness sigma:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	object_brightness_sigma_spin = gtk_spin_button_new_with_range( 0, 500, 0.1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), parameters.object_brightness_sigma );
-	g_signal_connect( object_brightness_sigma_spin, "value_changed", G_CALLBACK( spin_object_brightness_sigma ), NULL );
-	g_signal_connect_swapped( object_brightness_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), object_brightness_sigma_spin, 3, 4, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( object_brightness_sigma_spin );
-
-	label = gtk_label_new( _("Color mean:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	object_color_spin = gtk_spin_button_new_with_range( 1000, 40000, 1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), parameters.object_color_mean );
-	g_signal_connect( object_color_spin, "value_changed", G_CALLBACK( spin_object_color_mean ), NULL );
-	g_signal_connect_swapped( object_color_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), object_color_spin, 1, 2, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( object_color_spin );
-
-	label = gtk_label_new( _("Color sigma:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	object_color_sigma_spin = gtk_spin_button_new_with_range( 1, 10000, 1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), parameters.object_color_sigma );
-	g_signal_connect( object_color_sigma_spin, "value_changed", G_CALLBACK( spin_object_color_sigma ), NULL );
-	g_signal_connect_swapped( object_color_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), object_color_sigma_spin, 3, 4, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( object_color_sigma_spin );
-
-	if ( parameters.object_x == 0 ) parameters.object_x = gimp_image_width( image_id )/2;
-	label = gtk_label_new( _("Object center: X:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	object_center_x_spin = gtk_spin_button_new_with_range( 0, gimp_image_width( image_id ), 1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), parameters.object_x );
-	g_signal_connect( object_center_x_spin, "value_changed", G_CALLBACK( spin_object_x ), NULL );
-	g_signal_connect_swapped( object_center_x_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 3, 4, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), object_center_x_spin, 1, 2, 3, 4, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( object_center_x_spin );
-
-	if ( parameters.object_y == 0 ) parameters.object_y = gimp_image_height( image_id )/2;
-	label = gtk_label_new( _("Y:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	object_center_y_spin = gtk_spin_button_new_with_range( 0, gimp_image_height( image_id ), 1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), parameters.object_y );
-	g_signal_connect( object_center_y_spin, "value_changed", G_CALLBACK( spin_object_y ), NULL );
-	g_signal_connect_swapped( object_center_y_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 3, 4, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), object_center_y_spin, 3, 4, 3, 4, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( object_center_y_spin );
-
-	table = gtk_table_new( 2, 3, FALSE );
-	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
-	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
-	gtk_box_pack_start( GTK_BOX( object_box ), table, FALSE, FALSE, 0 );
-	gtk_widget_show( table );
-
-	label = gtk_label_new( _("Density profile:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 0, 1, GTK_EXPAND | GTK_FILL, 0, 0, 0);
-	gtk_label_set_justify( GTK_LABEL( label ), GTK_JUSTIFY_LEFT );
-	gtk_widget_show( label );
-
-	object_density_combo = gimp_int_combo_box_new(
-		_("Random"), DENSITY_RANDOM,
-		_("Gauss"), DENSITY_GAUSS,
-		_("Plummer"), DENSITY_PLUMMER,
-		NULL );
-	gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), parameters.object_density );
-	gimp_int_combo_box_connect( GIMP_INT_COMBO_BOX( object_density_combo ), parameters.object_density,
-		G_CALLBACK( gimp_int_combo_box_get_active ), &parameters.object_density );
-	gimp_int_combo_box_connect( GIMP_INT_COMBO_BOX( object_density_combo ), parameters.object_density,
-		G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), object_density_combo, 1, 2, 0, 1, GTK_EXPAND | GTK_FILL, 0, 0, 0);
-	gtk_widget_show( object_density_combo );
-
-	object_radius_adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 2,
-		_("Radius parameter:"), 125, 75,
-		parameters.object_radius, 0, 200, 1, 5, 0,
-		TRUE, 0, 0, _("Radius of object in % of the image (unused for random distribution)"), NULL );
-	g_signal_connect( object_radius_adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
-		&parameters.object_radius );
-	g_signal_connect_swapped( object_radius_adj, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-
-	gtk_widget_show( object_box );
-
-
-	star_frame = gtk_frame_new( _("Foreground stars:") );
-	gtk_box_pack_start( GTK_BOX( right_vbox ), star_frame, FALSE, FALSE, 0 );
-	gtk_widget_show( star_frame );
-
-	table = gtk_table_new( 2, 6, FALSE );
-	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
-	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
-	gtk_container_add( GTK_CONTAINER( star_frame ), table );
-	gtk_widget_show( table );
-
-	label = gtk_label_new( _("Number:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	foreground_number_spin = gtk_spin_button_new_with_range( 0, 10000, 1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), parameters.foreground_stars );
-	g_signal_connect( foreground_number_spin, "value_changed", G_CALLBACK( spin_foreground_stars ), NULL );
-	g_signal_connect_swapped( foreground_number_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), foreground_number_spin, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( foreground_number_spin );
-
-	label = gtk_label_new( _("Brightness mean:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	foreground_brightness_spin = gtk_spin_button_new_with_range( 0, 1000, 0.1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), parameters.foreground_brightness_mean );
-	g_signal_connect( foreground_brightness_spin, "value_changed", G_CALLBACK( spin_foreground_brightness_mean ), NULL );
-	g_signal_connect_swapped( foreground_brightness_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), foreground_brightness_spin, 1, 2, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( foreground_brightness_spin );
-
-	label = gtk_label_new( _("Brightness sigma:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	foreground_brightness_sigma_spin = gtk_spin_button_new_with_range( 0, 500, 0.1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), parameters.foreground_brightness_sigma );
-	g_signal_connect( foreground_brightness_sigma_spin, "value_changed", G_CALLBACK( spin_foreground_brightness_sigma ), NULL );
-	g_signal_connect_swapped( foreground_brightness_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), foreground_brightness_sigma_spin, 3, 4, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( foreground_brightness_sigma_spin );
-
-	label = gtk_label_new( _("Color mean:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	foreground_color_spin = gtk_spin_button_new_with_range( 1000, 40000, 1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), parameters.foreground_color_mean );
-	g_signal_connect( foreground_color_spin, "value_changed", G_CALLBACK( spin_foreground_color_mean ), NULL );
-	g_signal_connect_swapped( foreground_color_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 0, 1, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), foreground_color_spin, 1, 2, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( foreground_color_spin );
-
-	label = gtk_label_new( _("Color sigma:") );
-	gtk_misc_set_alignment( GTK_MISC( label ), 0, 0.5 );
-	foreground_color_sigma_spin = gtk_spin_button_new_with_range( 1, 10000, 1 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), parameters.foreground_color_sigma );
-	g_signal_connect( foreground_color_sigma_spin, "value_changed", G_CALLBACK( spin_foreground_color_sigma ), NULL );
-	g_signal_connect_swapped( foreground_color_sigma_spin, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
-	gtk_table_attach( GTK_TABLE( table ), label, 2, 3, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( label );
-	gtk_table_attach( GTK_TABLE( table ), foreground_color_sigma_spin, 3, 4, 2, 3, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( foreground_color_sigma_spin );
 
 	gtk_widget_show( left_vbox );
 	gtk_widget_show( right_vbox );
