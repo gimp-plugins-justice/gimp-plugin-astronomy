@@ -46,9 +46,9 @@ gauss fit (for stars) or center of brightness.
 
 #include "plugin-intl.h"
 
-#define PLUG_IN_NAME "astro-alignment"
-#define PLUG_IN_VERSION "astro-alignment 0.6"
-#define PLUG_IN_DATE "07.2008"
+#define PLUG_IN_NAME "gimp-plugin-astro-align-layers"
+#define PLUG_IN_VERSION "0.7"
+#define PLUG_IN_DATE "09.2012"
 
 /*
 parameters
@@ -220,8 +220,8 @@ static void query( void )
 	static gint nparams = sizeof( params )/sizeof( params[0] );
 	static gint nreturn_vals = 0;
 
-	gimp_install_procedure( "plug_in_"PLUG_IN_NAME,
-		"layer alignment",
+	gimp_install_procedure( PLUG_IN_NAME,
+		_("Move and rotate layers so that they overlap correctly"),
 		_("This plug-in translates and rotates layers so they fit best."),
 		"Georg Hennig <georg.hennig@web.de>",
 		"Georg Hennig <georg.hennig@web.de>",
@@ -234,7 +234,7 @@ static void query( void )
 		params,
 		return_vals );
 
-	gimp_plugin_menu_register( "plug_in_"PLUG_IN_NAME, _("<Image>/Filters/Astronomy") );
+	gimp_plugin_menu_register( PLUG_IN_NAME, _("<Image>/Filters/Astronomy") );
 }
 
 static void run( const gchar *name, gint nparams, const GimpParam  *param,
@@ -1587,10 +1587,10 @@ static gint dialog()
 
   gimp_ui_init( PLUG_IN_NAME, TRUE );
 
-	dlg = gimp_dialog_new( PLUG_IN_VERSION, PLUG_IN_NAME, NULL, 0,
-		gimp_standard_help_func, "plug-in-"PLUG_IN_NAME,
+	dlg = gimp_dialog_new( _("Align Layers"), "astro_align_layers", NULL, 0,
+		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		_("Align"), GTK_RESPONSE_OK,
+		_("_Align"), GTK_RESPONSE_OK,
 		NULL);
 
 	main_vbox = gtk_vbox_new( FALSE, 12 );
@@ -1664,16 +1664,16 @@ static gint dialog()
 		NULL );
 
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 1,
-		_("Center of brightness mean value's radius [Pixel]:"), 180, 75,
+		_("Center of brightness mean value's radius [px]:"), 180, 75,
 		parameters.search_radius, 1, 100, 1, 10, 0,
-		TRUE, 0, 0, _("Search radius, of course limited by layer border"), NULL );
+		TRUE, 0, 0, _("Search radius, limited by the layer's border"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
 		&parameters.search_radius );
 
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 2,
-		_("Cross correlation search area [% of selected area width/height]:"), 180, 75,
+		_("Cross correlation search area [%]:"), 180, 75,
 		parameters.cross_correlation, 100, 1000, 1, 10, 0,
-		TRUE, 0, 0, _("Cross correlation search area, of course limited by layer border"), NULL );
+		TRUE, 0, 0, _("Cross correlation search area, measured in % of selected area width/height and limited by the layer's border"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
 		&parameters.cross_correlation );
 

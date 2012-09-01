@@ -45,7 +45,7 @@ cluster, and foreground stars.
 
 #include "plugin-intl.h"
 
-#define PLUG_IN_NAME "gimp-plugin-artificial-stars"
+#define PLUG_IN_NAME "gimp-plugin-astro-artificial-stars"
 #define PLUG_IN_VERSION "0.7"
 #define PLUG_IN_DATE "09.2012"
 
@@ -1637,7 +1637,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
   gimp_ui_init( PLUG_IN_NAME, TRUE );
 
-	dlg = gimp_dialog_new( _("Create Artificial Stars"), "artificial_stars", NULL, 0,
+	dlg = gimp_dialog_new( _("Create Artificial Stars"), "astro_artificial_stars", NULL, 0,
 		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		_("Cre_ate"), GTK_RESPONSE_OK,

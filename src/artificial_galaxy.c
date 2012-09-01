@@ -43,7 +43,7 @@ spiral barred with bulge.
 
 #include "plugin-intl.h"
 
-#define PLUG_IN_NAME "gimp-plugin-artificial-galaxy"
+#define PLUG_IN_NAME "gimp-plugin-astro-artificial-galaxy"
 #define PLUG_IN_VERSION "0.7"
 #define PLUG_IN_DATE "09.2012"
 
@@ -2285,7 +2285,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
   gimp_ui_init( PLUG_IN_NAME, TRUE );
 
-	dlg = gimp_dialog_new( _("Create An Artificial Galaxy"), "artificial_galaxy", NULL, 0,
+	dlg = gimp_dialog_new( _("Create An Artificial Galaxy"), "astro_artificial_galaxy", NULL, 0,
 		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		_("Create"), GTK_RESPONSE_OK,
