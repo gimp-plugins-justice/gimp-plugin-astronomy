@@ -54,8 +54,8 @@
 
 
 (script-fu-register "astronomy-flat-division"
-	_"Divide all layers by a flat field"
-	_"Divide all layers by a flat field"
+	_"Divide all Layers by Flat Field"
+	_"Divides all layers by a flat field"
 	"Georg Hennig"
 	"Georg Hennig"
 	"07-2008"

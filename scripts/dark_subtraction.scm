@@ -54,7 +54,7 @@
 
 
 (script-fu-register "astronomy-dark-subtraction"
-	_"Subtract a dark frame from all layers"
+	_"Subtract Dark Frame from all Layers"
 	_"Subtract a dark frame from all layers"
 	"Georg Hennig"
 	"Georg Hennig"

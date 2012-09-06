@@ -314,8 +314,8 @@
 )
 
 (script-fu-register "astronomy-border-information"
-	_"Draw border with image information"
-	_"Draw border with image information"
+	_"Draw Border with Image Information"
+	_"Draw a border around an image and some information about it image in the bottom"
 	"Georg Hennig"
 	"Georg Hennig"
 	"07-2008"

@@ -59,8 +59,8 @@
 )
 
 (script-fu-register "astronomy-mode-batch"
-	_"Set mode for all layers"
-	_"Set mode for all layers"
+	_"Set Mode for all Layers"
+	_"Set a particular blending mode and opacity to all layers"
 	"Georg Hennig"
 	"Georg Hennig"
 	"07-2008"

@@ -39,8 +39,8 @@
 )
 
 (script-fu-register "astronomy-normalize-batch"
-	_"Normalize all layers"
-	_"Normalize all layers"
+	_"Normalize all Layers"
+	_"Apply the normalize function to all layers"
 	"Georg Hennig"
 	"Georg Hennig"
 	"07-2008"

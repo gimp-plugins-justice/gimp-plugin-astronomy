@@ -38,8 +38,8 @@
 )
 
 (script-fu-register "astronomy-brightness-contrast-batch"
-	_"Set brightness and contrast for all layers"
-	_"Set brightness and contrast for all layers"
+	_"Set Brightness and Contrast for all Layers"
+	_"Apply the Brightness/Contrast tool to all layers in an image"
 	"Georg Hennig"
 	"Georg Hennig"
 	"07-2008"
