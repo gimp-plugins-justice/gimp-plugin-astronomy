@@ -13,7 +13,7 @@ TEST_TYPE=-f
 FILE=src/alignment.c
 
 AUTOCONF_REQUIRED_VERSION=2.54
-AUTOMAKE_REQUIRED_VERSION=1.6
+AUTOMAKE_REQUIRED_VERSION=1.10
 GLIB_REQUIRED_VERSION=2.0.0
 INTLTOOL_REQUIRED_VERSION=0.17
 
@@ -62,6 +62,12 @@ elif (automake-1.8 --version) < /dev/null > /dev/null 2>&1; then
 elif (automake-1.9 --version) < /dev/null > /dev/null 2>&1; then
    AUTOMAKE=automake-1.9
    ACLOCAL=aclocal-1.9
+elif (automake-1.10 --version) < /dev/null > /dev/null 2>&1; then
+   AUTOMAKE=automake-1.10
+   ACLOCAL=aclocal-1.10
+elif (automake-1.11 --version) < /dev/null > /dev/null 2>&1; then
+   AUTOMAKE=automake-1.11
+   ACLOCAL=aclocal-1.11
 elif (automake-1.6 --version) < /dev/null > /dev/null 2>&1; then
    AUTOMAKE=automake-1.6
    ACLOCAL=aclocal-1.6
