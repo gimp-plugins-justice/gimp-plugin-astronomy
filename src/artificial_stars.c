@@ -384,14 +384,14 @@ static void run( const gchar *name, gint nparams, const GimpParam  *param,
 	switch( run_mode )
 	{
 		case GIMP_RUN_INTERACTIVE:
-			gimp_get_data( "plug_in_"PLUG_IN_NAME, &parameters );
+			gimp_get_data( PLUG_IN_NAME, &parameters );
 
 			if ( !dialog( param[1].data.d_image, gimp_drawable_get( param[2].data.d_drawable ) ) )
 			{
 				return;
 			}
 
-			gimp_set_data( "plug_in_"PLUG_IN_NAME, &parameters, sizeof( tparameter ) );
+			gimp_set_data( PLUG_IN_NAME, &parameters, sizeof( tparameter ) );
 			break;
 		case GIMP_RUN_NONINTERACTIVE:
 			if ( nparams != 37 )
@@ -439,7 +439,7 @@ static void run( const gchar *name, gint nparams, const GimpParam  *param,
 			}
 			break;
 		case GIMP_RUN_WITH_LAST_VALS:
-			gimp_get_data( "plug_in_"PLUG_IN_NAME, &parameters );
+			gimp_get_data( PLUG_IN_NAME, &parameters );
 			image_id = param[1].data.d_image;
 
 			break;
