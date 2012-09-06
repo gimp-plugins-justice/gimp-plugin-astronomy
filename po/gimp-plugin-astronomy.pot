@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-06 07:55+0400\n"
+"POT-Creation-Date: 2012-09-06 08:55+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,7 +72,7 @@ msgid "General Settings"
 msgstr ""
 
 #: ../src/alignment.c:1613
-msgid "Scale before processing [%]:"
+msgid "Scale before processing (%):"
 msgstr ""
 
 #: ../src/alignment.c:1615
@@ -121,7 +121,7 @@ msgid "Cross correlation (FFT)"
 msgstr ""
 
 #: ../src/alignment.c:1667
-msgid "Center of brightness mean value's radius [px]:"
+msgid "Center of brightness mean value's radius (px):"
 msgstr ""
 
 #: ../src/alignment.c:1669
@@ -129,7 +129,7 @@ msgid "Search radius, limited by the layer's border"
 msgstr ""
 
 #: ../src/alignment.c:1674
-msgid "Cross correlation search area [%]:"
+msgid "Cross correlation search area (%):"
 msgstr ""
 
 #: ../src/alignment.c:1676
@@ -244,7 +244,7 @@ msgid ""
 "pixel values."
 msgstr ""
 
-#: ../src/background_gradient.c:162
+#: ../src/background_gradient.c:162 ../src/background_gradient.c:787
 msgid "Background Gradient"
 msgstr ""
 
@@ -323,7 +323,7 @@ msgstr ""
 msgid "This plug-in creates an artificial star distribution. "
 msgstr ""
 
-#: ../src/artificial_stars.c:349
+#: ../src/artificial_stars.c:349 ../src/artificial_stars.c:1640
 msgid "Artificial Stars"
 msgstr ""
 
@@ -397,10 +397,6 @@ msgstr ""
 
 #: ../src/artificial_stars.c:1371 ../src/artificial_galaxy.c:2178
 msgid "Cancel recalculation"
-msgstr ""
-
-#: ../src/artificial_stars.c:1640
-msgid "Create Artificial Stars"
 msgstr ""
 
 #. Star distribution (left side)
@@ -626,7 +622,7 @@ msgstr ""
 msgid "This plug-in creates an artificial galaxy."
 msgstr ""
 
-#: ../src/artificial_galaxy.c:483
+#: ../src/artificial_galaxy.c:483 ../src/artificial_galaxy.c:2288
 msgid "Artificial Galaxy"
 msgstr ""
 
@@ -707,8 +703,7 @@ msgid "Bulge radius:"
 msgstr ""
 
 #: ../src/artificial_galaxy.c:1763 ../src/artificial_galaxy.c:1969
-#, c-format
-msgid "Radius [% of image size] of the bulge"
+msgid "Radius of the bulge, measured in percents of the image size"
 msgstr ""
 
 #: ../src/artificial_galaxy.c:1767 ../src/artificial_galaxy.c:1973
@@ -725,8 +720,7 @@ msgid "Spiral radius:"
 msgstr ""
 
 #: ../src/artificial_galaxy.c:1784 ../src/artificial_galaxy.c:1990
-#, c-format
-msgid "Radius [% of image size] of the spiral"
+msgid "Radius of the spiral, measured in percents of the image size"
 msgstr ""
 
 #: ../src/artificial_galaxy.c:1789 ../src/artificial_galaxy.c:1995
@@ -734,8 +728,7 @@ msgid "Spiral thickness:"
 msgstr ""
 
 #: ../src/artificial_galaxy.c:1791 ../src/artificial_galaxy.c:1997
-#, c-format
-msgid "Thickness sigma [% of image size] of the spiral"
+msgid "Thickness sigma of the spiral, measured in percents of the image size"
 msgstr ""
 
 #: ../src/artificial_galaxy.c:1796 ../src/artificial_galaxy.c:2002
@@ -791,8 +784,7 @@ msgid "Radius:"
 msgstr ""
 
 #: ../src/artificial_galaxy.c:2058
-#, c-format
-msgid "Radius [% of image size] of the elliptical galaxy"
+msgid "Radius of the elliptical galaxy, measured in percents of the image size"
 msgstr ""
 
 #: ../src/artificial_galaxy.c:2064
@@ -813,10 +805,6 @@ msgstr ""
 
 #: ../src/artificial_galaxy.c:2079
 msgid "Color:"
-msgstr ""
-
-#: ../src/artificial_galaxy.c:2288
-msgid "Create Artificial Galaxy"
 msgstr ""
 
 #: ../src/artificial_galaxy.c:2319
