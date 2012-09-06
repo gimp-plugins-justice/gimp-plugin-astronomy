@@ -1610,7 +1610,7 @@ static gint dialog()
 
 		/* Scale before processing */
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 0,
-		_("Scale before processing [%]:"), 180, 75,
+		_("Scale before processing (%):"), 180, 75,
 		parameters.scale_percent, 100, 400, 1, 10, 0,
 		TRUE, 0, 0, _("Scale layers before processing"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
@@ -1664,14 +1664,14 @@ static gint dialog()
 		NULL );
 
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 1,
-		_("Center of brightness mean value's radius [px]:"), 180, 75,
+		_("Center of brightness mean value's radius (px):"), 180, 75,
 		parameters.search_radius, 1, 100, 1, 10, 0,
 		TRUE, 0, 0, _("Search radius, limited by the layer's border"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
 		&parameters.search_radius );
 
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 2,
-		_("Cross correlation search area [%]:"), 180, 75,
+		_("Cross correlation search area (%):"), 180, 75,
 		parameters.cross_correlation, 100, 1000, 1, 10, 0,
 		TRUE, 0, 0, _("Cross correlation search area, measured in % of selected area width/height and limited by the layer's border"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),

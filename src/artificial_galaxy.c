@@ -1760,7 +1760,7 @@ static void create_spiral_table()
 	adj = gimp_scale_entry_new( GTK_TABLE( galaxy_spiral_table ), 0, 9,
 		_("Bulge radius:"), 185, 75,
 		parameters.spiral_bulge_radius, 0.0, 200.0, 0.1, 5, 1,
-		TRUE, 0, 0, _("Radius [% of image size] of the bulge"), NULL );
+		TRUE, 0, 0, _("Radius of the bulge, measured in percents of the image size"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_double_adjustment_update ),
 		&parameters.spiral_bulge_radius );
 
@@ -1781,14 +1781,14 @@ static void create_spiral_table()
 	adj = gimp_scale_entry_new( GTK_TABLE( galaxy_spiral_table ), 0, 11,
 		_("Spiral radius:"), 185, 75,
 		parameters.spiral_spiral_radius, 0.0, 200.0, 0.1, 5, 1,
-		TRUE, 0, 0, _("Radius [% of image size] of the spiral"), NULL );
+		TRUE, 0, 0, _("Radius of the spiral, measured in percents of the image size"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_double_adjustment_update ),
 		&parameters.spiral_spiral_radius );
 
 	adj = gimp_scale_entry_new( GTK_TABLE( galaxy_spiral_table ), 0, 12,
 		_("Spiral thickness:"), 185, 75,
 		parameters.spiral_spiral_thickness, 0.0, 50.0, 0.01, 5, 2,
-		TRUE, 0, 0, _("Thickness sigma [% of image size] of the spiral"), NULL );
+		TRUE, 0, 0, _("Thickness sigma of the spiral, measured in percents of the image size"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_double_adjustment_update ),
 		&parameters.spiral_spiral_thickness );
 
@@ -1966,7 +1966,7 @@ static void create_spiralbarred_table()
 	adj = gimp_scale_entry_new( GTK_TABLE( galaxy_spiralbarred_table ), 0, 9,
 		_("Bulge radius:"), 185, 75,
 		parameters.spiralbarred_bulge_radius, 0.0, 200.0, 0.1, 5, 1,
-		TRUE, 0, 0, _("Radius [% of image size] of the bulge"), NULL );
+		TRUE, 0, 0, _("Radius of the bulge, measured in percents of the image size"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_double_adjustment_update ),
 		&parameters.spiralbarred_bulge_radius );
 
@@ -1987,14 +1987,14 @@ static void create_spiralbarred_table()
 	adj = gimp_scale_entry_new( GTK_TABLE( galaxy_spiralbarred_table ), 0, 11,
 		_("Spiral radius:"), 185, 75,
 		parameters.spiralbarred_spiral_radius, 0.0, 200.0, 0.1, 5, 1,
-		TRUE, 0, 0, _("Radius [% of image size] of the spiral"), NULL );
+		TRUE, 0, 0, _("Radius of the spiral, measured in percents of the image size"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_double_adjustment_update ),
 		&parameters.spiralbarred_spiral_radius );
 
 	adj = gimp_scale_entry_new( GTK_TABLE( galaxy_spiralbarred_table ), 0, 12,
 		_("Spiral thickness:"), 185, 75,
 		parameters.spiralbarred_spiral_thickness, 0.0, 50.0, 0.01, 5, 2,
-		TRUE, 0, 0, _("Thickness sigma [% of image size] of the spiral"), NULL );
+		TRUE, 0, 0, _("Thickness sigma of the spiral, measured in percents of the image size"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_double_adjustment_update ),
 		&parameters.spiralbarred_spiral_thickness );
 
@@ -2055,7 +2055,7 @@ static void create_elliptical_table()
 	adj = gimp_scale_entry_new( GTK_TABLE( galaxy_elliptical_table ), 0, 0,
 		_("Radius:"), 185, 75,
 		parameters.elliptical_radius, 0.0, 200.0, 0.1, 5, 1,
-		TRUE, 0, 0, _("Radius [% of image size] of the elliptical galaxy"), NULL );
+		TRUE, 0, 0, _("Radius of the elliptical galaxy, measured in percents of the image size"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_double_adjustment_update ),
 		&parameters.elliptical_radius );
 	g_signal_connect_swapped( adj, "value_changed", G_CALLBACK( gimp_preview_invalidate ), preview );
@@ -2285,7 +2285,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
   gimp_ui_init( PLUG_IN_NAME, TRUE );
 
-	dlg = gimp_dialog_new( _("Create Artificial Galaxy"), "astro_artificial_galaxy", NULL, 0,
+	dlg = gimp_dialog_new( _("Artificial Galaxy"), "astro_artificial_galaxy", NULL, 0,
 		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		GTK_STOCK_OK, GTK_RESPONSE_OK,

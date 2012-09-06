@@ -784,7 +784,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
   gimp_ui_init( PLUG_IN_NAME, TRUE );
 
-	dlg = gimp_dialog_new( "Create A Background Gradient", "astro_background_gradient", NULL, 0,
+	dlg = gimp_dialog_new( _("Background Gradient"), "astro_background_gradient", NULL, 0,
 		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		GTK_STOCK_OK, GTK_RESPONSE_OK,
