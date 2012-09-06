@@ -521,7 +521,7 @@ static void run( const gchar *name, gint nparams, const GimpParam  *param,
 	switch( run_mode )
 	{
 		case GIMP_RUN_INTERACTIVE:
-			gimp_get_data( "plug_in_"PLUG_IN_NAME, &parameters );
+			gimp_get_data( PLUG_IN_NAME, &parameters );
 
 			if ( gimp_drawable_type( param[2].data.d_drawable ) == GIMP_RGB_IMAGE )
 			{
@@ -546,7 +546,7 @@ static void run( const gchar *name, gint nparams, const GimpParam  *param,
 				gimp_image_undo_enable( image_id );
 			}
 
-			gimp_set_data( "plug_in_"PLUG_IN_NAME, &parameters, sizeof( tparameter ) );
+			gimp_set_data( PLUG_IN_NAME, &parameters, sizeof( tparameter ) );
 			break;
 		case GIMP_RUN_NONINTERACTIVE:
 			if ( nparams != 67 )
@@ -652,7 +652,7 @@ static void run( const gchar *name, gint nparams, const GimpParam  *param,
 			}
 			break;
 		case GIMP_RUN_WITH_LAST_VALS:
-			gimp_get_data( "plug_in_"PLUG_IN_NAME, &parameters );
+			gimp_get_data( PLUG_IN_NAME, &parameters );
 			image_id = param[1].data.d_image;
 
 			break;
@@ -2285,7 +2285,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
   gimp_ui_init( PLUG_IN_NAME, TRUE );
 
-	dlg = gimp_dialog_new( _("Create An Artificial Galaxy"), "astro_artificial_galaxy", NULL, 0,
+	dlg = gimp_dialog_new( _("Create Artificial Galaxy"), "astro_artificial_galaxy", NULL, 0,
 		gimp_standard_help_func, PLUG_IN_NAME,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		GTK_STOCK_OK, GTK_RESPONSE_OK,
@@ -2300,9 +2300,9 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	gtk_container_set_border_width( GTK_CONTAINER( left_vbox ), 8 );
 	gtk_box_pack_start( GTK_BOX( main_hbox ), left_vbox, FALSE, FALSE, 0 );
 
-	GtkWidget *vertical_line = gtk_vseparator_new();
-	gtk_box_pack_start( GTK_BOX( main_hbox ), vertical_line, FALSE, FALSE, 0 );
-	gtk_widget_show( vertical_line );
+	// GtkWidget *vertical_line = gtk_vseparator_new();
+	// gtk_box_pack_start( GTK_BOX( main_hbox ), vertical_line, FALSE, FALSE, 0 );
+	// gtk_widget_show( vertical_line );
 
 	right_vbox = gtk_vbox_new( FALSE, 8 );
 	gtk_container_set_border_width( GTK_CONTAINER( right_vbox ), 8 );
@@ -2316,8 +2316,8 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 	g_signal_connect( preview, "invalidated", G_CALLBACK( preview_callback ), NULL );
 
-	frame = gimp_frame_new( _("Draw options:") );
-	gtk_box_pack_start( GTK_BOX( left_vbox ), frame, FALSE, FALSE, 0 );
+	frame = gimp_frame_new( _("Rendering Options") );
+	gtk_box_pack_start( GTK_BOX( right_vbox ), frame, FALSE, FALSE, 0 );
 	gtk_widget_show( frame );
 
 	table = gtk_table_new( 13, 3, FALSE );
@@ -2448,9 +2448,9 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 
 /* Distribution options (right side) */
-	frame = gimp_frame_new( _("Object distribution:") );
-	gtk_box_pack_start( GTK_BOX( right_vbox ), frame, FALSE, FALSE, 0 );
-	gtk_widget_show( frame );
+	// frame = gimp_frame_new( _("Object distribution:") );
+	// gtk_box_pack_start( GTK_BOX( right_vbox ), frame, FALSE, FALSE, 0 );
+	// gtk_widget_show( frame );
 
 	table = gtk_table_new( 3, 1, FALSE );
 	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
@@ -2475,9 +2475,9 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 // 	g_signal_connect( GIMP_RANDOM_SEED_SPINBUTTON( random_seed ), "value_changed", G_CALLBACK( spin_random_seed ), NULL );
 
 
-	frame = gtk_frame_new( "" );
-	gtk_box_pack_start( GTK_BOX( right_vbox ), frame, FALSE, FALSE, 0 );
-	gtk_widget_show( frame );
+	// frame = gimp_frame_new( "" );
+	// gtk_box_pack_start( GTK_BOX( right_vbox ), frame, FALSE, FALSE, 0 );
+	// gtk_widget_show( frame );
 
 	table = gtk_table_new( 2, 1, FALSE );
 	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
@@ -2504,7 +2504,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	gtk_table_attach( GTK_TABLE( table ), galaxy_type, 1, 3, 0, 1, GTK_EXPAND | GTK_FILL, 0, 0, 0);
 	gtk_widget_show( galaxy_type );
 
-	galaxy_specific_frame = gtk_frame_new( _("Galaxy settings:") );
+	galaxy_specific_frame = gimp_frame_new( _("Galaxy Settings") );
 	gtk_box_pack_start( GTK_BOX( right_vbox ), galaxy_specific_frame, FALSE, FALSE, 0 );
 	gtk_widget_show( galaxy_specific_frame );
 
