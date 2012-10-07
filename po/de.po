@@ -3,20 +3,25 @@
 # Copyright (C) 2000, 2007, 2008 Free Software Foundation, Inc.
 # Michael Natterer <mitch@gimp.org>
 #
-# Georg Hennig <georg.hennig@web.de>, 2007, 2008.
+# Georg Hennig <georg.hennig@web.de>, 2007, 2008, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-31 15:10+0200\n"
-"PO-Revision-Date: 2008-07-31 15:12+0200\n"
-"Last-Translator: Georg Hennig <georg.hennig@web.de>\n"
-"Language-Team: Deutsch\n"
+"POT-Creation-Date: 2012-10-07 11:50+0200\n"
+"PO-Revision-Date: 2012-10-07 12:02+0200\n"
+"Last-Translator: Georg Hennig <georg@hennigbuam.de>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.5\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: ../src/alignment.c:224
+msgid "Move and rotate layers so that they overlap correctly"
+msgstr "Verschiebe und rotiere Ebenen, so dass sie korrekt überlappen"
 
 #: ../src/alignment.c:225
 msgid "This plug-in translates and rotates layers so they fit best."
@@ -24,12 +29,12 @@ msgstr ""
 "Dieses Plug-in verschiebt und rotiert Ebenen so, dass sie am besten "
 "übereinander passen."
 
-#: ../src/alignment.c:229
+#: ../src/alignment.c:229 ../src/alignment.c:1590
 msgid "Align Layers"
 msgstr "Richte Ebenen aus"
 
 #: ../src/alignment.c:237 ../src/merge.c:177 ../src/background_gradient.c:170
-#: ../src/artificial_stars.c:357 ../src/artificial_galaxy.c:491
+#: ../src/artificial_stars.c:370 ../src/artificial_galaxy.c:491
 #: ../src/star_rounding.c:186
 msgid "<Image>/Filters/Astronomy"
 msgstr "<Image>/Filters/Astronomy"
@@ -65,25 +70,21 @@ msgstr "Bitte eine andere Fläche für das De-Rotieren der Ebenen auswählen."
 msgid "Rotating layers by estimated values..."
 msgstr "Rotiere die Ebenen um die geschätzten Winkel..."
 
-#: ../src/alignment.c:1593
-msgid "Align"
-msgstr "Ausrichten"
-
 #. Generic settings
-#: ../src/alignment.c:1601 ../src/merge.c:985
-msgid "Generic Settings"
+#: ../src/alignment.c:1601 ../src/merge.c:987
+msgid "General Settings"
 msgstr "Allgemeine Einstellungen"
 
 #: ../src/alignment.c:1613
-msgid "Scale before processing [%]:"
-msgstr "Vor der Verarbeitung skalieren [%]:"
+msgid "Scale before processing (%):"
+msgstr "Vor der Verarbeitung skalieren (%):"
 
 #: ../src/alignment.c:1615
 msgid "Scale layers before processing"
 msgstr "Skaliere Ebenen vor der Verarbeitung"
 
 #. visible layers ?
-#: ../src/alignment.c:1620 ../src/merge.c:996
+#: ../src/alignment.c:1620 ../src/merge.c:998
 msgid "Use visible layers only"
 msgstr "Benutze nur sichtbare Ebenen"
 
@@ -124,35 +125,41 @@ msgid "Cross correlation (FFT)"
 msgstr "Kreuzkorrelation (FFT)"
 
 #: ../src/alignment.c:1667
-msgid "Center of brightness mean value's radius [Pixel]:"
-msgstr "Radius für die Mittelwertbildung für den Helligkeitsschwerpunkt [Pixel]:"
+msgid "Center of brightness mean value's radius (px):"
+msgstr "Radius für die Mittelwertbildung für den Helligkeitsschwerpunkt (px):"
 
 #: ../src/alignment.c:1669
-msgid "Search radius, of course limited by layer border"
-msgstr "Suchradius, natürlich beschränkt durch auf Ebenengrenzen"
+msgid "Search radius, limited by the layer's border"
+msgstr "Suchradius, natürlich beschränkt auf Ebenengrenzen"
 
 #: ../src/alignment.c:1674
-#, c-format
-msgid "Cross correlation search area [% of selected area width/height]:"
-msgstr ""
-"Suchumgebung für die Kreuzkorrelation [% der Breite/Höhe der ausgewählten "
-"Fläche]:"
+msgid "Cross correlation search area (%):"
+msgstr "Suchumgebung der Kreuzkorrelation (%):"
 
 #: ../src/alignment.c:1676
-msgid "Cross correlation search area, of course limited by layer border"
+#, c-format
+msgid ""
+"Cross correlation search area, measured in % of selected area width/height "
+"and limited by the layer's border"
 msgstr ""
-"Suchumgebung für die Kreuzkorrelation, natürlich beschränkt auf die "
-"Ebenengrenzen"
+"Suchumgebung der Kreuzkorrelation, gemessen in % der Breite/Höhe der "
+"ausgewählten Fläche, und begrenzt durch die Ebenengrenzen"
 
 #: ../src/alignment.c:1683
 msgid "Subpixel resolution when using cross correlation"
 msgstr "Subpixel-Auflösung bei Kreuzkorrelation"
 
+#: ../src/merge.c:164
+msgid "Merge layers using different mean value algorithms"
+msgstr ""
+"Mittelwert von Ebenen durch verschiedene Mittelwert-Algorithmen berechnen"
+
 #: ../src/merge.c:165
 msgid "This plug-in merges layers using different mean value algorithms. "
-msgstr "Dieses Plug-In mittelt Ebenen über verschiedene Mittelwert-Algorithmen."
+msgstr ""
+"Dieses Plug-In mittelt Ebenen über verschiedene Mittelwert-Algorithmen."
 
-#: ../src/merge.c:169
+#: ../src/merge.c:169 ../src/merge.c:962
 msgid "Merge Layers"
 msgstr "Überlagere Ebenen"
 
@@ -160,15 +167,15 @@ msgstr "Überlagere Ebenen"
 msgid "Merge Layers..."
 msgstr "Überlagere Ebenen..."
 
-#: ../src/merge.c:800 ../src/merge.c:1015
+#: ../src/merge.c:800 ../src/merge.c:1017
 msgid "Arithmetic mean"
 msgstr "Arithmetisches Mittel"
 
-#: ../src/merge.c:803 ../src/merge.c:1016
+#: ../src/merge.c:803 ../src/merge.c:1018
 msgid "Geometric mean"
 msgstr "Geometrisches Mittel"
 
-#: ../src/merge.c:806 ../src/merge.c:1017
+#: ../src/merge.c:806 ../src/merge.c:1019
 msgid "Median"
 msgstr "Median"
 
@@ -184,28 +191,24 @@ msgstr "Sigma Median (1 Durchlauf)"
 msgid "Sigma median (2 passes)"
 msgstr "Sigma Median (2 Durchläufe)"
 
-#: ../src/merge.c:963
-msgid "Merge"
-msgstr "Überlagern"
-
 #. Merge methods + settings
-#: ../src/merge.c:1004
-msgid "Merge method (mean value)"
+#: ../src/merge.c:1006
+msgid "Merge Method (Mean Value)"
 msgstr "Methode zum Überlagern (Art des Mittelwerts)"
 
-#: ../src/merge.c:1018
-msgid "Arithmetic mean of x sigma around median"
+#: ../src/merge.c:1020
+msgid "Arithmetic mean of X sigma around median"
 msgstr "Arithmetisches Mittel der Werte innerhalb x Sigma um den Median"
 
-#: ../src/merge.c:1019
-msgid "Median of x sigma around median (1 pass)"
+#: ../src/merge.c:1021
+msgid "Median of X sigma around median (1 pass)"
 msgstr "Median der Werte innerhalb x Sigma um den Median (1 Durchgang)"
 
-#: ../src/merge.c:1020
-msgid "Median of x sigma around median (2 passes)"
+#: ../src/merge.c:1022
+msgid "Median of X sigma around median (2 passes)"
 msgstr "Median der Werte innerhalb x Sigma um den Median (2 Durchgänge)"
 
-#: ../src/merge.c:1032 ../src/artificial_stars.c:1702
+#: ../src/merge.c:1034 ../src/artificial_stars.c:2060
 #: ../src/artificial_galaxy.c:1661 ../src/artificial_galaxy.c:1687
 #: ../src/artificial_galaxy.c:1713 ../src/artificial_galaxy.c:1739
 #: ../src/artificial_galaxy.c:1867 ../src/artificial_galaxy.c:1893
@@ -213,42 +216,53 @@ msgstr "Median der Werte innerhalb x Sigma um den Median (2 Durchgänge)"
 msgid "Sigma:"
 msgstr "Sigma:"
 
-#: ../src/merge.c:1034
-msgid "Clip x sigma around median (unused for arithmetic/geometric mean or median)"
+#: ../src/merge.c:1036
+msgid ""
+"Clip X sigma around median (unused for arithmetic/geometric mean or median)"
 msgstr ""
 "Clippe x Sigma um den Median herum (wird nicht vom Arithmetischen/"
 "Geometrischen Mittel oder dem einfachen Median benutzt)"
 
 #. Preprocess values
-#: ../src/merge.c:1040
-msgid "Preprocess pixel values before merging"
+#: ../src/merge.c:1042
+msgid "Preprocess Pixel Values Before Merging"
 msgstr "Verarbeitung der Pixel-Werte vor dem Überlagern"
 
-#: ../src/merge.c:1052
-msgid "Multiply before processing:"
-msgstr "Multipliziere vor der Verarbeitung mit:"
-
 #: ../src/merge.c:1054
-msgid "Multiply each pixel value with this constant before processing"
-msgstr "Multipliziere jeden Pixel-Wert vor der Verarbeitung mit dieser Konstante"
+msgid "Multiply:"
+msgstr "Multiplikation:"
 
-#: ../src/merge.c:1061
-msgid "Add constant before processing:"
-msgstr "Addiere vor der Verarbeitung:"
+#: ../src/merge.c:1056
+msgid "Multiply each pixel value with this constant before processing"
+msgstr ""
+"Multipliziere jeden Pixel-Wert vor der Verarbeitung mit dieser Konstante"
 
 #: ../src/merge.c:1063
+msgid "Add a constant:"
+msgstr "Addiere eine Konstante:"
+
+#: ../src/merge.c:1065
 msgid "Add this constant to each pixel value before processing"
 msgstr "Addiere diese Konstante zu jedem Pixel-Wert vor der Verarbeitung"
+
+#: ../src/background_gradient.c:157
+msgid "Create a layer containing the background for an artificial flat field"
+msgstr ""
+"Erzeuge eine Ebene, die den Hintergrund des künstlichen Sternen-Feldes enthält"
 
 #: ../src/background_gradient.c:158
 msgid ""
 "This plug-in tries to fit a polynomial of order 4 through the background "
-"pixel values. "
+"pixel values."
 msgstr ""
 "Dieses Plug-In versucht, ein Polynom 4. Grades durch die Pixel-Werte des "
 "Hintergrundes zu fitten."
 
-#: ../src/background_gradient.c:162 ../src/background_gradient.c:434
+#: ../src/background_gradient.c:162 ../src/background_gradient.c:787
+msgid "Background Gradient"
+msgstr "Hintergrund-Gradient"
+
+#: ../src/background_gradient.c:434
 msgid "Background gradient"
 msgstr "Hintergrund-Gradient"
 
@@ -267,10 +281,6 @@ msgstr "Fitte das Polynom und berechne das Maximum der Pixel-Werte..."
 #: ../src/background_gradient.c:672
 msgid "Writing normalized pixel values..."
 msgstr "Schreibe normalisierte Pixel-Werte..."
-
-#: ../src/background_gradient.c:790
-msgid "Create gradient"
-msgstr "Erstelle Gradienten"
 
 #. Box width
 #: ../src/background_gradient.c:805
@@ -295,7 +305,7 @@ msgid "Clip values inside the box by ... sigma"
 msgstr "Clippe die Werte innerhalb der Box auf ... Sigma"
 
 #: ../src/background_gradient.c:867
-msgid "Minimum number of not clipping values:"
+msgid "Min number of non-clipping values:"
 msgstr "Mindestanzahl nicht-clippender Werte:"
 
 #: ../src/background_gradient.c:869
@@ -314,309 +324,330 @@ msgstr "Dunkelste Werte"
 msgid "Brightest values"
 msgstr "Hellste Werte"
 
-#: ../src/background_gradient.c:894
-msgid "Use percentage:"
-msgstr "Benutze Prozentsatz:"
+#: ../src/background_gradient.c:894 ../src/star_rounding.c:768
+#: ../src/star_rounding.c:845
+msgid "Percentage:"
+msgstr "Prozentsatz:"
 
-#: ../src/artificial_stars.c:345
+#: ../src/artificial_stars.c:357
+msgid "Create an artificial star distribution"
+msgstr "Erzeuge ein künstliches Stern-Feld"
+
+#: ../src/artificial_stars.c:358
 msgid "This plug-in creates an artificial star distribution. "
 msgstr "Dieses Plug-in erzeugt ein künstliches Stern-Feld."
 
-#: ../src/artificial_stars.c:349
-msgid "Create artificial stars"
-msgstr "Erzeuge künstliche Sterne"
+#: ../src/artificial_stars.c:362 ../src/artificial_stars.c:1653
+msgid "Artificial Stars"
+msgstr "Künstliche Sterne"
 
-#: ../src/artificial_stars.c:459
+#: ../src/artificial_stars.c:472
 msgid ""
 "Do you want to recalculate the star distribution before actually drawing the "
 "stars?"
-msgstr "Wollen Sie die Verteilung der Sterne vor dem Zeichnen der Sterne neu berechnen?"
+msgstr ""
+"Wollen Sie die Verteilung der Sterne vor dem Zeichnen der Sterne neu "
+"berechnen?"
 
-#: ../src/artificial_stars.c:528
+#: ../src/artificial_stars.c:541
 msgid "Creating background star distribution"
 msgstr "Erzeuge Hintergrund-Stern-Feld"
 
-#: ../src/artificial_stars.c:534
+#: ../src/artificial_stars.c:547
 msgid "Creating object star distribution"
 msgstr "Erzeuge Objekt-Stern-Feld"
 
-#: ../src/artificial_stars.c:540
+#: ../src/artificial_stars.c:553
 msgid "Creating foreground star distribution"
 msgstr "Erzeuge Vordergrund-Stern-Feld"
 
-#: ../src/artificial_stars.c:552 ../src/artificial_stars.c:1380
-#: ../src/artificial_stars.c:1801 ../src/artificial_galaxy.c:1141
+#: ../src/artificial_stars.c:565 ../src/artificial_stars.c:1393
+#: ../src/artificial_stars.c:1696 ../src/artificial_galaxy.c:1141
 #: ../src/artificial_galaxy.c:2187
 msgid "Recalculate distribution"
 msgstr "Berechne Feld neu"
 
-#: ../src/artificial_stars.c:571
+#: ../src/artificial_stars.c:584
 msgid "Sorting stars by brightness"
 msgstr "Sortiere Sterne nach Helligkeit"
 
-#: ../src/artificial_stars.c:1060 ../src/artificial_galaxy.c:1378
+#: ../src/artificial_stars.c:1073 ../src/artificial_galaxy.c:1378
 msgid "Creating background..."
 msgstr "Erzeuge Hintergrund..."
 
-#: ../src/artificial_stars.c:1087
+#: ../src/artificial_stars.c:1100
 msgid "Creating background stars..."
 msgstr "Erzeuge Hintergrund-Sterne..."
 
-#: ../src/artificial_stars.c:1097
+#: ../src/artificial_stars.c:1110
 msgid "Creating object stars..."
 msgstr "Erzeuge Objekt-Sterne..."
 
-#: ../src/artificial_stars.c:1107
+#: ../src/artificial_stars.c:1120
 msgid "Creating foreground stars..."
 msgstr "Erzeuge Vordergrund-Sterne..."
 
-#: ../src/artificial_stars.c:1117 ../src/artificial_galaxy.c:1440
+#: ../src/artificial_stars.c:1130 ../src/artificial_galaxy.c:1440
 msgid "Creating noise..."
 msgstr "Erzeuge Rauschen..."
 
-#: ../src/artificial_stars.c:1123 ../src/artificial_galaxy.c:1446
+#: ../src/artificial_stars.c:1136 ../src/artificial_galaxy.c:1446
 msgid "Writing normalized values to buffer..."
 msgstr "Schreibe normalisierte Werte in den Puffer..."
 
-#: ../src/artificial_stars.c:1165
+#: ../src/artificial_stars.c:1178
 msgid "Artificial background stars"
 msgstr "Künstliche Hintergrund-Sterne"
 
-#: ../src/artificial_stars.c:1180
+#: ../src/artificial_stars.c:1193
 msgid "Artificial object stars"
 msgstr "Künstliche Objekt-Sterne"
 
-#: ../src/artificial_stars.c:1195
+#: ../src/artificial_stars.c:1208
 msgid "Artificial foreground stars"
 msgstr "Künstliche Vordergrund-Sterne"
 
-#: ../src/artificial_stars.c:1212
+#: ../src/artificial_stars.c:1225
 msgid "Artificial stars"
 msgstr "Künstliche Sterne"
 
-#: ../src/artificial_stars.c:1371 ../src/artificial_galaxy.c:2178
+#: ../src/artificial_stars.c:1384 ../src/artificial_galaxy.c:2178
 msgid "Cancel recalculation"
 msgstr "Abbruch der Neuberechnung"
 
-#: ../src/artificial_stars.c:1643 ../src/artificial_galaxy.c:2291
-msgid "Create"
-msgstr "Erzeuge"
+#. Star distribution (left side)
+#: ../src/artificial_stars.c:1686
+msgid "Star Distribution"
+msgstr "Sternen-Feld"
 
-#: ../src/artificial_stars.c:1671 ../src/artificial_galaxy.c:2319
-msgid "Draw options:"
-msgstr "Darstellungsoptionen:"
+#. Sample Distributions
+#: ../src/artificial_stars.c:1718
+msgid "Sample Distributions"
+msgstr "Beispiel-Felder"
 
-#: ../src/artificial_stars.c:1681
-msgid "PSF:"
-msgstr "PSF:"
+#: ../src/artificial_stars.c:1729
+msgid "Standard (high density)"
+msgstr "Standard (hohe Dichte)"
 
-#: ../src/artificial_stars.c:1687
-msgid "Delta peak"
-msgstr "Delta-Funktion"
+#: ../src/artificial_stars.c:1730
+msgid "Standard (low density)"
+msgstr "Standard (niedrige Dichte)"
 
-#: ../src/artificial_stars.c:1688 ../src/artificial_stars.c:2038
+#: ../src/artificial_stars.c:1731
+msgid "Globular cluster (high density)"
+msgstr "Kugelsternhaufen (hohe Dichte)"
+
+#: ../src/artificial_stars.c:1732
+msgid "Globular cluster (low density)"
+msgstr "Kugelsternhaufen (niedrige Dichte)"
+
+#: ../src/artificial_stars.c:1733
+msgid "Open cluster (high density)"
+msgstr "Offener Haufen (hohe Dichte)"
+
+#: ../src/artificial_stars.c:1734
+msgid "Open cluster (low density)"
+msgstr "Offener Haufen (niedrige Dichte)"
+
+#: ../src/artificial_stars.c:1742
+msgid "Apply"
+msgstr "Anwenden"
+
+#: ../src/artificial_stars.c:1758
+msgid "_Distribution Options"
+msgstr "_Verteilungsoptionen"
+
+#: ../src/artificial_stars.c:1761
+msgid "Background Stars"
+msgstr "Hintergrund-Sterne"
+
+#: ../src/artificial_stars.c:1771 ../src/artificial_stars.c:1841
+#: ../src/artificial_stars.c:1966
+msgid "Amount:"
+msgstr "Menge:"
+
+#: ../src/artificial_stars.c:1782 ../src/artificial_stars.c:1852
+#: ../src/artificial_stars.c:1977
+msgid "Brightness mean:"
+msgstr "Helligkeitsmittelwert:"
+
+#: ../src/artificial_stars.c:1793 ../src/artificial_stars.c:1863
+#: ../src/artificial_stars.c:1988
+msgid "Brightness sigma:"
+msgstr "Sigma der Helligkeit:"
+
+#: ../src/artificial_stars.c:1804 ../src/artificial_stars.c:1874
+#: ../src/artificial_stars.c:1999
+msgid "Color mean:"
+msgstr "Farb-Mittelwert:"
+
+#: ../src/artificial_stars.c:1815 ../src/artificial_stars.c:1885
+#: ../src/artificial_stars.c:2010
+msgid "Color sigma:"
+msgstr "Sigma der Farbe:"
+
+#: ../src/artificial_stars.c:1827
+msgid "Object Stars"
+msgstr "Objekt-Sterne"
+
+#: ../src/artificial_stars.c:1897
+msgid "Object center: X:"
+msgstr "Objekt-Mittelpunkt: X:"
+
+#: ../src/artificial_stars.c:1909
+msgid "Y:"
+msgstr "Y:"
+
+#: ../src/artificial_stars.c:1926
+msgid "Density profile:"
+msgstr "Dichte-Verteilung:"
+
+#: ../src/artificial_stars.c:1933
+msgid "Random"
+msgstr "Zufällig"
+
+#: ../src/artificial_stars.c:1934 ../src/artificial_stars.c:2046
 msgid "Gauss"
 msgstr "Gauß"
 
-#: ../src/artificial_stars.c:1689
+#: ../src/artificial_stars.c:1935
+msgid "Plummer"
+msgstr "Plummer"
+
+#: ../src/artificial_stars.c:1946
+msgid "Radius parameter:"
+msgstr "Radius-Parameter:"
+
+#: ../src/artificial_stars.c:1948
+#, c-format
+msgid "Radius of object in % of the image (unused for random distribution)"
+msgstr ""
+"Radius des Objekts in % der Bildgröße (nicht benutzt für Zufallsverteilung)"
+
+#: ../src/artificial_stars.c:1956
+msgid "Foreground Stars"
+msgstr "Vordergrund-Sterne"
+
+#: ../src/artificial_stars.c:2026
+msgid "R_endering"
+msgstr "R_endering"
+
+#: ../src/artificial_stars.c:2029
+msgid "Options"
+msgstr "Optionen"
+
+#: ../src/artificial_stars.c:2039
+msgid "PSF:"
+msgstr "PSF:"
+
+#: ../src/artificial_stars.c:2045
+msgid "Delta peak"
+msgstr "Delta-Funktion"
+
+#: ../src/artificial_stars.c:2047
 msgid "Gauss with 4 diffraction lines"
 msgstr "Gauß mit 4 Beugungsstrahlen"
 
-#: ../src/artificial_stars.c:1690
+#: ../src/artificial_stars.c:2048
 msgid "Gauss with 6 diffraction lines"
 msgstr "Gauß mit 6 Beugungsstrahlen"
 
-#: ../src/artificial_stars.c:1691
+#: ../src/artificial_stars.c:2049
 msgid "Gauss with 12 diffraction lines"
 msgstr "Gauß mit 12 Beugungsstrahlen"
 
-#: ../src/artificial_stars.c:1704
+#: ../src/artificial_stars.c:2062
 msgid "Sigma of gauss function in px"
 msgstr "Sigma der Gauß-Funktion in Pixel"
 
-#: ../src/artificial_stars.c:1710
+#: ../src/artificial_stars.c:2068
 msgid "Stars with diffraction lines:"
 msgstr "Sterne mit Beugungsstrahlen:"
 
-#: ../src/artificial_stars.c:1712
+#: ../src/artificial_stars.c:2070
 msgid "Percentage of stars that have diffraction lines"
 msgstr "Prozentsatz der Sterne mit Beugungsstrahlen"
 
-#: ../src/artificial_stars.c:1719
+#: ../src/artificial_stars.c:2077
 msgid "Diffraction angle:"
 msgstr "Winkel der Beugungsstrahlen:"
 
-#: ../src/artificial_stars.c:1721
+#: ../src/artificial_stars.c:2079
 msgid "Angle of diffraction lines in degrees"
 msgstr "Winkel der Beugungsstrahlen in Grad"
 
-#: ../src/artificial_stars.c:1727
+#: ../src/artificial_stars.c:2085
 msgid "Diffraction length:"
 msgstr "Länge der Beugungsstrahlen:"
 
-#: ../src/artificial_stars.c:1729
+#: ../src/artificial_stars.c:2087
 msgid "Length of diffraction lines"
 msgstr "Länge der Beugungsstrahlen"
 
-#: ../src/artificial_stars.c:1735
+#: ../src/artificial_stars.c:2093
 msgid "Diffraction color:"
 msgstr "Farbe der Beugungsstrahlen:"
 
-#: ../src/artificial_stars.c:1737
+#: ../src/artificial_stars.c:2095
 msgid "Diffraction lines usually show a color variation"
 msgstr "Beugungsstrahlen zeigen normalerweise eine Variation in ihrer Farbe"
 
-#: ../src/artificial_stars.c:1743 ../src/artificial_galaxy.c:2387
+#: ../src/artificial_stars.c:2101 ../src/artificial_galaxy.c:2387
 msgid "Noise:"
 msgstr "Rauschen:"
 
-#: ../src/artificial_stars.c:1745 ../src/artificial_galaxy.c:2389
+#: ../src/artificial_stars.c:2103 ../src/artificial_galaxy.c:2389
 #, c-format
 msgid "Noise in % of sqrt(N) = photon noise"
 msgstr "Rauschen in % von sqrt(N) = Photonenrauschen"
 
-#: ../src/artificial_stars.c:1751
+#: ../src/artificial_stars.c:2109
 msgid "Background:"
 msgstr "Hintergrund:"
 
-#: ../src/artificial_stars.c:1753
+#: ../src/artificial_stars.c:2111
 msgid "Background pixel value offset"
 msgstr "Pixel-Wert des Hintergrunds"
 
-#: ../src/artificial_stars.c:1759
+#: ../src/artificial_stars.c:2117
 msgid "Burn out:"
 msgstr "Ausbrennen:"
 
-#: ../src/artificial_stars.c:1761
+#: ../src/artificial_stars.c:2119
 #, c-format
-msgid "% of stars that burn out (0=normalize to brightest star, 100=to darkest one)"
+msgid ""
+"% of stars that burn out (0=normalize to brightest star, 100=to darkest one)"
 msgstr ""
 "% der Sterne, die ausbrennen (0=Normalisiere zum hellsten Stern, 100=zum "
 "dunkelsten)"
 
-#: ../src/artificial_stars.c:1768
+#: ../src/artificial_stars.c:2126
 msgid "Shininess:"
 msgstr "Glanz:"
 
-#: ../src/artificial_stars.c:1770
+#: ../src/artificial_stars.c:2128
 msgid "Burnt out stars have larger sigma"
 msgstr "Ausgebrannte Sterne erscheinen mit größerem Sigma in der PSF"
 
-#: ../src/artificial_stars.c:1775
+#: ../src/artificial_stars.c:2133
 msgid "Split foreground, object and background to layers"
 msgstr "Spalte Vordergrund, Objekt und Hintergrund in Ebenen"
 
-#: ../src/artificial_stars.c:1782
+#: ../src/artificial_stars.c:2140
 msgid "Create an illumination mask"
 msgstr "Erzeuge Beleuchtungs-Maske"
 
-#. gtk_widget_show( check_box );
-#. Distribution options (right side)
-#: ../src/artificial_stars.c:1791
-msgid "Star distribution:"
-msgstr "Sternen-Feld:"
-
-#: ../src/artificial_stars.c:1818
-msgid "Sample distributions:"
-msgstr "Beispiel-Felder:"
-
-#: ../src/artificial_stars.c:1828
-msgid "Standard (HD)"
-msgstr "Standard (HD)"
-
-#: ../src/artificial_stars.c:1834
-msgid "Standard (LD)"
-msgstr "Standard (ND)"
-
-#: ../src/artificial_stars.c:1840
-msgid "Globular cluster (HD)"
-msgstr "Kugelsternhaufen (HD)"
-
-#: ../src/artificial_stars.c:1846
-msgid "Globular cluster (LD)"
-msgstr "Kugelsternhaufen (ND)"
-
-#: ../src/artificial_stars.c:1852
-msgid "Open cluster (HD)"
-msgstr "Offener Haufen (HD)"
-
-#: ../src/artificial_stars.c:1858
-msgid "Open cluster (LD)"
-msgstr "Offener Haufen (ND)"
-
-#: ../src/artificial_stars.c:1865
-msgid "Background stars:"
-msgstr "Hintergrund-Sterne:"
-
-#: ../src/artificial_stars.c:1875 ../src/artificial_stars.c:1945
-#: ../src/artificial_stars.c:2070
-msgid "Number:"
-msgstr "Anzahl:"
-
-#: ../src/artificial_stars.c:1886 ../src/artificial_stars.c:1956
-#: ../src/artificial_stars.c:2081
-msgid "Brightness mean:"
-msgstr "Helligkeitsmittelwert:"
-
-#: ../src/artificial_stars.c:1897 ../src/artificial_stars.c:1967
-#: ../src/artificial_stars.c:2092
-msgid "Brightness sigma:"
-msgstr "Sigma der Helligkeit:"
-
-#: ../src/artificial_stars.c:1908 ../src/artificial_stars.c:1978
-#: ../src/artificial_stars.c:2103
-msgid "Color mean:"
-msgstr "Farb-Mittelwert:"
-
-#: ../src/artificial_stars.c:1919 ../src/artificial_stars.c:1989
-#: ../src/artificial_stars.c:2114
-msgid "Color sigma:"
-msgstr "Sigma der Farbe:"
-
-#: ../src/artificial_stars.c:1931
-msgid "Object stars:"
-msgstr "Objekt-Sterne:"
-
-#: ../src/artificial_stars.c:2001
-msgid "Object center: X:"
-msgstr "Objekt-Mittelpunkt: X:"
-
-#: ../src/artificial_stars.c:2013
-msgid "Y:"
-msgstr "Y:"
-
-#: ../src/artificial_stars.c:2030
-msgid "Density profile:"
-msgstr "Dichte-Verteilung:"
-
-#: ../src/artificial_stars.c:2037
-msgid "Random"
-msgstr "Zufällig"
-
-#: ../src/artificial_stars.c:2039
-msgid "Plummer"
-msgstr "Plummer"
-
-#: ../src/artificial_stars.c:2050
-msgid "Radius parameter:"
-msgstr "Radius-Parameter:"
-
-#: ../src/artificial_stars.c:2052
-#, c-format
-msgid "Radius of object in % of the image (unused for random distribution)"
-msgstr "Radius des Objekts in % der Bildgröße (nicht benutzt für Zufallsverteilung)"
-
-#: ../src/artificial_stars.c:2060
-msgid "Foreground stars:"
-msgstr "Vordergrund-Sterne:"
+#: ../src/artificial_galaxy.c:478
+msgid "Create an artificial galaxy"
+msgstr "Erzeuge künstliche Galaxie"
 
 #: ../src/artificial_galaxy.c:479
-msgid "This plug-in creates an artificial galaxy. "
+msgid "This plug-in creates an artificial galaxy."
 msgstr "Dieses Plug-in erzeugt eine künstliche Galaxie."
 
-#: ../src/artificial_galaxy.c:483
-msgid "Create artificial galaxy"
-msgstr "Erzeuge künstliche Galaxie"
+#: ../src/artificial_galaxy.c:483 ../src/artificial_galaxy.c:2288
+msgid "Artificial Galaxy"
+msgstr "Künstliche Galaxie"
 
 #: ../src/artificial_galaxy.c:1395
 msgid "Creating bulge / ellipse..."
@@ -695,9 +726,8 @@ msgid "Bulge radius:"
 msgstr "Radius des Bulges:"
 
 #: ../src/artificial_galaxy.c:1763 ../src/artificial_galaxy.c:1969
-#, c-format
-msgid "Radius [% of image size] of the bulge"
-msgstr "Radius [% der Bildgröße] des Bulges"
+msgid "Radius of the bulge, measured in percents of the image size"
+msgstr "Radius des Bulges, gemessen in Prozent der Bildgröße"
 
 #: ../src/artificial_galaxy.c:1767 ../src/artificial_galaxy.c:1973
 msgid "Bulge color:"
@@ -713,18 +743,16 @@ msgid "Spiral radius:"
 msgstr "Radius der Spirale"
 
 #: ../src/artificial_galaxy.c:1784 ../src/artificial_galaxy.c:1990
-#, c-format
-msgid "Radius [% of image size] of the spiral"
-msgstr "Radius [% der Bildgröße] der Spirale"
+msgid "Radius of the spiral, measured in percents of the image size"
+msgstr "Radius der Spirale, gemessen in Prozent der Bildgröße"
 
 #: ../src/artificial_galaxy.c:1789 ../src/artificial_galaxy.c:1995
 msgid "Spiral thickness:"
 msgstr "Dicke der Spirale:"
 
 #: ../src/artificial_galaxy.c:1791 ../src/artificial_galaxy.c:1997
-#, c-format
-msgid "Thickness sigma [% of image size] of the spiral"
-msgstr "Dicke (Sigma) [% der Bildgröße] der Spirale:"
+msgid "Thickness sigma of the spiral, measured in percents of the image size"
+msgstr "Dicke (Sigma) der Spirale, gemessen in Prozent der Bildgröße"
 
 #: ../src/artificial_galaxy.c:1796 ../src/artificial_galaxy.c:2002
 msgid "Spiral turns:"
@@ -779,9 +807,8 @@ msgid "Radius:"
 msgstr "Radius"
 
 #: ../src/artificial_galaxy.c:2058
-#, c-format
-msgid "Radius [% of image size] of the elliptical galaxy"
-msgstr "Radius [% der Bildgröße] der Elliptischen Galaxie"
+msgid "Radius of the elliptical galaxy, measured in percents of the image size"
+msgstr "Radius der elliptischen Galaxie, gemessen in Prozent der Bildgröße"
 
 #: ../src/artificial_galaxy.c:2064
 msgid "Excentricity:"
@@ -805,6 +832,10 @@ msgstr ""
 msgid "Color:"
 msgstr "Farbe:"
 
+#: ../src/artificial_galaxy.c:2319
+msgid "Rendering Options"
+msgstr "Rendering-Optionen"
+
 #: ../src/artificial_galaxy.c:2331
 msgid "Object center (X, Y):"
 msgstr "Objekt-Mittelpunkt (X, Y):"
@@ -825,56 +856,6 @@ msgstr "Multiplikator:"
 msgid "Multiply with value"
 msgstr "Multipliziere mit Wert"
 
-#. check_box = gtk_check_button_new_with_label( _("Split bulge, spirals and dark clouds to layers") );
-#. gtk_table_attach_defaults( GTK_TABLE( table ), check_box, 0, 2, 9, 10 );
-#. gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( check_box ), parameters.split_layers );
-#. g_signal_connect( check_box, "toggled", G_CALLBACK( split_layers_toggled ), NULL );
-#. g_signal_connect_swapped( check_box, "toggled", G_CALLBACK( gimp_preview_invalidate ), preview );
-#. gtk_widget_show( check_box );
-#. star_frame = gtk_frame_new( _("Sample distributions:") );
-#. gtk_box_pack_start( GTK_BOX( left_vbox ), star_frame, FALSE, FALSE, 0 );
-#. gtk_widget_show( star_frame );
-#.
-#. table = gtk_table_new( 2, 3, FALSE );
-#. gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
-#. gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
-#. gtk_container_add( GTK_CONTAINER( star_frame ), table );
-#. gtk_widget_show( table );
-#.
-#. button = gtk_button_new_with_label( _("Sample A") );
-#. gtk_table_attach( GTK_TABLE( table ), button, 0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
-#. gtk_widget_show( button );
-#. g_signal_connect( button, "clicked", G_CALLBACK( a_clicked ), NULL );
-#.
-#. button = gtk_button_new_with_label( _("Sample B") );
-#. gtk_table_attach( GTK_TABLE( table ), button, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
-#. gtk_widget_show( button );
-#. g_signal_connect( button, "clicked", G_CALLBACK( b_clicked ), NULL );
-#.
-#. button = gtk_button_new_with_label( _("Sample C") );
-#. gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
-#. gtk_widget_show( button );
-#. g_signal_connect( button, "clicked", G_CALLBACK( c_clicked ), NULL );
-#.
-#. button = gtk_button_new_with_label( _("Sample D") );
-#. gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 1, 2, GTK_FILL, 0, 0, 0 );
-#. gtk_widget_show( button );
-#. g_signal_connect( button, "clicked", G_CALLBACK( d_clicked ), NULL );
-#.
-#. button = gtk_button_new_with_label( _("Sample E") );
-#. gtk_table_attach( GTK_TABLE( table ), button, 2, 3, 0, 1, GTK_FILL, 0, 0, 0 );
-#. gtk_widget_show( button );
-#. g_signal_connect( button, "clicked", G_CALLBACK( e_clicked ), NULL );
-#.
-#. button = gtk_button_new_with_label( _("Sample F") );
-#. gtk_table_attach( GTK_TABLE( table ), button, 2, 3, 1, 2, GTK_FILL, 0, 0, 0 );
-#. gtk_widget_show( button );
-#. g_signal_connect( button, "clicked", G_CALLBACK( f_clicked ), NULL );
-#. Distribution options (right side)
-#: ../src/artificial_galaxy.c:2451
-msgid "Object distribution:"
-msgstr "Objekt-Verteilung:"
-
 #: ../src/artificial_galaxy.c:2488
 msgid "Galaxy type:"
 msgstr "Galaxien-Typ:"
@@ -886,32 +867,36 @@ msgid "Elliptical galaxy"
 msgstr "Elliptische Galaxie"
 
 #: ../src/artificial_galaxy.c:2507
-msgid "Galaxy settings:"
+msgid "Galaxy Settings"
 msgstr "Einstellungen zur Galaxie"
+
+#: ../src/star_rounding.c:173
+msgid "Rounds longish stars"
+msgstr "Rechne Sterne rund"
 
 #: ../src/star_rounding.c:174
 msgid ""
 "This plug-in applies different calculations to each pixel, resulting in "
-"rounded stars. "
+"rounded stars."
 msgstr ""
 "Dieses Plug-in wendet pixelweise verschiedene Berechnungen an, die zu "
 "runderen Sternen führen."
 
 #: ../src/star_rounding.c:178
-msgid "Star rounding"
-msgstr "Sterne rund rechnen"
+msgid "Round Stars"
+msgstr "Rechne Sterne rund"
 
 #: ../src/star_rounding.c:592
 msgid "Round stars..."
 msgstr "Rechne Sterne rund..."
 
-#: ../src/star_rounding.c:724
-msgid "Round stars"
-msgstr "Rechne Sterne rund"
+#: ../src/star_rounding.c:721
+msgid "Rounds Stars"
+msgstr "Rechnet Sterne rund"
 
 #. Radial correction
 #: ../src/star_rounding.c:747
-msgid "Radial correction"
+msgid "Radial Correction"
 msgstr "Radiale Korrektur"
 
 #: ../src/star_rounding.c:759
@@ -921,10 +906,6 @@ msgstr "Maximale Länge:"
 #: ../src/star_rounding.c:761 ../src/star_rounding.c:829
 msgid "Length of the blurred stars"
 msgstr "Länge der verwischten Sterne"
-
-#: ../src/star_rounding.c:768 ../src/star_rounding.c:845
-msgid "Percentage:"
-msgstr "Prozentsatz:"
 
 #: ../src/star_rounding.c:770 ../src/star_rounding.c:847
 msgid "Replace pixel value by <percentage> of new pixel value"
@@ -944,7 +925,7 @@ msgstr "* x"
 
 #. Linear correction
 #: ../src/star_rounding.c:815
-msgid "Linear correction"
+msgid "Linear Correction"
 msgstr "Lineare Korrektur"
 
 #: ../src/star_rounding.c:827
@@ -961,7 +942,7 @@ msgstr "Winkel der verwischten Sterne"
 
 #. Replace method
 #: ../src/star_rounding.c:854
-msgid "Replace method"
+msgid "Replacement Method"
 msgstr "Methode zum Ersetzen der Pixel-Werte"
 
 #: ../src/star_rounding.c:865
@@ -1010,109 +991,129 @@ msgid "Bottom information height"
 msgstr "Höhe der unteren Informationsleiste"
 
 #: ../scripts/border_information.scm.h:2
-msgid "Draw border with image information"
+msgid "Draw Border with Image Information"
 msgstr "Zeichne Rahmen mit Bild-Informationen"
 
 #: ../scripts/border_information.scm.h:3
+msgid ""
+"Draw a border around an image and some information about it image in the "
+"bottom"
+msgstr ""
+"Zeichnet einen Rahmen um ein Bild mit Informationen über das Bild am unteren "
+"Rand"
+
+#: ../scripts/border_information.scm.h:4
 msgid "Font"
 msgstr "Font"
 
-#: ../scripts/border_information.scm.h:4
+#: ../scripts/border_information.scm.h:5
 msgid "Font Color"
 msgstr "Font-Farbe"
 
-#: ../scripts/border_information.scm.h:5
+#: ../scripts/border_information.scm.h:6
 msgid "Font size (left, first line)"
 msgstr "Font-Größe (links, erste Zeile)"
 
-#: ../scripts/border_information.scm.h:6
+#: ../scripts/border_information.scm.h:7
 msgid "Font size (left, second line)"
 msgstr "Font-Größe (links, zweite Zeile)"
 
-#: ../scripts/border_information.scm.h:7
+#: ../scripts/border_information.scm.h:8
 msgid "Font size (middle, first line)"
 msgstr "Font-Größe (Mitte, erste Zeile)"
 
-#: ../scripts/border_information.scm.h:8
+#: ../scripts/border_information.scm.h:9
 msgid "Font size (middle, second line)"
 msgstr "Font-Größe (Mitte, zweite Zeile)"
 
-#: ../scripts/border_information.scm.h:9
+#: ../scripts/border_information.scm.h:10
 msgid "Font size (right, first line)"
 msgstr "Font-Größe (rechts, erste Zeile)"
 
-#: ../scripts/border_information.scm.h:10
+#: ../scripts/border_information.scm.h:11
 msgid "Font size (right, second line)"
 msgstr "Font-Größe (rechts, zweite Zeile)"
 
-#: ../scripts/border_information.scm.h:11
+#: ../scripts/border_information.scm.h:12
 msgid "Gauss Radius"
 msgstr "Gauß-Radius"
 
-#: ../scripts/border_information.scm.h:12
+#: ../scripts/border_information.scm.h:13
 msgid "Inner border color"
 msgstr "Farbe des inneren Rahmens"
 
-#: ../scripts/border_information.scm.h:13
+#: ../scripts/border_information.scm.h:14
 msgid "Inner border size"
 msgstr "Breite des inneren Rahmens"
 
-#: ../scripts/border_information.scm.h:14
+#: ../scripts/border_information.scm.h:15
 msgid "Outer border color"
 msgstr "Farbe des äußeren Rahmens"
 
-#: ../scripts/border_information.scm.h:15
+#: ../scripts/border_information.scm.h:16
 msgid "Outer border size"
 msgstr "Breite des äußeren Rahmens"
 
-#: ../scripts/border_information.scm.h:16
+#: ../scripts/border_information.scm.h:17
 msgid "Text (left, first line)"
 msgstr "Text (links, erste Zeile)"
 
-#: ../scripts/border_information.scm.h:17
+#: ../scripts/border_information.scm.h:18
 msgid "Text (left, second line)"
 msgstr "Text (links, zweite Zeile)"
 
-#: ../scripts/border_information.scm.h:18
+#: ../scripts/border_information.scm.h:19
 msgid "Text (middle, first line)"
 msgstr "Text (Mitte, erste Zeile)"
 
-#: ../scripts/border_information.scm.h:19
+#: ../scripts/border_information.scm.h:20
 msgid "Text (middle, second line)"
 msgstr "Text (Mitte, zweite Zeile)"
 
-#: ../scripts/border_information.scm.h:20
+#: ../scripts/border_information.scm.h:21
 msgid "Text (right, first line)"
 msgstr "Text (rechts, erste Zeile)"
 
-#: ../scripts/border_information.scm.h:21
+#: ../scripts/border_information.scm.h:22
 msgid "Text (right, second line)"
 msgstr "Text (rechts, zweite Zeile)"
 
 #: ../scripts/brightness_contrast_batch.scm.h:1
+msgid "Apply the Brightness/Contrast tool to all layers in an image"
+msgstr "Helligkeit und Kontrast für alle Ebenen einstellen"
+
+#: ../scripts/brightness_contrast_batch.scm.h:2
 msgid "Brightness"
 msgstr "Helligkeit"
 
-#: ../scripts/brightness_contrast_batch.scm.h:2
+#: ../scripts/brightness_contrast_batch.scm.h:3
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: ../scripts/brightness_contrast_batch.scm.h:3
-msgid "Set brightness and contrast for all layers"
+#: ../scripts/brightness_contrast_batch.scm.h:4
+msgid "Set Brightness and Contrast for all Layers"
 msgstr "Helligkeit und Kontrast für alle Ebenen einstellen"
 
-#: ../scripts/brightness_contrast_batch.scm.h:4
-#: ../scripts/dark_subtraction.scm.h:2 ../scripts/flat_division.scm.h:2
-#: ../scripts/mode_batch.scm.h:24 ../scripts/normalize_batch.scm.h:2
+#: ../scripts/brightness_contrast_batch.scm.h:5
+#: ../scripts/dark_subtraction.scm.h:3 ../scripts/flat_division.scm.h:3
+#: ../scripts/mode_batch.scm.h:25 ../scripts/normalize_batch.scm.h:3
 msgid "Visible layers only"
 msgstr "Benutze nur sichtbare Ebenen"
 
 #: ../scripts/dark_subtraction.scm.h:1
+msgid "Subtract Dark Frame from all Layers"
+msgstr "Subtrahiert ein Dark-Frame von allen Ebenen"
+
+#: ../scripts/dark_subtraction.scm.h:2
 msgid "Subtract a dark frame from all layers"
 msgstr "Subtrahiert ein Dark-Frame von allen Ebenen"
 
 #: ../scripts/flat_division.scm.h:1
-msgid "Divide all layers by a flat field"
+msgid "Divide all Layers by Flat Field"
+msgstr "Dividiert alle Ebenen durch ein Flat-Field"
+
+#: ../scripts/flat_division.scm.h:2
+msgid "Divides all layers by a flat field"
 msgstr "Dividiert alle Ebenen durch ein Flat-Field"
 
 #: ../scripts/mode_batch.scm.h:1
@@ -1192,22 +1193,87 @@ msgid "Screen"
 msgstr "Bildschirm"
 
 #: ../scripts/mode_batch.scm.h:20
-msgid "Set mode for all layers"
+msgid "Set Mode for all Layers"
 msgstr "Modus für alle Ebenen einstellen"
 
 #: ../scripts/mode_batch.scm.h:21
+msgid "Set a particular blending mode and opacity to all layers"
+msgstr ""
+"Stellt einen bestimmten Überlagerungsmodus und Transparenz bei allen Ebenen "
+"ein"
+
+#: ../scripts/mode_batch.scm.h:22
 msgid "Soft Light"
 msgstr "Weiche Kanten"
 
-#: ../scripts/mode_batch.scm.h:22
+#: ../scripts/mode_batch.scm.h:23
 msgid "Subtract"
 msgstr "Abziehen"
 
-#: ../scripts/mode_batch.scm.h:23
+#: ../scripts/mode_batch.scm.h:24
 msgid "Value"
 msgstr "Wert"
 
 #: ../scripts/normalize_batch.scm.h:1
-msgid "Normalize all layers"
+msgid "Apply the normalize function to all layers"
+msgstr "Wende die Normalisierungsfunktion auf alle Ebenen an"
+
+#: ../scripts/normalize_batch.scm.h:2
+msgid "Normalize all Layers"
 msgstr "Normalisiere alle Ebenen"
 
+#~ msgid "Align"
+#~ msgstr "Ausrichten"
+
+#~ msgid "Cross correlation search area, of course limited by layer border"
+#~ msgstr ""
+#~ "Suchumgebung für die Kreuzkorrelation, natürlich beschränkt auf die "
+#~ "Ebenengrenzen"
+
+#~ msgid "Merge"
+#~ msgstr "Überlagern"
+
+#~ msgid "Multiply before processing:"
+#~ msgstr "Multipliziere vor der Verarbeitung mit:"
+
+#~ msgid "Add constant before processing:"
+#~ msgstr "Addiere vor der Verarbeitung:"
+
+#~ msgid "Create gradient"
+#~ msgstr "Erstelle Gradienten"
+
+#~ msgid "Use percentage:"
+#~ msgstr "Benutze Prozentsatz:"
+
+#~ msgid "Create artificial stars"
+#~ msgstr "Erzeuge künstliche Sterne"
+
+#~ msgid "Create"
+#~ msgstr "Erzeuge"
+
+#~ msgid "Standard (LD)"
+#~ msgstr "Standard (ND)"
+
+#~ msgid "Globular cluster (LD)"
+#~ msgstr "Kugelsternhaufen (ND)"
+
+#~ msgid "Open cluster (LD)"
+#~ msgstr "Offener Haufen (ND)"
+
+#~ msgid "Number:"
+#~ msgstr "Anzahl:"
+
+#~ msgid "Radius [% of image size] of the bulge"
+#~ msgstr "Radius [% der Bildgröße] des Bulges"
+
+#~ msgid "Radius [% of image size] of the spiral"
+#~ msgstr "Radius [% der Bildgröße] der Spirale"
+
+#~ msgid "Radius [% of image size] of the elliptical galaxy"
+#~ msgstr "Radius [% der Bildgröße] der Elliptischen Galaxie"
+
+#~ msgid "Object distribution:"
+#~ msgstr "Objekt-Verteilung:"
+
+#~ msgid "Star rounding"
+#~ msgstr "Sterne rund rechnen"
