@@ -65,6 +65,16 @@ enum DENSITY
 	DENSITY_PLUMMER
 };
 
+enum SAMPLE_DISTRIBUTIONS
+{
+	STANDARD_HD = 0,
+	STANDARD_LD,
+	GLOBULAR_HD,
+	GLOBULAR_LD,
+	OPEN_HD,
+	OPEN_LD
+};
+
 /*
 parameters
 */
@@ -186,6 +196,8 @@ gdouble *foreground_stars = NULL;
 gint32 all_stars_number = 0;
 gdouble *all_stars = NULL;
 
+gint32 sample_distribution = 0;
+
 gdouble brightness_star_norm = 0.;
 gdouble brightness_star_diffraction = 0.;
 
@@ -250,6 +262,7 @@ GtkWidget *object_brightness_spin, *object_brightness_sigma_spin;
 GtkWidget *object_color_spin, *object_color_sigma_spin;
 GtkWidget *object_center_x_spin, *object_center_y_spin;
 GtkWidget *object_density_combo;
+GtkWidget *sample_distribution_combo;
 GtkObject *object_radius_adj;
 
 GtkWidget *foreground_number_spin;
@@ -1403,164 +1416,164 @@ static void recalculation_done()
 	gtk_widget_modify_bg( recalculate_button, GTK_STATE_ACTIVE, NULL );
 }
 
-static void standard_hd_clicked( GtkWidget *button )
+static void sample_distribution_clicked( GtkWidget *button )
 {
-	gdouble number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
+	gdouble number_percentage;
+	switch ( sample_distribution )
+	{
+		case STANDARD_HD:
+			number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)40000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 0. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 15. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7000 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)40000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 0. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 15. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7000 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)5000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 45. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 30. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 7000 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 1000 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
-	gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_RANDOM );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)5000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 45. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 30. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 7000 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 1000 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
+			gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_RANDOM );
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)2000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 80. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 35. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7500 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
-}
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)2000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 80. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 35. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7500 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
+			break;
+		case STANDARD_LD:
+			number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
 
-static void standard_ld_clicked( GtkWidget *button )
-{
-	gdouble number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)2500*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 15. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 10. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7000 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)2500*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 15. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 10. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7000 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)500*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 45. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 30. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 7000 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 1000 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
+			gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_RANDOM );
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)500*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 45. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 30. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 7000 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 1000 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
-	gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_RANDOM );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)15*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 90. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 40. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7500 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
+			break;
+		case GLOBULAR_HD:
+			number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)15*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 90. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 40. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7500 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
-}
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)5000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 0. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 45. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7500 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
 
-static void globular_hd_clicked( GtkWidget *button )
-{
-	gdouble number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)50000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 100. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 40. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 6500 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 800 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
+			gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_PLUMMER );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( GIMP_SCALE_ENTRY_SPINBUTTON( object_radius_adj ) ), 50 );
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)5000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 0. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 45. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7500 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)1000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 90. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 60. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7500 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
+			break;
+		case GLOBULAR_LD:
+			number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)50000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 100. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 40. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 6500 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 800 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
-	gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_PLUMMER );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( GIMP_SCALE_ENTRY_SPINBUTTON( object_radius_adj ) ), 50 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)5000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 0. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 45. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7500 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)1000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 90. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 60. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7500 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
-}
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)10000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 100. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 40. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 6500 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 800 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
+			gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_PLUMMER );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( GIMP_SCALE_ENTRY_SPINBUTTON( object_radius_adj ) ), 15 );
 
-static void globular_ld_clicked( GtkWidget *button )
-{
-	gdouble number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)1000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 90. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 60. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7500 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
+			break;
+		case OPEN_HD:
+			number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)5000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 0. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 45. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7500 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)40000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 0. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 25. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7200 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)10000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 100. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 40. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 6500 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 800 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
-	gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_PLUMMER );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( GIMP_SCALE_ENTRY_SPINBUTTON( object_radius_adj ) ), 15 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)1200*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 80. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 35. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 7100 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 500 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
+			gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_GAUSS );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( GIMP_SCALE_ENTRY_SPINBUTTON( object_radius_adj ) ), 6 );
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)1000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 90. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 60. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7500 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
-}
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)2000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 100. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 40. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7200 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
+			break;
+		case OPEN_LD:
+			number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
 
-static void open_hd_clicked( GtkWidget *button )
-{
-	gdouble number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)40000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 0. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 25. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7200 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)40000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 0. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 25. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7200 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)300*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 110. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 30. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 7100 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 500 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
+			gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_PLUMMER );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( GIMP_SCALE_ENTRY_SPINBUTTON( object_radius_adj ) ), 180 );
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)1200*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 80. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 35. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 7100 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 500 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
-	gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_GAUSS );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( GIMP_SCALE_ENTRY_SPINBUTTON( object_radius_adj ) ), 6 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)2000*number_percentage );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 100. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 40. );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7200 );
+			gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
+			break;
+		default:
+			break;
+	}
+  
 
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)2000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 100. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 40. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7200 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
-}
-
-static void open_ld_clicked( GtkWidget *button )
-{
-	gdouble number_percentage = (gdouble)(gimp_image_width( image_id )*gimp_image_height( image_id ))/3.3e6;
-
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_number_spin ), (gint32)40000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_spin ), 0. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_brightness_sigma_spin ), 25. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_spin ), 7200 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( background_color_sigma_spin ), 1000 );
-
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_number_spin ), (gint32)300*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_spin ), 110. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_brightness_sigma_spin ), 30. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_spin ), 7100 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_color_sigma_spin ), 500 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_x_spin ), gimp_image_width( image_id )/2 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( object_center_y_spin ), gimp_image_height( image_id )/2 );
-	gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( object_density_combo ), DENSITY_PLUMMER );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( GIMP_SCALE_ENTRY_SPINBUTTON( object_radius_adj ) ), 180 );
-
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_number_spin ), (gint32)2000*number_percentage );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_spin ), 100. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_brightness_sigma_spin ), 40. );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_spin ), 7200 );
-	gtk_spin_button_set_value( GTK_SPIN_BUTTON( foreground_color_sigma_spin ), 1000 );
 }
 
 void reporter( const gchar *string, const gdouble fraction )
@@ -1706,48 +1719,31 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	gtk_box_pack_start( GTK_BOX( left_vbox ), frame, FALSE, FALSE, 0 );
 	gtk_widget_show( frame );
 
-	table = gtk_table_new( 2, 3, FALSE );
+	table = gtk_table_new( 1, 2, FALSE );
 	gtk_table_set_col_spacings( GTK_TABLE( table ), 6 );
 	gtk_table_set_row_spacings( GTK_TABLE( table ), 2 );
 	gtk_container_add( GTK_CONTAINER( frame ), table );
 	gtk_widget_show( table );
 
-	button = gtk_button_new_with_label( _("Standard (HD)") );
-	gtk_table_attach( GTK_TABLE( table ), button, 0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( standard_hd_clicked ), NULL );
-	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
+	sample_distribution_combo = gimp_int_combo_box_new(
+		_("Standard (high density)"), STANDARD_HD,
+		_("Standard (low density)"), STANDARD_LD,
+		_("Globular cluster (high density)"), GLOBULAR_HD,
+		_("Globular cluster (low density)"), GLOBULAR_LD,
+		_("Open cluster (high density)"), OPEN_HD,
+		_("Open cluster (low density)"), OPEN_LD,
+		NULL );
+	gimp_int_combo_box_set_active( GIMP_INT_COMBO_BOX( sample_distribution_combo ), sample_distribution );
+	gimp_int_combo_box_connect( GIMP_INT_COMBO_BOX( sample_distribution_combo ), sample_distribution,
+		G_CALLBACK( gimp_int_combo_box_get_active ), &sample_distribution );
+	gtk_table_attach( GTK_TABLE( table ), sample_distribution_combo, 0, 1, 0, 1, GTK_EXPAND | GTK_FILL, 0, 0, 0);
+	gtk_widget_show( sample_distribution_combo );
 
-	button = gtk_button_new_with_label( _("Standard (LD)") );
-	gtk_table_attach( GTK_TABLE( table ), button, 0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( standard_ld_clicked ), NULL );
-	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
-
-	button = gtk_button_new_with_label( _("Globular cluster (HD)") );
+	button = gtk_button_new_with_label( _("Apply") );
 	gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
 	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( globular_hd_clicked ), NULL );
+	g_signal_connect( button, "clicked", G_CALLBACK( sample_distribution_clicked ), NULL );
 	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
-
-	button = gtk_button_new_with_label( _("Globular cluster (LD)") );
-	gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( globular_ld_clicked ), NULL );
-	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
-
-	button = gtk_button_new_with_label( _("Open cluster (HD)") );
-	gtk_table_attach( GTK_TABLE( table ), button, 2, 3, 0, 1, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( open_hd_clicked ), NULL );
-	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
-
-	button = gtk_button_new_with_label( _("Open cluster (LD)") );
-	gtk_table_attach( GTK_TABLE( table ), button, 2, 3, 1, 2, GTK_FILL, 0, 0, 0 );
-	gtk_widget_show( button );
-	g_signal_connect( button, "clicked", G_CALLBACK( open_ld_clicked ), NULL );
-	g_signal_connect_swapped( button, "clicked", G_CALLBACK( recalculation_necessary ), NULL );
-
 
 
 /*  Create notebook  */
