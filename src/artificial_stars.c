@@ -1683,7 +1683,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 /* Star distribution (left side) */
 
-	frame = gimp_frame_new( _("Star Distribution") );
+	frame = gimp_frame_new( _("Options Processing") );
 	gtk_box_pack_start( GTK_BOX( left_vbox ), frame, FALSE, FALSE, 0 );
 	gtk_widget_show( frame );
 
@@ -1715,7 +1715,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 /* Sample Distributions */
 
-	frame = gimp_frame_new( _("Sample Distributions") );
+	frame = gimp_frame_new( _("Presets for Star Distributions") );
 	gtk_box_pack_start( GTK_BOX( left_vbox ), frame, FALSE, FALSE, 0 );
 	gtk_widget_show( frame );
 
@@ -1739,7 +1739,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	gtk_table_attach( GTK_TABLE( table ), sample_distribution_combo, 0, 1, 0, 1, GTK_EXPAND | GTK_FILL, 0, 0, 0);
 	gtk_widget_show( sample_distribution_combo );
 
-	button = gtk_button_new_with_label( _("Apply") );
+	button = gtk_button_new_with_mnemonic( _("_Apply") );
 	gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
 	gtk_widget_show( button );
 	g_signal_connect( button, "clicked", G_CALLBACK( sample_distribution_clicked ), NULL );
