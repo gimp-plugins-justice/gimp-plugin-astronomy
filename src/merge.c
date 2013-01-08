@@ -820,7 +820,7 @@ static void merge_layers()
 	gint32 layer_destination = gimp_layer_new( image_destination, name, gimp_image_width( image_destination ),
 		gimp_image_height( image_destination ), layer_type, 100, GIMP_NORMAL_MODE );
 
-	gimp_image_add_layer( image_destination, layer_destination, 0 );
+	gimp_image_insert_layer (image_destination, layer_destination, 0, -1);
 
 	gimp_drawable_fill( layer_destination, GIMP_WHITE_FILL );
 

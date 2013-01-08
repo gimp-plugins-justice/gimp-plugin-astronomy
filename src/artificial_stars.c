@@ -1178,7 +1178,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial background stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_NORMAL_MODE );
 
-		gimp_image_add_layer( image_id, layer_destination, 0 );
+		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -1193,7 +1193,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial object stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_LIGHTEN_ONLY_MODE );
 
-		gimp_image_add_layer( image_id, layer_destination, 0 );
+		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -1208,7 +1208,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial foreground stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_LIGHTEN_ONLY_MODE );
 
-		gimp_image_add_layer( image_id, layer_destination, 0 );
+		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -1225,7 +1225,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_NORMAL_MODE );
 
-		gimp_image_add_layer( image_id, layer_destination, 0 );
+		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );

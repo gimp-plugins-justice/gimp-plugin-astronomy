@@ -671,7 +671,7 @@ static void background_gradient( gint32 image_id )
 
 	gimp_progress_init( _("Writing normalized pixel values...") );
 
- 	gimp_image_add_layer( image_id, layer_destination, 0 );
+ 	gimp_image_insert_layer (image_id, layer_destination, 0, -1);
 
 	guint progress = 0;
 	progress_skip = 0;
