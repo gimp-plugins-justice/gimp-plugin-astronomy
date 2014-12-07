@@ -30,7 +30,11 @@ of median +- sigma or sigma median (1 or 2 pass) algorithm.
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#if !defined(WIN32)
+/* on GNU systems, nothing necessary */
+#else
 char *strndup(const char *s, size_t n);
+#endif
 
 #include <libgimp/gimp.h>
 #include <libgimp/gimpui.h>
@@ -820,7 +824,7 @@ static void merge_layers()
 	gint32 layer_destination = gimp_layer_new( image_destination, name, gimp_image_width( image_destination ),
 		gimp_image_height( image_destination ), layer_type, 100, GIMP_NORMAL_MODE );
 
-	gimp_image_insert_layer (image_destination, layer_destination, 0, -1);
+	gimp_image_add_layer( image_destination, layer_destination, 0 );
 
 	gimp_drawable_fill( layer_destination, GIMP_WHITE_FILL );
 

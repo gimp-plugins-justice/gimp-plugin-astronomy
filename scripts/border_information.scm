@@ -1,5 +1,5 @@
 ;; /***************************************************************************
-;;  *   Copyright (C) 2007-2008 by Georg Hennig                               *
+;;  *   Copyright (C) 2007-2014 by Georg Hennig                               *
 ;;  *   georg.hennig@web.de                                                   *
 ;;  *                                                                         *
 ;;  *   This program is free software; you can redistribute it and/or modify  *
@@ -35,7 +35,7 @@
 (define RIGHT1 "Author's Name")
 (define RIGHT1_SIZE 12)
 
-(define RIGHT2 "31.07.2008")
+(define RIGHT2 "01.12.2014")
 (define RIGHT2_SIZE 16)
 
 ;; If BORDERx is set to "0", it simply isn't drawn
@@ -318,7 +318,7 @@
 	_"Draw a border around an image and some information about it image in the bottom"
 	"Georg Hennig"
 	"Georg Hennig"
-	"07-2008"
+	"12-2014"
 	"RGB*"
 	SF-IMAGE    "SF-IMAGE" 0
 	SF-DRAWABLE "SF-DRAWABLE" 0

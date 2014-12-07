@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GIMP Plugin Astronomy 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-07 22:18+0400\n"
-"PO-Revision-Date: 2012-10-07 22:24+0400\n"
+"POT-Creation-Date: 2012-10-07 11:50+0200\n"
+"PO-Revision-Date: 2012-09-06 08:54+0400\n"
 "Last-Translator: Александр Прокудин <alexandre.prokoudine@gmail.com>\n"
 "Language-Team: русский <>\n"
 "Language: ru\n"
@@ -412,41 +412,47 @@ msgstr "Отменить повторный расчёт"
 
 #. Star distribution (left side)
 #: ../src/artificial_stars.c:1686
-msgid "Options Processing"
-msgstr "Обработка параметров"
+msgid "Star Distribution"
+msgstr "Распределение звёзд"
 
 #. Sample Distributions
 #: ../src/artificial_stars.c:1718
-msgid "Presets for Star Distributions"
-msgstr "Предустановки распределения звёзд"
+msgid "Sample Distributions"
+msgstr "Предустановки распределений"
 
 #: ../src/artificial_stars.c:1729
+#, fuzzy
 msgid "Standard (high density)"
-msgstr "Обычное, выс. плотность"
+msgstr "Обычное (ВП)"
 
 #: ../src/artificial_stars.c:1730
+#, fuzzy
 msgid "Standard (low density)"
-msgstr "Обычное, низк. плотность"
+msgstr "Обычное (ВП)"
 
 #: ../src/artificial_stars.c:1731
+#, fuzzy
 msgid "Globular cluster (high density)"
-msgstr "Шаровидное скопление, выс. плотность"
+msgstr "Шаровидное скопление (ВП)"
 
 #: ../src/artificial_stars.c:1732
+#, fuzzy
 msgid "Globular cluster (low density)"
-msgstr "Шаровидное скопление, низк. плотность"
+msgstr "Шаровидное скопление (ВП)"
 
 #: ../src/artificial_stars.c:1733
+#, fuzzy
 msgid "Open cluster (high density)"
-msgstr "Рассеянное скопление, выс. плотность"
+msgstr "Рассеянное скопление (ВП)"
 
 #: ../src/artificial_stars.c:1734
+#, fuzzy
 msgid "Open cluster (low density)"
-msgstr "Рассеянное скопление, низк. плотность"
+msgstr "Рассеянное скопление (ВП)"
 
 #: ../src/artificial_stars.c:1742
-msgid "_Apply"
-msgstr "_Применить"
+msgid "Apply"
+msgstr ""
 
 #: ../src/artificial_stars.c:1758
 msgid "_Distribution Options"
@@ -980,8 +986,241 @@ msgstr ""
 "Заменить значение пиксела выше порога (для минимума) или ниже порога (для "
 "максимума)"
 
-#~ msgid "Sample Distributions"
-#~ msgstr "Предустановки распределений"
+#: ../scripts/border_information.scm.h:1
+msgid "Bottom information height"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:2
+msgid "Draw Border with Image Information"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:3
+msgid ""
+"Draw a border around an image and some information about it image in the "
+"bottom"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:4
+msgid "Font"
+msgstr "Шрифт"
+
+#: ../scripts/border_information.scm.h:5
+msgid "Font Color"
+msgstr "Цвет шрифта"
+
+#: ../scripts/border_information.scm.h:6
+msgid "Font size (left, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:7
+msgid "Font size (left, second line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:8
+msgid "Font size (middle, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:9
+msgid "Font size (middle, second line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:10
+msgid "Font size (right, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:11
+msgid "Font size (right, second line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:12
+#, fuzzy
+msgid "Gauss Radius"
+msgstr "Аппроксимация по Гауссу"
+
+#: ../scripts/border_information.scm.h:13
+msgid "Inner border color"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:14
+msgid "Inner border size"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:15
+msgid "Outer border color"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:16
+msgid "Outer border size"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:17
+msgid "Text (left, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:18
+msgid "Text (left, second line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:19
+msgid "Text (middle, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:20
+msgid "Text (middle, second line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:21
+msgid "Text (right, first line)"
+msgstr ""
+
+#: ../scripts/border_information.scm.h:22
+msgid "Text (right, second line)"
+msgstr ""
+
+#: ../scripts/brightness_contrast_batch.scm.h:1
+msgid "Apply the Brightness/Contrast tool to all layers in an image"
+msgstr ""
+
+#: ../scripts/brightness_contrast_batch.scm.h:2
+msgid "Brightness"
+msgstr "Яркость"
+
+#: ../scripts/brightness_contrast_batch.scm.h:3
+msgid "Contrast"
+msgstr "Контраст"
+
+#: ../scripts/brightness_contrast_batch.scm.h:4
+msgid "Set Brightness and Contrast for all Layers"
+msgstr ""
+
+#: ../scripts/brightness_contrast_batch.scm.h:5
+#: ../scripts/dark_subtraction.scm.h:3 ../scripts/flat_division.scm.h:3
+#: ../scripts/mode_batch.scm.h:25 ../scripts/normalize_batch.scm.h:3
+msgid "Visible layers only"
+msgstr "Только видимые слои"
+
+#: ../scripts/dark_subtraction.scm.h:1
+msgid "Subtract Dark Frame from all Layers"
+msgstr ""
+
+#: ../scripts/dark_subtraction.scm.h:2
+msgid "Subtract a dark frame from all layers"
+msgstr ""
+
+#: ../scripts/flat_division.scm.h:1
+msgid "Divide all Layers by Flat Field"
+msgstr ""
+
+#: ../scripts/flat_division.scm.h:2
+msgid "Divides all layers by a flat field"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:1
+msgid "Addition"
+msgstr "Добавление"
+
+#: ../scripts/mode_batch.scm.h:2
+msgid "Burn"
+msgstr "Затемнить"
+
+#: ../scripts/mode_batch.scm.h:3
+msgid "Color"
+msgstr "Цвет"
+
+#: ../scripts/mode_batch.scm.h:4
+msgid "Darken Only"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:5
+msgid "Difference"
+msgstr "Разница"
+
+#: ../scripts/mode_batch.scm.h:6
+msgid "Divide"
+msgstr "Деление"
+
+#: ../scripts/mode_batch.scm.h:7
+msgid "Dodge"
+msgstr "Осветлить"
+
+#: ../scripts/mode_batch.scm.h:8
+msgid "Grain extract"
+msgstr "Извлечение зерна"
+
+#: ../scripts/mode_batch.scm.h:9
+msgid "Grain merge"
+msgstr "Объединение зерна"
+
+#: ../scripts/mode_batch.scm.h:10
+msgid "Hard Light"
+msgstr "Жёсткий свет"
+
+#: ../scripts/mode_batch.scm.h:11
+msgid "Hue"
+msgstr "Тон"
+
+#: ../scripts/mode_batch.scm.h:12
+msgid "Lighten Only"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:13
+msgid "Mode"
+msgstr "Режим"
+
+#: ../scripts/mode_batch.scm.h:14
+#, fuzzy
+msgid "Multiply"
+msgstr "Умножить:"
+
+#: ../scripts/mode_batch.scm.h:15
+msgid "Normal"
+msgstr "Обычный"
+
+#: ../scripts/mode_batch.scm.h:16
+msgid "Opacity"
+msgstr "Непрозрачность"
+
+#: ../scripts/mode_batch.scm.h:17
+msgid "Overlay"
+msgstr "Перекрытие"
+
+#: ../scripts/mode_batch.scm.h:18
+msgid "Saturation"
+msgstr "Насыщенность"
+
+#: ../scripts/mode_batch.scm.h:19
+msgid "Screen"
+msgstr "Экран"
+
+#: ../scripts/mode_batch.scm.h:20
+msgid "Set Mode for all Layers"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:21
+msgid "Set a particular blending mode and opacity to all layers"
+msgstr ""
+
+#: ../scripts/mode_batch.scm.h:22
+msgid "Soft Light"
+msgstr "Мягкий свет"
+
+#: ../scripts/mode_batch.scm.h:23
+msgid "Subtract"
+msgstr "Вычитание"
+
+#: ../scripts/mode_batch.scm.h:24
+msgid "Value"
+msgstr "Значение"
+
+#: ../scripts/normalize_batch.scm.h:1
+#, fuzzy
+msgid "Apply the normalize function to all layers"
+msgstr "Нормировать все слои"
+
+#: ../scripts/normalize_batch.scm.h:2
+#, fuzzy
+msgid "Normalize all Layers"
+msgstr "Нормировать все слои"
 
 #~ msgid "Standard (LD)"
 #~ msgstr "Обычное (НП)"
@@ -1035,78 +1274,3 @@ msgstr ""
 
 #~ msgid "Star rounding"
 #~ msgstr "Округлить звёзды"
-
-#~ msgid "Font"
-#~ msgstr "Шрифт"
-
-#~ msgid "Font Color"
-#~ msgstr "Цвет шрифта"
-
-#~ msgid "Brightness"
-#~ msgstr "Яркость"
-
-#~ msgid "Contrast"
-#~ msgstr "Контраст"
-
-#~ msgid "Visible layers only"
-#~ msgstr "Только видимые слои"
-
-#~ msgid "Addition"
-#~ msgstr "Добавление"
-
-#~ msgid "Burn"
-#~ msgstr "Затемнить"
-
-#~ msgid "Color"
-#~ msgstr "Цвет"
-
-#~ msgid "Difference"
-#~ msgstr "Разница"
-
-#~ msgid "Divide"
-#~ msgstr "Деление"
-
-#~ msgid "Dodge"
-#~ msgstr "Осветлить"
-
-#~ msgid "Grain extract"
-#~ msgstr "Извлечение зерна"
-
-#~ msgid "Grain merge"
-#~ msgstr "Объединение зерна"
-
-#~ msgid "Hard Light"
-#~ msgstr "Жёсткий свет"
-
-#~ msgid "Hue"
-#~ msgstr "Тон"
-
-#~ msgid "Mode"
-#~ msgstr "Режим"
-
-#~ msgid "Normal"
-#~ msgstr "Обычный"
-
-#~ msgid "Opacity"
-#~ msgstr "Непрозрачность"
-
-#~ msgid "Overlay"
-#~ msgstr "Перекрытие"
-
-#~ msgid "Saturation"
-#~ msgstr "Насыщенность"
-
-#~ msgid "Screen"
-#~ msgstr "Экран"
-
-#~ msgid "Soft Light"
-#~ msgstr "Мягкий свет"
-
-#~ msgid "Subtract"
-#~ msgstr "Вычитание"
-
-#~ msgid "Value"
-#~ msgstr "Значение"
-
-#~ msgid "Normalize all layers"
-#~ msgstr "Нормировать все слои"

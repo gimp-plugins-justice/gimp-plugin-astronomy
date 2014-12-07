@@ -31,7 +31,7 @@ INCLUDES =\
 	@GIMP_CFLAGS@		\
 	-I$(includedir)
 
-LDADD = $(GIMP_LIBS) -lgsl -lgslcblas -lfftw3
+LDADD = $(GIMP_LIBS) -lgsl -lgslcblas -lfftw3 -lm
 
 EXTRA_DIST = \
 	plugin-intl.h \

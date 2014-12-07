@@ -1,5 +1,5 @@
 ;; /***************************************************************************
-;;  *   Copyright (C) 2006-2008 by Georg Hennig                               *
+;;  *   Copyright (C) 2006-2014 by Georg Hennig                               *
 ;;  *   georg.hennig@web.de                                                   *
 ;;  *                                                                         *
 ;;  *   This program is free software; you can redistribute it and/or modify  *
@@ -63,7 +63,7 @@
 	_"Set a particular blending mode and opacity to all layers"
 	"Georg Hennig"
 	"Georg Hennig"
-	"07-2008"
+	"12-2014"
 	""
 	SF-IMAGE    "SF-IMAGE" 0
 	SF-DRAWABLE "SF-DRAWABLE" 0

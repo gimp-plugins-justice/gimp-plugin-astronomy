@@ -7,7 +7,7 @@ m4_define([plugin_name], [gimp-plugin-astronomy])
 
 dnl These two define the plug-in version number
 m4_define([plugin_major_version], [0])
-m4_define([plugin_minor_version], [6])
+m4_define([plugin_minor_version], [9])
 
 m4_define([plugin_version],
           [plugin_major_version.plugin_minor_version])

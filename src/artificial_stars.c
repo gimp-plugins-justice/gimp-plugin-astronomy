@@ -1178,7 +1178,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial background stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_NORMAL_MODE );
 
-		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
+		gimp_image_add_layer( image_id, layer_destination, 0 );
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -1193,7 +1193,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial object stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_LIGHTEN_ONLY_MODE );
 
-		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
+		gimp_image_add_layer( image_id, layer_destination, 0 );
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -1208,7 +1208,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial foreground stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_LIGHTEN_ONLY_MODE );
 
-		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
+		gimp_image_add_layer( image_id, layer_destination, 0 );
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -1225,7 +1225,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_NORMAL_MODE );
 
-		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
+		gimp_image_add_layer( image_id, layer_destination, 0 );
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -1683,7 +1683,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 /* Star distribution (left side) */
 
-	frame = gimp_frame_new( _("Options Processing") );
+	frame = gimp_frame_new( _("Star Distribution") );
 	gtk_box_pack_start( GTK_BOX( left_vbox ), frame, FALSE, FALSE, 0 );
 	gtk_widget_show( frame );
 
@@ -1715,7 +1715,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 /* Sample Distributions */
 
-	frame = gimp_frame_new( _("Presets for Star Distributions") );
+	frame = gimp_frame_new( _("Sample Distributions") );
 	gtk_box_pack_start( GTK_BOX( left_vbox ), frame, FALSE, FALSE, 0 );
 	gtk_widget_show( frame );
 
@@ -1739,7 +1739,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	gtk_table_attach( GTK_TABLE( table ), sample_distribution_combo, 0, 1, 0, 1, GTK_EXPAND | GTK_FILL, 0, 0, 0);
 	gtk_widget_show( sample_distribution_combo );
 
-	button = gtk_button_new_with_mnemonic( _("_Apply") );
+	button = gtk_button_new_with_label( _("Apply") );
 	gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
 	gtk_widget_show( button );
 	g_signal_connect( button, "clicked", G_CALLBACK( sample_distribution_clicked ), NULL );
