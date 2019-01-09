@@ -1,4 +1,4 @@
-#!@INTLTOOL_PERL@ -w
+#!/usr/bin/perl -w
 # -*- Mode: perl; indent-tabs-mode: nil; c-basic-offset: 4  -*-
 
 #
@@ -93,7 +93,7 @@ my $OUTFILE;
 
 my %po_files_by_lang = ();
 my %translations = ();
-my $iconv = $ENV{"ICONV"} || $ENV{"INTLTOOL_ICONV"} || "@INTLTOOL_ICONV@";
+my $iconv = $ENV{"ICONV"} || $ENV{"INTLTOOL_ICONV"} || "/usr/bin/iconv";
 my $devnull = ($^O eq 'MSWin32' ? 'NUL:' : '/dev/null');
 
 # Use this instead of \w for XML files to handle more possible characters.
@@ -268,7 +268,7 @@ sub gather_po_files
 sub get_local_charset
 {
     my ($encoding) = @_;
-    my $alias_file = $ENV{"G_CHARSET_ALIAS"} || "@INTLTOOL_LIBDIR@/charset.alias";
+    my $alias_file = $ENV{"G_CHARSET_ALIAS"} || "/usr/local/lib/charset.alias";
 
     # seek character encoding aliases in charset.alias (glib)
 

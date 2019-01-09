@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2008 by Georg Hennig                               *
+ *   Copyright (C) 2006-2018 by Georg Hennig                               *
  *   georg.hennig@web.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -43,8 +43,8 @@ char *strndup(const char *s, size_t n);
 #include "plugin-intl.h"
 
 #define PLUG_IN_NAME "gimp-plugin-astro-merge-layers"
-#define PLUG_IN_VERSION "0.7"
-#define PLUG_IN_DATE "09.2012"
+#define PLUG_IN_VERSION "0.10"
+#define PLUG_IN_DATE "09.2018"
 
 enum MERGE_METHOD
 {

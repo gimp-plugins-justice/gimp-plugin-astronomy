@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2008 by Georg Hennig                               *
+ *   Copyright (C) 2006-2018 by Georg Hennig                               *
  *   georg.hennig@web.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -44,8 +44,8 @@ spiral barred with bulge.
 #include "plugin-intl.h"
 
 #define PLUG_IN_NAME "gimp-plugin-astro-artificial-galaxy"
-#define PLUG_IN_VERSION "0.7"
-#define PLUG_IN_DATE "09.2012"
+#define PLUG_IN_VERSION "0.10"
+#define PLUG_IN_DATE "09.2018"
 
 double CLAMP_DOUBLE( const double a, const double b, const double c )
 {
@@ -276,7 +276,7 @@ static tparameter parameters =
 /* elliptical radius, excentricity, boxiness */
 	20,
 	0.8,
-	0.05,
+	0.02,
 
 /* elliptical color mean */
 	4600,
@@ -1201,7 +1201,7 @@ void draw_bulge_or_ellipse( const gint galaxy_type, gdouble *image_buffer, gint3
 					radius = sqrt( ((double)(x-parameters.object_x))*((double)(x-parameters.object_x)) +
 						((double)(y-parameters.object_y))*((double)(y-parameters.object_y)) );
 
-					phi = atan2( (double)(y-parameters.object_y), (double)(x-parameters.object_x) );
+					phi = atan2( (double)(y)-(double)(parameters.object_y), (double)(x)-(double)(parameters.object_x) );
 					phi += M_PI * parameters.phi / 180.;
 
 					dradius = -parameters.elliptical_boxiness*cos(4.*phi);
