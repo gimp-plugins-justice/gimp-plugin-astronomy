@@ -383,7 +383,7 @@ void fit_polynomial( const double *x, const double *y, const double *z, const do
 	gsl_matrix_free( cov );
 }
 
-double polynomial_value( const double x, const double y, double *coeffs, int start_coeffs )
+static double polynomial_value( const double x, const double y, double *coeffs, int start_coeffs )
 {
 	return coeffs[start_coeffs+0] + coeffs[start_coeffs+1]*x + coeffs[start_coeffs+2]*x*x +
 		coeffs[start_coeffs+3]*x*x*x + coeffs[start_coeffs+4]*x*x*x*x + coeffs[start_coeffs+5]*y +
