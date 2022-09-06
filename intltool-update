@@ -619,7 +619,7 @@ sub GenerateHeaders
 #
 sub GeneratePOTemplate
 {
-    my $XGETTEXT = $ENV{"XGETTEXT"} || "/usr/bin/xgettext";
+    my $XGETTEXT = $ENV{"XGETTEXT"} || "@INTLTOOL_XGETTEXT@";
     my $XGETTEXT_ARGS = $ENV{"XGETTEXT_ARGS"} || '';
     chomp $XGETTEXT;
 
@@ -788,7 +788,7 @@ sub POFile_Update
 {
     -f "$MODULE.pot" or die "$PROGRAM: $MODULE.pot does not exist.\n";
 
-    my $MSGMERGE = $ENV{"MSGMERGE"} || "/usr/bin/msgmerge";
+    my $MSGMERGE = $ENV{"MSGMERGE"} || "@INTLTOOL_MSGMERGE@";
     my ($lang, $outfile) = @_;
 
     print "Merging $SRCDIR/$lang.po with $MODULE.pot..." if $VERBOSE;
@@ -831,7 +831,7 @@ sub POFile_GetLanguage ($)
 sub Console_Write_TranslationStatus
 {
     my ($lang, $output_file) = @_;
-    my $MSGFMT = $ENV{"MSGFMT"} || "/usr/bin/msgfmt";
+    my $MSGFMT = $ENV{"MSGFMT"} || "@INTLTOOL_MSGFMT@";
 
     $output_file = "$SRCDIR/$lang.po" if ($output_file eq "");
 
@@ -840,7 +840,7 @@ sub Console_Write_TranslationStatus
 
 sub Console_Write_CoverageReport
 {
-    my $MSGFMT = $ENV{"MSGFMT"} || "/usr/bin/msgfmt";
+    my $MSGFMT = $ENV{"MSGFMT"} || "@INTLTOOL_MSGFMT@";
 
     &GatherPOFiles;
 
