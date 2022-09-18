@@ -8,13 +8,13 @@ m4_define([plugin_name], [gimp-plugin-astronomy])
 
 dnl These two define the plug-in version number
 m4_define([plugin_major_version], [0])
-m4_define([plugin_minor_version], [9])
+m4_define([plugin_minor_version], [10])
 
 m4_define([plugin_version], [plugin_major_version.plugin_minor_version])
 m4_define([plugin_package_name], [gimp-plugin-astronomy])
 
 AC_INIT([plugin_name],[plugin_version],
-   [https://github.com/gimp-plugins-justice/gimp-plugin-astronomy/issues],[plugin_package_name],
+   [[https://github.com/gimp-plugins-justice/gimp-plugin-astronomy/issues/]],[plugin_package_name],
    [http://www.hennigbuam.de/georg/gimp.html])
 
 AC_CONFIG_SRCDIR([src/alignment.c])
@@ -25,6 +25,7 @@ AC_CANONICAL_BUILD
 AC_USE_SYSTEM_EXTENSIONS
 AM_INIT_AUTOMAKE([foreign -Wall])
 AM_MAINTAINER_MODE([enable])
+AM_GNU_GETTEXT_VERSION(0.21)
 
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 
@@ -34,12 +35,11 @@ AC_PROG_LN_S
 AC_PROG_MKDIR_P
 AC_PATH_PROG([STRIP],[strip],[:])
 AC_PATH_PROG([GIMPTOOL],[gimptool-2.0],[:])
+AC_PATH_PROG([MSGFMT],[msgfmt],[msgfmt])
 AC_PATH_PROG([XGETTEXT],[xgettext],[:])
 AC_CONFIG_HEADERS([src/config.h],[:])
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
-
-IT_PROG_INTLTOOL
 
 msos=
 case "$host" in
@@ -122,13 +122,11 @@ AC_DEFINE(PLUGIN_MINOR_VERSION, ["plugin_minor_version"], [Plug-In minor version
 GETTEXT_PACKAGE=gimp-plugin-astronomy
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [The gettext translation domain.])
+AM_GNU_GETTEXT([external])
 
 AC_SUBST([PLUGIN_NAME],[plugin_name])
 AC_SUBST([PLUGIN_PACKAGE_NAME],[plugin_package_name])
 AC_SUBST([PLUGIN_VERSION],[plugin_version])
-
-dnl Add the languages which your application supports here.
-#ALL_LINGUAS="de"
 
 AC_CONFIG_FILES([
 Makefile
@@ -136,9 +134,6 @@ doc/Makefile
 scripts/Makefile
 src/Makefile
 po/Makefile.in
-intltool-extract
-intltool-merge
-intltool-update
 rpm/gimp-plugin-astronomy.spec
 ])
 

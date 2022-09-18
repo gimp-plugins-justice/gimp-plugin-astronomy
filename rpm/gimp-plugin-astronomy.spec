@@ -3,7 +3,7 @@
 %define         scriptdir     %{_datadir}/gimp/2.0/scripts
 
 Name:           gimp-plugin-astronomy
-Version:        0.9
+Version:        0.10
 Release:        0
 Summary:        Astronomy plugins for the GIMP graphic editor
 License:        GPLv2+

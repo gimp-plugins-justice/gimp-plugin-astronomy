@@ -312,7 +312,7 @@ static void query( void )
 		{ GIMP_PDB_FLOAT, "diffraction_angle", "Angle of diffraction lines [deg]" },
 		{ GIMP_PDB_FLOAT, "diffraction_length", "Length of diffraction lines [a.u.]" },
 		{ GIMP_PDB_FLOAT, "diffraction_color", "Color interference of diffraction lines [a.u.]" },
-		{ GIMP_PDB_INT32, "noise", "Noise in % of sqrt(N)" },
+		{ GIMP_PDB_INT32, "noise", "Noise in (%) of sqrt(N)" },
 		{ GIMP_PDB_INT32, "background", "Background pixel value [absolute value]" },
 		{ GIMP_PDB_FLOAT, "burnout", "Burn out % stars" },
 		{ GIMP_PDB_FLOAT, "shininess", "Enlarge burnt out stars [a.u.]" },
@@ -1945,7 +1945,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	object_radius_adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 2,
 		_("Radius parameter:"), 125, 75,
 		parameters.object_radius, 0, 200, 1, 5, 0,
-		TRUE, 0, 0, _("Radius of object in % of the image (unused for random distribution)"), NULL );
+		TRUE, 0, 0, _("Radius of object in (%) of the image (unused for random distribution)"), NULL );
 	g_signal_connect( object_radius_adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
 		&parameters.object_radius );
 	g_signal_connect_swapped( object_radius_adj, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
@@ -2100,7 +2100,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 6,
 		_("Noise:"), 185, 75,
 		parameters.noise, 0, 200, 1, 5, 0,
-		TRUE, 0, 0, _("Noise in % of sqrt(N) = photon noise"), NULL );
+		TRUE, 0, 0, _("Noise in (%) of sqrt(N) = photon noise"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
 		&parameters.noise );
 	g_signal_connect_swapped( adj, "value_changed", G_CALLBACK( gimp_preview_invalidate ), preview );
@@ -2116,7 +2116,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 8,
 		_("Burn out:"), 185, 75,
 		parameters.burnout, 0.00, 100.00, 0.01, 5, 2,
-		TRUE, 0, 0, _("% of stars that burn out (0=normalize to brightest star, 100=to darkest one)"), NULL );
+		TRUE, 0, 0, _("(%) of stars that burn out (0=normalize to brightest star, 100=to darkest one)"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_double_adjustment_update ),
 		&parameters.burnout );
 	g_signal_connect_swapped( adj, "value_changed", G_CALLBACK( find_star_norm ), NULL );

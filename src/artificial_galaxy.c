@@ -401,7 +401,7 @@ static void query( void )
 		{ GIMP_PDB_FLOAT, "theta", "Theta angle" },
 		{ GIMP_PDB_FLOAT, "transparency_bright", "Transparency of bright clouds" },
 		{ GIMP_PDB_FLOAT, "transparency_dark", "Transparency of dark clouds" },
-		{ GIMP_PDB_INT32, "noise", "Noise in % of sqrt(N)" },
+		{ GIMP_PDB_INT32, "noise", "Noise in (%) of sqrt(N)" },
 		{ GIMP_PDB_FLOAT, "multiplier", "Multiplier to all pixel values" },
 		{ GIMP_PDB_INT32, "split_layers", "Split objects to layers" },
 		{ GIMP_PDB_INT32, "random_seed", "Seed number" },
@@ -2386,7 +2386,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 7,
 		_("Noise:"), 185, 75,
 		parameters.noise, 0, 200, 1, 5, 0,
-		TRUE, 0, 0, _("Noise in % of sqrt(N) = photon noise"), NULL );
+		TRUE, 0, 0, _("Noise in (%) of sqrt(N) = photon noise"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
 		&parameters.noise );
 	g_signal_connect_swapped( adj, "value_changed", G_CALLBACK( gimp_preview_invalidate ), preview );

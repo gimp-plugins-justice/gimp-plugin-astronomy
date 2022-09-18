@@ -1676,7 +1676,7 @@ static gint dialog()
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 2,
 		_("Cross correlation search area (%):"), 180, 75,
 		parameters.cross_correlation, 100, 1000, 1, 10, 0,
-		TRUE, 0, 0, _("Cross correlation search area, measured in % of selected area width/height and limited by the layer's border"), NULL );
+		TRUE, 0, 0, _("Cross correlation search area, measured in (%) of selected area width/height and limited by the layer's border"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
 		&parameters.cross_correlation );
 
