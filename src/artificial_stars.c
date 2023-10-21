@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2008 by Georg Hennig                               *
+ *   Copyright (C) 2006-2018 by Georg Hennig                               *
  *   georg.hennig@web.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -46,8 +46,8 @@ cluster, and foreground stars.
 #include "plugin-intl.h"
 
 #define PLUG_IN_NAME "gimp-plugin-astro-artificial-stars"
-#define PLUG_IN_VERSION "0.7"
-#define PLUG_IN_DATE "09.2012"
+#define PLUG_IN_VERSION "0.10"
+#define PLUG_IN_DATE "09.2018"
 
 enum PSF
 {
@@ -312,7 +312,7 @@ static void query( void )
 		{ GIMP_PDB_FLOAT, "diffraction_angle", "Angle of diffraction lines [deg]" },
 		{ GIMP_PDB_FLOAT, "diffraction_length", "Length of diffraction lines [a.u.]" },
 		{ GIMP_PDB_FLOAT, "diffraction_color", "Color interference of diffraction lines [a.u.]" },
-		{ GIMP_PDB_INT32, "noise", "Noise in % of sqrt(N)" },
+		{ GIMP_PDB_INT32, "noise", "Noise in (%) of sqrt(N)" },
 		{ GIMP_PDB_INT32, "background", "Background pixel value [absolute value]" },
 		{ GIMP_PDB_FLOAT, "burnout", "Burn out % stars" },
 		{ GIMP_PDB_FLOAT, "shininess", "Enlarge burnt out stars [a.u.]" },
@@ -1178,7 +1178,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial background stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_NORMAL_MODE );
 
-		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
+		gimp_image_add_layer( image_id, layer_destination, 0 );
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -1193,7 +1193,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial object stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_LIGHTEN_ONLY_MODE );
 
-		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
+		gimp_image_add_layer( image_id, layer_destination, 0 );
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -1208,7 +1208,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial foreground stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_LIGHTEN_ONLY_MODE );
 
-		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
+		gimp_image_add_layer( image_id, layer_destination, 0 );
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -1225,7 +1225,7 @@ static void create_stars()
 		layer_destination = gimp_layer_new( image_id, _("Artificial stars"), gimp_image_width( image_id ),
 			gimp_image_height( image_id ), GIMP_RGB_IMAGE, 100, GIMP_NORMAL_MODE );
 
-		gimp_image_insert_layer (image_id, layer_destination, 0, -1);
+		gimp_image_add_layer( image_id, layer_destination, 0 );
 
 		gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 			gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -1683,7 +1683,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 /* Star distribution (left side) */
 
-	frame = gimp_frame_new( _("Options Processing") );
+	frame = gimp_frame_new( _("Star Distribution") );
 	gtk_box_pack_start( GTK_BOX( left_vbox ), frame, FALSE, FALSE, 0 );
 	gtk_widget_show( frame );
 
@@ -1715,7 +1715,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 
 /* Sample Distributions */
 
-	frame = gimp_frame_new( _("Presets for Star Distributions") );
+	frame = gimp_frame_new( _("Sample Distributions") );
 	gtk_box_pack_start( GTK_BOX( left_vbox ), frame, FALSE, FALSE, 0 );
 	gtk_widget_show( frame );
 
@@ -1739,7 +1739,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	gtk_table_attach( GTK_TABLE( table ), sample_distribution_combo, 0, 1, 0, 1, GTK_EXPAND | GTK_FILL, 0, 0, 0);
 	gtk_widget_show( sample_distribution_combo );
 
-	button = gtk_button_new_with_mnemonic( _("_Apply") );
+	button = gtk_button_new_with_label( _("Apply") );
 	gtk_table_attach( GTK_TABLE( table ), button, 1, 2, 0, 1, GTK_FILL, 0, 0, 0 );
 	gtk_widget_show( button );
 	g_signal_connect( button, "clicked", G_CALLBACK( sample_distribution_clicked ), NULL );
@@ -1945,7 +1945,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	object_radius_adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 2,
 		_("Radius parameter:"), 125, 75,
 		parameters.object_radius, 0, 200, 1, 5, 0,
-		TRUE, 0, 0, _("Radius of object in % of the image (unused for random distribution)"), NULL );
+		TRUE, 0, 0, _("Radius of object in (%) of the image (unused for random distribution)"), NULL );
 	g_signal_connect( object_radius_adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
 		&parameters.object_radius );
 	g_signal_connect_swapped( object_radius_adj, "value_changed", G_CALLBACK( recalculation_necessary ), NULL );
@@ -2100,7 +2100,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 6,
 		_("Noise:"), 185, 75,
 		parameters.noise, 0, 200, 1, 5, 0,
-		TRUE, 0, 0, _("Noise in % of sqrt(N) = photon noise"), NULL );
+		TRUE, 0, 0, _("Noise in (%) of sqrt(N) = photon noise"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
 		&parameters.noise );
 	g_signal_connect_swapped( adj, "value_changed", G_CALLBACK( gimp_preview_invalidate ), preview );
@@ -2116,7 +2116,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 8,
 		_("Burn out:"), 185, 75,
 		parameters.burnout, 0.00, 100.00, 0.01, 5, 2,
-		TRUE, 0, 0, _("% of stars that burn out (0=normalize to brightest star, 100=to darkest one)"), NULL );
+		TRUE, 0, 0, _("(%) of stars that burn out (0=normalize to brightest star, 100=to darkest one)"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_double_adjustment_update ),
 		&parameters.burnout );
 	g_signal_connect_swapped( adj, "value_changed", G_CALLBACK( find_star_norm ), NULL );

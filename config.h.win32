@@ -62,19 +62,19 @@
 #define PACKAGE_NAME "gimp-plugin-astronomy"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "gimp-plugin-astronomy 0.6"
+#define PACKAGE_STRING "gimp-plugin-astronomy 0.9"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "gimp-plugin-astronomy"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.6"
+#define PACKAGE_VERSION "0.9"
 
 /* Plug-In major version */
 #define PLUGIN_MAJOR_VERSION 0
 
 /* Plug-In minor version */
-#define PLUGIN_MINOR_VERSION 6
+#define PLUGIN_MINOR_VERSION 9
 
 /* Plug-In name */
 #define PLUGIN_NAME PACKAGE_NAME

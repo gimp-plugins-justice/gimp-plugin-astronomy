@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2008 by Georg Hennig                               *
+ *   Copyright (C) 2006-2018 by Georg Hennig                               *
  *   georg.hennig@web.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -44,8 +44,8 @@ spiral barred with bulge.
 #include "plugin-intl.h"
 
 #define PLUG_IN_NAME "gimp-plugin-astro-artificial-galaxy"
-#define PLUG_IN_VERSION "0.7"
-#define PLUG_IN_DATE "09.2012"
+#define PLUG_IN_VERSION "0.10"
+#define PLUG_IN_DATE "09.2018"
 
 double CLAMP_DOUBLE( const double a, const double b, const double c )
 {
@@ -276,7 +276,7 @@ static tparameter parameters =
 /* elliptical radius, excentricity, boxiness */
 	20,
 	0.8,
-	0.05,
+	0.02,
 
 /* elliptical color mean */
 	4600,
@@ -401,7 +401,7 @@ static void query( void )
 		{ GIMP_PDB_FLOAT, "theta", "Theta angle" },
 		{ GIMP_PDB_FLOAT, "transparency_bright", "Transparency of bright clouds" },
 		{ GIMP_PDB_FLOAT, "transparency_dark", "Transparency of dark clouds" },
-		{ GIMP_PDB_INT32, "noise", "Noise in % of sqrt(N)" },
+		{ GIMP_PDB_INT32, "noise", "Noise in (%) of sqrt(N)" },
 		{ GIMP_PDB_FLOAT, "multiplier", "Multiplier to all pixel values" },
 		{ GIMP_PDB_INT32, "split_layers", "Split objects to layers" },
 		{ GIMP_PDB_INT32, "random_seed", "Seed number" },
@@ -1201,7 +1201,7 @@ void draw_bulge_or_ellipse( const gint galaxy_type, gdouble *image_buffer, gint3
 					radius = sqrt( ((double)(x-parameters.object_x))*((double)(x-parameters.object_x)) +
 						((double)(y-parameters.object_y))*((double)(y-parameters.object_y)) );
 
-					phi = atan2( (double)(y-parameters.object_y), (double)(x-parameters.object_x) );
+					phi = atan2( (double)(y)-(double)(parameters.object_y), (double)(x)-(double)(parameters.object_x) );
 					phi += M_PI * parameters.phi / 180.;
 
 					dradius = -parameters.elliptical_boxiness*cos(4.*phi);
@@ -1484,7 +1484,7 @@ static void create_galaxy()
 	layer_destination = gimp_layer_new( image_id, _("Artificial galaxy"), gimp_image_width( image_id ),
 		gimp_image_height( image_id ), GIMP_RGBA_IMAGE, 100, GIMP_NORMAL_MODE );
 
-	gimp_image_insert_layer (image_id, layer_destination, 0, -1);
+	gimp_image_add_layer( image_id, layer_destination, 0 );
 
 	gimp_pixel_rgn_init( &region_destination, gimp_drawable_get( layer_destination ), 0, 0,
 		gimp_drawable_width( layer_destination ), gimp_drawable_height( layer_destination ), TRUE, TRUE );
@@ -2386,7 +2386,7 @@ static gint dialog( gint32 image_id, GimpDrawable *drawable )
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 7,
 		_("Noise:"), 185, 75,
 		parameters.noise, 0, 200, 1, 5, 0,
-		TRUE, 0, 0, _("Noise in % of sqrt(N) = photon noise"), NULL );
+		TRUE, 0, 0, _("Noise in (%) of sqrt(N) = photon noise"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
 		&parameters.noise );
 	g_signal_connect_swapped( adj, "value_changed", G_CALLBACK( gimp_preview_invalidate ), preview );

@@ -1,3 +1,20 @@
+0.10
+====
+- Updates for gimp 2.10 and current fftw3 and gsl
+- adapted to new windows build system
+
+0.9
+===
+- fixed linking on some Linux systems
+
+0.8
+===
+- further GUI cleanups
+
+0.7
+===
+- GUI cleanup (thanks to Alexandre Prokoudine)
+
 0.6
 ===
 - all: documentation

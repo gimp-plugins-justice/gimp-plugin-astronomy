@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2008 by Georg Hennig                               *
+ *   Copyright (C) 2006-2018 by Georg Hennig                               *
  *   georg.hennig@web.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -41,8 +41,8 @@ Might also useful for real flat fields.
 #include "plugin-intl.h"
 
 #define PLUG_IN_NAME "gimp-plugin-astro-background-gradient"
-#define PLUG_IN_VERSION "0.7"
-#define PLUG_IN_DATE "09.2012"
+#define PLUG_IN_VERSION "0.10"
+#define PLUG_IN_DATE "09.2018"
 
 enum BACKGROUND_VALUE_METHOD
 {
@@ -383,7 +383,7 @@ void fit_polynomial( const double *x, const double *y, const double *z, const do
 	gsl_matrix_free( cov );
 }
 
-inline double polynomial_value( const double x, const double y, double *coeffs, int start_coeffs )
+static double polynomial_value( const double x, const double y, double *coeffs, int start_coeffs )
 {
 	return coeffs[start_coeffs+0] + coeffs[start_coeffs+1]*x + coeffs[start_coeffs+2]*x*x +
 		coeffs[start_coeffs+3]*x*x*x + coeffs[start_coeffs+4]*x*x*x*x + coeffs[start_coeffs+5]*y +
@@ -671,7 +671,7 @@ static void background_gradient( gint32 image_id )
 
 	gimp_progress_init( _("Writing normalized pixel values...") );
 
- 	gimp_image_insert_layer (image_id, layer_destination, 0, -1);
+ 	gimp_image_add_layer( image_id, layer_destination, 0 );
 
 	guint progress = 0;
 	progress_skip = 0;
@@ -714,7 +714,7 @@ static void background_gradient( gint32 image_id )
 	gimp_drawable_update( layer_destination, 0, 0, gimp_drawable_width( layer_destination ),
 		gimp_drawable_height( layer_destination ) );
 
-	gimp_layer_set_mode( layer_destination, GIMP_DIVIDE_MODE );
+	gimp_layer_set_mode( layer_destination, GIMP_LAYER_MODE_DIVIDE );
 
 	gimp_image_undo_group_end( image_id );
 

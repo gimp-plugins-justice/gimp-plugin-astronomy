@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2007-2008 by Georg Hennig                               *
+ *   Copyright (C) 2007-2018 by Georg Hennig                               *
  *   georg.hennig@web.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -47,8 +47,8 @@ gauss fit (for stars) or center of brightness.
 #include "plugin-intl.h"
 
 #define PLUG_IN_NAME "gimp-plugin-astro-align-layers"
-#define PLUG_IN_VERSION "0.7"
-#define PLUG_IN_DATE "09.2012"
+#define PLUG_IN_VERSION "0.10"
+#define PLUG_IN_DATE "09.2018"
 
 /*
 parameters
@@ -470,7 +470,10 @@ gint get_gauss_fit( const guchar *data, const gint bit, const gint bpp, const gi
 		status = gsl_multifit_test_delta( s->dx, s->x, 1e-8, 1e-8 );
 	} while (status == GSL_CONTINUE && iter < 5000);
 
-	gsl_multifit_covar( s->J, 0.0, covar );
+	gsl_matrix* J = gsl_matrix_alloc(n, p);
+ 	gsl_multifit_fdfsolver_jac(s, J);
+ 	gsl_multifit_covar(J, 0.0, covar);
+ 	gsl_matrix_free(J);
 
 	gdouble chi = gsl_blas_dnrm2( s->f );
 	gdouble dof = n - p;
@@ -834,11 +837,11 @@ void get_center( gint32 layer, gint alignment_method, gint sel_pos_x, gint sel_p
 	{
 		fit_width = sel_width;
 		fit_height = sel_height;
-		sel_pos_x = sel_pos_x - ((cross_correlation-100)*sel_width)/200;
-		sel_pos_y = sel_pos_y - ((cross_correlation-100)*sel_height)/200;
+		sel_pos_x = (double)sel_pos_x - ((double)(cross_correlation-100)*sel_width)/200. + 0.5;
+		sel_pos_y = (double)sel_pos_y - ((double)(cross_correlation-100)*sel_height)/200. + 0.5;
 
-		sel_width = (cross_correlation*sel_width)/100;
-		sel_height = (cross_correlation*sel_height)/100;
+		sel_width = (double)(cross_correlation*sel_width)/100. + 0.5;
+		sel_height = (double)(cross_correlation*sel_height)/100. + 0.5;
 		if ( sel_width%2 ) sel_width--;
 		if ( sel_height%2 ) sel_height--;
 	}
@@ -1150,8 +1153,8 @@ static void align_layers( gint32 image_id )
 
 	if ( parameters.scale_percent > 100 )
 	{
-		gint new_size_x = (parameters.scale_percent*gimp_drawable_width( layers[active_layer] ))/100;
-		gint new_size_y = (parameters.scale_percent*gimp_drawable_height( layers[active_layer] ))/100;
+		gint new_size_x = (double)(parameters.scale_percent*gimp_drawable_width( layers[active_layer] ))/100. + 0.5;
+		gint new_size_y = (double)(parameters.scale_percent*gimp_drawable_height( layers[active_layer] ))/100. + 0.5;
 
 		gimp_image_scale( image_id, new_size_x, new_size_y ); /* This also scales the selection! */
 	}
@@ -1673,7 +1676,7 @@ static gint dialog()
 	adj = gimp_scale_entry_new( GTK_TABLE( table ), 0, 2,
 		_("Cross correlation search area (%):"), 180, 75,
 		parameters.cross_correlation, 100, 1000, 1, 10, 0,
-		TRUE, 0, 0, _("Cross correlation search area, measured in % of selected area width/height and limited by the layer's border"), NULL );
+		TRUE, 0, 0, _("Cross correlation search area, measured in (%) of selected area width/height and limited by the layer's border"), NULL );
 	g_signal_connect( adj, "value_changed", G_CALLBACK( gimp_int_adjustment_update ),
 		&parameters.cross_correlation );
 

@@ -1,5 +1,5 @@
 ;; /***************************************************************************
-;;  *   Copyright (C) 2008 by Georg Hennig                                    *
+;;  *   Copyright (C) 2008-2014 by Georg Hennig                               *
 ;;  *   georg.hennig@web.de                                                   *
 ;;  *                                                                         *
 ;;  *   This program is free software; you can redistribute it and/or modify  *

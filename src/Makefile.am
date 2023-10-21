@@ -1,8 +1,10 @@
 ## Process this file with automake to produce Makefile.in
 
+ACLOCAL_AMFLAGS=-I m4 ${ACLOCAL}
+
 bin_PROGRAMS = astronomy-alignment astronomy-merge astronomy-background-gradient astronomy-artificial-stars astronomy-artificial-galaxy astronomy-star-rounding
 
-bindir = $(GIMP_LIBDIR)/plug-ins
+bindir = ${GIMP_LIBDIR}/plug-ins
 
 astronomy_alignment_SOURCES = \
 	alignment.c
@@ -23,16 +25,19 @@ astronomy_star_rounding_SOURCES = \
 	star_rounding.c
 
 AM_CPPFLAGS = \
-	-DLOCALEDIR=\""$(LOCALEDIR)"\"		\
-	-DDATADIR=\""$(DATADIR)"\"
-
-INCLUDES =\
-	-I$(top_srcdir)		\
-	@GIMP_CFLAGS@		\
+	-DLOCALEDIR=\""$(LOCALEDIR)"\"	\
+	-DDATADIR=\""$(DATADIR)"\"	\
+	-I$(build_srcdir)		\
+	-I$(top_srcdir)			\
+	@GIMP_CFLAGS@			\
 	-I$(includedir)
 
-LDADD = $(GIMP_LIBS) -lgsl -lgslcblas -lfftw3
+LDADD = $(LIBS) $(GSL_LIBS) $(FFTW_LIBS) $(GIMP_LIBS)
 
 EXTRA_DIST = \
+	alignment_autopano.c \
 	plugin-intl.h \
 	artificial_stars_temperature.h
+
+strip:
+	$(STRIP) $(bin_PROGRAMS)
